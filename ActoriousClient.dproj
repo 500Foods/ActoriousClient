@@ -150,7 +150,7 @@
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
         <TMSWebPWAStartURL>https://www.actorious.com/</TMSWebPWAStartURL>
         <TMSWebObfuscation>1</TMSWebObfuscation>
-        <TMSVersion>1.0.3319</TMSVersion>
+        <TMSVersion>1.0.3320</TMSVersion>
         <TMSWebDebugInfo>2</TMSWebDebugInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
@@ -1029,6 +1029,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1048,12 +1054,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
