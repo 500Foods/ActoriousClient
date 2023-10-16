@@ -1,0 +1,750 @@
+/* actorious.css
+**
+** Lots of examples to be found here for customizing common JS libraries that
+** are part of the project, most notably the likes of Tabulator and FlatPickr.
+** Quite a few 'hacks' are used to move things around change things that
+** normally would be better changed elsewhere but can be done here in a pinch.
+** Comments abound both for my own sanity and as a way to help track down things
+** later when I've forgotten entirely what it was I was doing.
+**
+** NOTE 1: This CSS file is used on a project with the latest version of the
+** Bootstrap library (5.2+) which provides all of its colors as CSS variables.
+** This is handy, and these are used throughout, for better or for worse.
+** Better because it is consistent.  Worse because it is probably what lots of
+** folks do, so it might not have all that unique a feel at the end of the day.
+**
+** NOTE 2: This file is put through a minify step as part of its production
+** release process, so comments in particular are stirpped out. Means I can talk
+** all I want here :)
+**
+** Created by: Andrew Simard, June 2022.
+*/
+
+
+/* Using Bootstrap (v5.2+) there are a bunch of colors defined by default.
+** Which makes it easy to alter them - specifically the primary and secondary
+** colors.  Here we're looking for darker variations of the defaults. Primarily
+** for the buttons, as few of them as there are.
+*/
+:root {
+  --bs-primary:   #0047AB; /* Cobalt Blue */
+  --bs-secondary: #505050; /* Dark Gray   */
+}
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+}
+.btn-secondary {
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+}
+
+
+/* Generally the idea is to prevent selection of page content.
+** There are areas where this maybe isn't strictly necessary, but it is something
+** where perhapse selection will be enabled as as the exception rather than the rule.
+*/
+body {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+
+
+/* In the Biography section, there are sometimes blocks of text shown. We'd like
+** to have a bit of space between them, but not as much as a line of text that
+** <br /> would produce.  So we insert <p></p> tags instead, and then use this
+** to define that space as half of the regular amount.
+**
+** h4 - title
+** h5 - tagline
+** h6 - used when biography is not available
+*/
+p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+h4 {
+  font-size: 1.4rem;
+}
+h5 {
+  margin-top: -5px;
+  font-size: 1.2rem;
+  font-style: italic;
+  opacity: 0.5;
+}
+h6 {
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+
+
+a:link {
+  color: #000080;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #000040;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0000B0;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #0000FF;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
+/* I do like rounded corners. Like is probably not nearly a strong enough term.
+** With a little luck and a lot of perseverence, there should be no square
+** outside corners appearing anywhere! And the rounding should be consistent.
+**
+** A quick way to check that everything is rounding the same is to put in an
+** absurdly large rounding value and see what isn't conforming. Similiarly,
+** setting it to zero can be a way to make sure that everything is aligned
+** perfectly.
+*/
+:root {
+  --rounding: 0.35rem;
+}
+
+div.rounded,
+span.rounded,
+img.rounded,
+button.rounded,
+.rounded {
+  border-radius: var(--rounding) !important;
+}
+div.rounded-end,
+.rounded-end {
+  border-top-right-radius: var(--rounding) !important;
+  border-bottom-right-radius: var(--rounding) !important;
+}
+div.rounded-start,
+.rounded-start {
+  border-top-left-radius: var(--rounding) !important;
+  border-bottom-left-radius: var(--rounding) !important;
+}
+
+
+
+/* Bootstrap has some weird ideas about centering text vertically.  This little
+** nudge helps with the buttons appearing at the top-left of the interface.
+*/
+#btnWriters,
+#btnDirectors,
+#btnActors,
+#btnTop1000 {
+  line-height: 5px;
+}
+
+
+
+/* Customize scrollbars. After rounded corners, customized toolbars are the
+** next item on the hit-list. A bit of a challenge as each browser likes to do
+** its own thing.  Firefox 100+ doesn't even display them anymore, or at least
+** hides them as quickly as possible.  Which is good if you're not going to
+** bother implementing any way to change them I suppose.
+*/
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-corner {
+  background-color: var(--bs-dark);
+}
+::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 200px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--bs-primary);
+  border-radius: 200px;
+  border: 3px solid black;
+}
+
+
+
+/* Used to center the promo image (pizza or coffee) */
+#divPizza {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+
+/* Customize switches (Settings page) */
+.slider {
+  border-radius: 0.4rem;
+}
+.slider:before {
+  border-radius: 0.4rem;
+  background: var(--bs-light);
+}
+
+
+
+/* FontAwesome Spinner speed */
+.fa-spin {
+  -webkit-animation: fa-spin 5s infinite linear;
+  animation: fa-spin 5s infinite linear;
+}
+
+
+
+/* Fades in images that are already being lazy loaded */
+img.lazy {
+  opacity: 0.7;
+}
+img:not(.initial) {
+  transition: opacity 0.1s;
+}
+img.initial,
+img.loaded,
+img.error {
+  opacity: 1;
+}
+
+
+
+/* Video and Backdrop sliders have two rows, so we need to set the height of
+** the slides to be the available height/2 minus the gap between the rows
+*/
+div.swiper2 > div > .swiper-slide,
+div.swiper3 > div > .swiper-slide {
+  height: calc((100% - 3px) / 2);
+  width: 207px;
+}
+div.swiper2 > div > .swiper-slide > img,
+div.swiper3 > div > .swiper-slide > img {
+  width: 206px;
+}
+
+
+
+/* When clicking on the main photo at the top, or on any of the other images
+** (either profile photos or title posters) this block is used to cover the rest
+** of the page.  The opacity is set to 0.9 and the color to black to give the
+** shade effect we're after, and is also an element that can be clicked on to
+** then hide the image.
+**
+** Also, z-index set to appear above everything, particularly toolitps!! The X
+** button is also displayed separately, so it can be above an image with the
+** background shading below the image - an image sandwich of sorts.
+**
+** The fancy CSS for the image holder is to center a 2:3 image with a small
+** border at the bottom/top.  Depends on the aspect-ratio being available.
+*/
+#divBlock {
+  position: fixed !important;
+  z-index: 99997;
+  background-color: #000;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#divViewerHolder {
+  z-index: 99998;
+}
+#divBlockControls {
+  position: fixed !important;
+  z-index: 99999;
+  bottom: 10px;
+  right: 15px;
+}
+#divBlockData {
+  position: fixed !important;
+  z-index: 99999;
+  top: 5px;
+  right: 0px;
+}
+
+
+
+/*******************************************************************************
+** Custom Bootstrap 5 Tooltips                                                **
+**                                                                            **
+** NOTE: Only tested with Bootstrap 5.2.                                      **
+**                                                                            **
+** Lots of CSS shenanigans here. The arror for example is just clipped border **
+** corners to get the right direction.  Plenty of fiddling.  Wanted to have a **
+** border that matched the arrow color mostly. That's how it started, anyway! **
+**                                                                            **
+*******************************************************************************/
+
+/* This is for the whole tooltip */
+.tooltip.show {
+  /* way better than box-shadows in that they take the shape of whatever
+  ** youire applying the filter to.  Much nicer effect overall.  Probably
+  ** super-expensive, but what the heck. */
+  filter: drop-shadow(0px 0px 3px #000);
+  opacity: 1 !important;
+}
+
+/* The tooltip contents */
+.tooltip-inner {
+  /* not sure why we need to press this font issue, but it seems we do */
+  font-family: 'Cairo', sans-serif !important;
+  background-color: rgba(33,37,41,0.7) !important; /* --bs-dark + transparency */
+  border: 2px solid var(--bs-secondary);
+  border-radius: 0.5rem !important;
+}
+
+/* style any included image */
+.tooltip-inner > img {
+  border-radius: 0.5rem !important;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+/* These adjust the arrow colors based on tooltip placement direction */
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+  border-top-color: var(--bs-secondary) !important;
+}
+.bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow::before {
+  border-right-color: var(--bs-secondary) !important;
+}
+.bs-tooltip-auto[data-popper-placement^=bottom] .tooltip-arrow::before {
+  border-bottom-color: var(--bs-secondary) !important;
+}
+.bs-tooltip-auto[data-popper-placement^=left] .tooltip-arrow::before {
+  border-left-color: var(--bs-secondary) !important;
+}
+
+/* When using Tabulator to draw the tooltips, here's the missing left arrow */
+.tooltip.show.imageright .tooltip-inner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -6px;
+  margin-top: -12px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent var(--bs-secondary) transparent transparent;
+  opacity: 1;
+}
+
+
+
+/*******************************************************************************
+** Tabulator 5.2+                                                             **
+**                                                                            **
+** Starting from the default tabulator.css file, here are the changes, tweaks **
+** and perhaps even a few hacks to get Tabulator to do what I want it to do.  **
+** Most of this is pretty standard stuff, but some of it is tracked down via  **
+** the Chrome dev tools to find every last little mysterious line being drawn **
+** somwhere that is the wrong color or otherwise messing things up.  So lots  **
+** of silliness to be found.                                                  **
+**                                                                            **
+*******************************************************************************/
+
+/* This is used to get rid of the padding in Tabulator cells, which we're doing
+** so that the images can fill to expand the available space and be directly
+** adjacent to one another. Means we also have to add it back elsewhere. And
+** by default we'd like the text color to be black most of the time. I think
+** it defaults to #333 but that can be a little distracting at times. */
+.tabulator-cell {
+  padding: 0px !important;
+  color: #000 !important;
+}
+
+/* Tabulator background color */
+.tabulator-tableholder,
+.tabulator {
+  background-color: var(--bs-dark);
+}
+
+/* Column Headers */
+.tabulator-header,
+.tabulator-col {
+  background: var(--bs-dark) !important;
+  color: var(--bs-gray-200);
+}
+
+/* Sometimes something tries to make these taller than they need to be, which
+** would normally be fine, but as we've got two tables side-by-side, they really
+** need to be the same as it is super annoying when they are not. The second
+** part is to just tighten up the vertical spacing as much as possible. */
+.tabulator-header {
+  height: 26px;
+}
+.tabulator .tabulator-header .tabulator-col div.tabulator-col-content {
+  padding: 2px 4px;
+}
+
+/* Odd rows, even rows, selected rows */
+.tabulator-row {
+  background-color: var(--bs-gray-400);
+  max-height: 68px;
+  min-height: 68px;
+}
+.tabulator-row.tabulator-row-even {
+  background-color: var(--bs-gray-200);
+}
+.tabulator-row.tabulator-row-even.tabulator-selected,
+.tabulator-row.tabulator-selected {
+  background-color: #9abcde;  /* I dunno about this...? */
+}
+
+/* Tamp down the padding around the header menu icons and change the color so
+** all the elements are the same except for the title.  The spacing needs to
+** be big enough that someone could reasonably tap on it but not so big that
+** it uses up all the space in some of the very narrow columns we have. */
+.tabulator-header-popup-button {
+  padding: 0px 6px 0px 0px !important;
+  color: var(--bs-secondary);
+}
+
+
+/* Hide all sort icons by default */
+.tabulator-col .tabulator-col-sorter div.icon {
+  display: none;
+}
+/* Display the fa-sort icon when the column is not sorted */
+.tabulator-col[aria-sort="none"] .tabulator-col-sorter div.icon.sort{
+  display: inline-block;
+  fill: var(--bs-secondary);
+}
+/* Hover styles are good */
+.tabulator-col[aria-sort="none"] .tabulator-col-sorter div.icon:hover{
+  opacity:0.6;
+}
+/* Display the fa-sort-up icon when the column is sorted in asc order */
+.tabulator-col[aria-sort="ascending"] .tabulator-col-sorter div.icon.sort-up{
+  display: inline-block;
+  fill: #fff;
+}
+/* Display the fa-sort-down icon when the column is sorted in desc order */
+.tabulator-col[aria-sort="descending"] .tabulator-col-sorter div.icon.sort-down{
+  display: inline-block;
+  fill: #fff;
+}
+
+/* Set the cell borders to match the rest of the theme */
+.tabulator-row .tabulator-cell {
+  border-right-color: var(--bs-secondary) !important;
+}
+
+/* These are to get rid of the extra line that is left after changing the
+** rest of the colors.  It is the far-right column's right borer */
+.tabulator .tabulator-footer .tabulator-calcs-holder .tabulator-row {
+  background: var(--bs-dark) !important;
+}
+.tabulator-headers > div:nth-last-child(1),
+.tabulator-headers > div:nth-last-child(2),
+.tabulator .tabulator-footer .tabulator-calcs-holder .tabulator-row > div:last-child {
+  border-right:none !important;
+}
+
+/* Aadd a bit of style to the popup menus, such as the column selectors */
+.tabulator-menu {
+  background: var(--bs-dark);
+  color: var(--bs-light);
+  border-radius: 0.4rem;
+  margin-top: 10px;
+  line-height: 1;
+  padding: 5px 0px;
+  filter: drop-shadow(0px 0px 3px black);
+  opacity: 0.95;
+}
+.tabulator-menu.tabulator-popup-container {
+  border: 2px solid var(--bs-secondary) !important;
+}
+.tabulator-menu .tabulator-menu-item:not(.tabulator-menu-item-disabled):hover {
+  background: var(--bs-secondary);
+}
+.tabulator-menu-item {
+  max-height: 24px;
+  width: 175px;
+}
+
+/* This is for the popoups like the header filter options */
+.tabulator-popup-container {
+  opacity: 0.95;
+  filter: drop-shadow(0px 0px 3px black);
+}
+
+/* This is used to shift the Filter icon to the right side of the column title
+** block. This is basically taking the first element and shifting right, using
+** the 'Name' selector to just do this for one column. Will likely do the same
+** for other filters in other columns as well.  CSS shenanigans indeed! */
+
+/* Normally, ellipsis is a great option here (the default) but we've got some
+** closely spaced title elements, so the ellipsis is taking up more space than
+** we've got available, potentially using up valuable real estate. */
+.tabulator-col-title {
+  text-overflow: clip !important;
+}
+#divActorTabulator > div.tabulator-header > div > div.tabulator-headers > div.tabulator-col.tabulator-sortable.tabulator-col-sorter-element.Name > div > div.tabulator-col-title-holder > div.tabulator-col-title {
+  display: flex;
+}
+#divActorTabulator > div.tabulator-header > div > div.tabulator-headers > div.tabulator-col.tabulator-sortable.tabulator-col-sorter-element.Name > div > div.tabulator-col-title-holder > div.tabulator-col-title > span:nth-child(1) {
+  order: 1;
+  text-align: right;
+  flex-grow: 1;
+  margin-right: -10px;
+  color: var(--bs-secondary);
+  fill: var(--bs-secondary) !important;
+}
+#divActorTabulator > div.tabulator-header > div > div.tabulator-headers > div.tabulator-col.tabulator-sortable.tabulator-col-sorter-element.Name.FilterActive > div > div.tabulator-col-title-holder > div.tabulator-col-title > span:nth-child(1) {
+  color: var(--bs-warning) !important;
+  fill: var(--bs-warning) !important;
+}
+
+/* More CSS Shenanigans with Tabulator Placeholder. Here, we've got a set of
+** divs (5 of them) and we hide all but one of them, switching them by changing
+** the parent class as we encounter different table states through the
+** progression of making requests.
+**
+** States: <default>, Searching, Preparing, Loading, ReqError
+*/
+
+/* Default - shows "No Data Found" when appropriate */
+div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(1) {
+  display: flex !important;
+}
+div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(2),
+div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(3),
+div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(4),
+div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(5) {
+ display: none !important;
+}
+
+/* Searching */
+.Searching div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(1),
+.Searching div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(3),
+.Searching div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(4),
+.Searching div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(5) {
+ display: none !important;
+}
+div.Searching > .tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(2) {
+  display: flex !important;
+}
+
+/* Preparing */
+.Preparing div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(1),
+.Preparing div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(2),
+.Preparing div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(4),
+.Preparing div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(5) {
+  display: none !important;
+}
+.Preparing div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(3) {
+  display: flex !important;
+}
+
+/* Loading */
+.Loading div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(1),
+.Loading div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(2),
+.Loading div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(3),
+.Loading div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(5) {
+  display: none !important;
+}
+.Loading div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(4) {
+  display: flex !important;
+}
+
+/* ReqError */
+.ReqError div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(1),
+.ReqError div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(2),
+.ReqError div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(3),
+.ReqError div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(4) {
+  display: none !important;
+}
+.ReqError div.tabulator-tableholder > div.tabulator-placeholder > div > div:nth-child(5) {
+  display: flex !important;
+}
+
+
+/*******************************************************************************
+** FlatPickr                                                                  **
+**                                                                            **
+** The default FlatPickr themes are all really large and mostly the same with **
+** just variations in colours.  Here we're looking to tighten things up a bit **
+** and fit in more with the rest of the theme we've got going on.             **
+*******************************************************************************/
+
+/* The main calendar window drop-down */
+.flatpickr-calendar {
+  width: 300px !important;
+  background: var(--bs-dark) !important;
+  border-radius: 0.4rem !important;
+  border: 2px solid var(--bs-secondary);
+  color: var(--bs-light) !important;
+  box-shadow: none;
+  font-size: 12px;
+  opacity: 0.95 !important;
+  filter: drop-shadow(0px 0px 3px black);
+}
+
+/* The arrow at the top */
+.flatpickr-calendar.arrowTop:before,
+.flatpickr-calendar.arrowTop:after {
+  border-bottom-color: var(--bs-secondary);
+}
+.flatpickr-calendar:before {
+  border-width: 8px;
+}
+
+/* This is primarily what sets the size of everything.  FlatPickr does a bunch
+** of math to make it all work.  Rather strange, but no criticism here. A good
+** example of just copying rules from the dev tools and adjusting to suit. */
+.flatpickr-day {
+  background: none !important;
+  border: 1px solid transparent;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #393939;
+  width: 14.2857143%;
+  -webkit-flex-basis: 14.2857143%;
+  -ms-flex-preferred-size: 14.2857143%;
+  flex-basis: 14.2857143%;
+  max-width: 39px;
+  height: 30px;
+  line-height: 30px;
+  color: var(--bs-white) !important;
+  border-radius: 0.5rem !important;
+}
+/* The rest of these are kind of self-explanatory.  Basically set by looking at
+** the control and deciding whether something needs to be changed or not, and
+** then adding rules where needed.  Seems not efficient, but given how much is
+** going on in the layout of this control, not sure if there is a better way.
+** Even money that there is a set of SCSS rules that are used to generate all
+** the theme-related things here that is likely simpler than this approach */
+.flatpickr-day:hover {
+  color: var(--bs-light) !important;
+  background: #000 !important;
+}
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.prevMonthDay,
+.flatpickr-weeks .flatpickr-day {
+  color: var(--bs-secondary) !important;
+}
+.flatpickr-weekdays {
+  background: var(--bs-secondary) !important;
+  width: 259px;
+}
+.flatpickr-weekwrapper .flatpickr-weekday {
+  background: var(--bs-secondary) !important;
+}
+.flatpickr-weekwrapper .flatpickr-weeks {
+  padding: 1px 12px 0px 12px;
+  -webkit-box-shadow: 2px 0 0 var(--bs-secondary);
+  box-shadow: 2px 0 0 var(--bs-secondary);
+}
+.flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+  padding: 4px 10px 5px 10px !important;
+  color: var(--bs-secondary) !important;
+  fill: var(--bs-secondary) !important;
+}
+.dayContainer {
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
+  padding: 0px 2px;
+}
+.flatpickr-current-month {
+  padding: 0px !important;
+  color: var(--bs-light) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.flatpickr-current-month > .numInputWrapper {
+  margin-left: 30px;
+}
+
+/* Not the biggest fan of the animation */
+.flatpickr-calendar.animate.open {
+  -webkit-animation: unset !important;
+  animation:unset !important;
+}
+
+/* This is for the list of months that appears when clicking on a month */
+div.flatpickr-months > div > div > select {
+  background: var(--bs-dark) !important;
+  color: var(--bs-light) !important;
+}
+
+
+#divTop {
+  min-height: 281px;
+}
+#divBottom {
+  min-height: 281px;
+  flex: 1;
+  padding: 0px 4px 4px 4px;
+}
+
+#divInfoPages {
+  position: relative !important;
+  width: unset !important;
+  top: unset !important;
+  left: unset !important;
+  order: 1;
+  flex-grow: 1 !important;
+  min-width: 185px;
+}
+
+#divInfoPages > span {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: unset !important;
+  left: unset !important;
+  padding: 3px;
+}
+#divInfoPages > span > div {
+  height: 100%;
+  padding: 3px 3px 3px 0px;
+}
+#pageAbout > div > div,
+#pageBio > div > div {
+  position: relative !important;
+  width: unset !important;
+  height: 100% !important;
+  top: unset !important;
+  left: unset !important;
+}
+#divBackgroundSlider,
+#divVideoSlider,
+#divPhotoSlider {
+  height: 240px !important;
+  width: 100% !important;
+}
+
+.order-0 { order: 0; }
+.order-1 { order: 1; }
+.order-2 { order: 2; }
+.order-3 { order: 3; }
+.order-4 { order: 4; }
+.order-5 { order: 5; }
+.order-6 { order: 6; }
+.order-7 { order: 7; }
+.order-8 { order: 8; }
+.order-9 { order: 9; }
+
+
+/*******************************************************************************
+**                                                                            **
+** This is the end!                                                           **
+**                                                                            **
+*******************************************************************************/
+
