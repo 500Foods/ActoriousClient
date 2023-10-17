@@ -3,6 +3,8 @@ This is the main web application for the [Actorious](https://www.actorious.com) 
 
 ![Screenshot_20231017_141418](https://github.com/500Foods/ActoriousClient/assets/41052272/9b2d2191-3f14-4cb4-b9e3-ae14e837270c)
 
+The website uses the APIs from The Movie Database and WikiData for the majority of its data, using the TMDb's identifiers to map data between the two in order to perform searches based on birthdays and other criteria not natively supported by TMDb.
+
 ## Repository Information
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
 ```
