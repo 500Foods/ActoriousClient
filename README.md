@@ -1,6 +1,7 @@
 # ActoriousClient
 This is the main web application for the [Actorious](https://www.actorious.com) website. It has been developed using Delphi and TMS WEB Core along with many other very capable JavaScript libraries. In particular, Tabulator.
 
+![Screenshot_20231017_141418](https://github.com/500Foods/ActoriousClient/assets/41052272/9b2d2191-3f14-4cb4-b9e3-ae14e837270c)
 
 ## Repository Information
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
