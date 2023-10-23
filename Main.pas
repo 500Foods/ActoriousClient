@@ -838,8 +838,8 @@ begin
   // If development, load data from development server.
   // If production, load data from production server.
   if (pos('actorious.com', lowercase(window.location.href)) > 0)
-  then MainForm.Server := 'https://carnival.500foods.com:10999/tms/xdata'
-  else MainForm.Server := 'http://localhost:2001/tms/xdata';
+  then MainForm.Server := 'https://carnival.500foods.com:10999/actorious'
+  else MainForm.Server := 'http://localhost:10999/actorious';
 
 
   // Check for Parameters
