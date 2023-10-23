@@ -557,6 +557,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(Data);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -4023,6 +4024,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(CacheData);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -4276,6 +4278,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(CacheData);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -4527,6 +4530,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(CacheData);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -4538,9 +4542,6 @@ var
   Progress: String;               // Used to lookup progress on the request later
   Endpoint: String;               // The service endpoint for this request
   LookupRef: TJSObject;              // What we're sending
-  ReferenceList: TStringList;     // Decode list of reference values
-  i: integer;
-  id: String;
 begin
 
   MainForm.divProgressSpinner.HTML.Text := '<div style="width:100%; height:100%; font-size:11em; color:var(--bs-danger); opacity:0.75; text-align: center;"><i class="fa-regular fa-loader fa-spin"></i></div>';
@@ -4723,6 +4724,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(Data);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -4939,6 +4941,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(Data);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
@@ -5401,6 +5404,7 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(Data);
+  MainForm.PreventCompilerHint(Blob);
 
 end;
 
