@@ -1359,9 +1359,10 @@ begin
       slidesPerView: 'auto',
       watchOverflow: false,
       preLoadImages: false,
-      spaceBetween: 3,
+      spaceBetween: 2,
       slidesOffsetBefore: 4,
       slidesOffsetAfter: 6,
+      speed: 200,
       slidesPerGroupAuto: true,
       grid: { rows: 2},
       mousewheel: {},
@@ -1372,9 +1373,10 @@ begin
       slidesPerView: 'auto',
       watchOverflow: false,
       preLoadImages: false,
-      spaceBetween: 3,
+      spaceBetween: 2,
       slidesOffsetBefore: 4,
       slidesOffsetAfter: 6,
+      speed: 200,
       slidesPerGroupAuto: true,
       grid: { rows: 2},
       mousewheel: {},
@@ -2000,8 +2002,8 @@ end;
               var image = checkImage(imagelist[i],null,row.getCell('TYP').getValue(),{imgtype:"tvmovie"});
               slides = slides+'<div class="swiper-slide" style="width:154px !important; height:234px;">'+
                                  '<img '+
-                                   'class="rounded lazy portrait" '+
-                                   'style="cursor: pointer; width: 156px; height: auto;"'+
+                                   'class="lazy portrait" '+
+                                   'style="cursor: pointer; width: 156px; height: 234px; border-radius: 4px;"'+
                                    'src='+image+' '+
                                    'data-src='+image.replace('/w92/','/w185/')+' '+
                                    'alt='+altphoto+
@@ -2028,11 +2030,11 @@ end;
             for (var i = 0; i < imagecount; i++) {
               if (imagelist[i].indexOf('YouTube:') !== -1) {
                 var image = imagelist[i].substr(8,50);
-                slides = slides+'<div class="swiper-slide" style="width:208px !important; height:117px !important;">'+
+                slides = slides+'<div class="swiper-slide" style="width:206px !important; height:116px !important;">'+
                                   '<a href="https://www.youtube.com/watch?v='+image+'" target=_blank aria-label='+altvideo+'>'+
                                     '<img '+
-                                      'class="rounded lazy landscape" '+
-                                      'style="cursor: pointer; width: 206px; height: auto;"'+
+                                      'class="lazy landscape" '+
+                                      'style="cursor: pointer; width: 206px; height: 116px; border-radius: 4px;"'+
                                       'src="https://img.youtube.com/vi/'+image+'/default.jpg" '+
                                       'data-src="https://img.youtube.com/vi/'+image+'/mqdefault.jpg" '+
                                       'alt='+altvideo+
@@ -2059,10 +2061,10 @@ end;
             imagecount = imagelist.length;
             for (var i = 0; i < imagecount; i++) {
               var image = checkImage(imagelist[i],null,null,{imgtype:"backdrop"});
-              slides = slides+'<div class="swiper-slide" style="width:208px height:117px !important;">'+
+              slides = slides+'<div class="swiper-slide" style="width:206px height:116px !important;">'+
                                  '<img '+
-                                   'class="rounded lazy landscape" '+
-                                   'style="cursor: pointer; width:208px; height:auto"'+
+                                   'class="lazy landscape" '+
+                                   'style="cursor: pointer; width:206px; height:116px; border-radius: 4px;"'+
                                    'src='+image+' '+
                                    'data-src='+image+' '+
                                    'alt='+altphoto+
@@ -2262,8 +2264,8 @@ end;
               var image = checkImage(imagelist[i],null,null,{imgtype:"person"});
               slides = slides+'<div class="swiper-slide" style="width:156px !important; height:234px !important">'+
                                  '<img '+
-                                   'class="rounded lazy portrait" '+
-                                   'style="cursor: pointer; width: 156px; height: auto;"'+
+                                   'class="lazy portrait" '+
+                                   'style="cursor: pointer; width: 156px; height: 234px; border-radius: 4px;"'+
                                    'src='+image+' '+
                                    'data-src='+image.replace('/w45/','/w185/')+' '+
                                    'alt='+altphoto+

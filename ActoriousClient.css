@@ -729,6 +729,10 @@ div.flatpickr-months > div > div > select {
   height: 240px !important;
   width: 100% !important;
 }
+#divBackgroundSlider,
+#divVideoSlider {
+  padding: 0px 3px;
+}
 
 .order-0 { order: 0; }
 .order-1 { order: 1; }

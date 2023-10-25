@@ -72,11 +72,11 @@
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <SanitizedProjectName>ActoriousClient</SanitizedProjectName>
         <TMSWebPWAResIconLowFile>IconResLow.png</TMSWebPWAResIconLowFile>
-        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
+        <TMSWebPWAResIconMidFile>IconResMid.png</TMSWebPWAResIconMidFile>
         <TMSPWAManifestFile>Manifest.json</TMSPWAManifestFile>
+        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
         <TMSWebPWAServiceWorkerFile>ServiceWorker.js</TMSWebPWAServiceWorkerFile>
         <TMSWebHTMLFile>ActoriousClient.html</TMSWebHTMLFile>
-        <TMSWebPWAResIconMidFile>IconResMid.png</TMSWebPWAResIconMidFile>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;fmxase;DBXDb2Driver;DBXInterBaseDriver;VCLTMSFNCChartPkgDXE12;TMSLogging;vclactnband;FmxTeeUI926;vclFireDAC;emsclientfiredac;tethering;svnui;DataSnapFireDAC;FireDACADSDriver;FMXfrxDB26;DBXMSSQLDriver;TMSQueryStudio;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXfrxIBX26;vcltouch;FMXTMSFNCUIPackPkgDXE12;JSExtend;vcldb;bindcompfmx;svn;TMSWEBCorePkgLibDXE12;DBXOracleDriver;rbUSERDesign2126;inetdb;IcsFmxD103Run;CEF4Delphi;IcsVclD103Run;rbTC2126;FMXTMSFNCWXPackPkgDXE12;TMSScripter_Memo;emsedge;fmx;FireDACIBDriver;fmxdae;FMXfrx26;vclib;rbBDE2126;FireDACDBXDriver;dbexpress;IndyCore;DCEF_XE5;xdata;vclx;dsnap;emsclient;DataSnapCommon;rbRCL2126;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;FMXfs26;VCLRESTComponents;soapserver;TMSScripter_Legacy;remotedb;vclie;TMSScripter_VCL;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;CData.QuickBooksOnline.D26;FMXTeeDB926;FireDACCommonODBC;FireDACCommonDriver;VCLTMSFNCCorePkgDXE12;DataSnapClient;inet;rbTCUI2126;IndyIPCommon;bindcompdbx;vcl;IndyIPServer;DBXSybaseASEDriver;sparkle;tmsbcl;IndySystem;FireDACDb2Driver;FMXTee926;dsnapcon;FMXfrxTee26;FMXTMSFNCCorePkgDXE12;TMSWorkflow;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FMXfsIBX26;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;advmemopkgdXE12;DBXOdbcDriver;FireDACTDataDriver;TMSDiagram;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;emsserverresource;DbxClientDriver;ibxbindings;DBXSybaseASADriver;TMSScripter_IDE;CustomIPTransport;vcldsnap;rbIDE2126;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;EurekaLogCore;rbCloudSC2126;bindcompvcl;IcsCommonD103Run;TMSCryptoPkgDXE12;rbUSER2126;dclTMSQueryStudio;TMSWEBCorePkgDXE12;FMXfsDB26;FMXfrxe26;dbxcds;VclSmp;adortl;FireDACODBCDriver;VCLTMSFNCWXPackPkgDXE12;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;FMXfrxDBX26;FMXTMSFNCChartPkgDXE12;TMSCryptoPkgDEDXE12;FMXfsTee26;DataSnapServerMidas;$(DCC_UsePackage)</DCC_UsePackage>
@@ -137,21 +137,22 @@
         <Icon_MainIcon>ActoriousClient_Icon.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>iconx\favicon-48x48.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>iconx\apple-touch-icon-152x152.png</UWP_DelphiLogo150>
+        <TMSWebDebugInfo>2</TMSWebDebugInfo>
+        <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSWebObfuscation>1</TMSWebObfuscation>
         <TMSApplicationDescription>Connections</TMSApplicationDescription>
-        <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
-        <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
-        <TMSWebSingleJS>2</TMSWebSingleJS>
-        <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
-        <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
+        <TMSWebPWAStartURL>https://www.actorious.com/</TMSWebPWAStartURL>
         <TMSWebPWAResIconLowFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-64x64.png</TMSWebPWAResIconLowFile>
         <TMSWebPWAResIconMidFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-256x256.png</TMSWebPWAResIconMidFile>
-        <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSWebPrivExts>$(TMSWebPrivExts);*.svg, *.ico</TMSWebPrivExts>
         <TMSVersionAuto>2</TMSVersionAuto>
+        <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
+        <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
+        <TMSVersion>1.0.3341</TMSVersion>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
-        <TMSWebPWAStartURL>https://www.actorious.com/</TMSWebPWAStartURL>
-        <TMSWebObfuscation>1</TMSWebObfuscation>
-        <TMSWebDebugInfo>2</TMSWebDebugInfo>
-        <TMSVersion>1.0.3325</TMSVersion>
+        <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
+        <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
+        <TMSWebSingleJS>2</TMSWebSingleJS>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -586,14 +587,14 @@
                     <Source Name="MainSource">ActoriousClient.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMXTMSFNCWXPackPkgDXE12.bpl">TMS FNC WX Pack for FMX</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\Steema Software\Steema TeeChart Standard VCL FMX 2022.35\Delphi26\Delphi26.win32\Bin\DclTee926.bpl">TeeChart Standard 2022 Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMXTMSFNCWXPackPkgDXE12.bpl">TMS FNC WX Pack for FMX</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCWXPackPkgDEDXE12.bpl">TMS FNC WX Pack for FMX/VCL Designtime</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCCorePkgDEDXE12.bpl">TMS FNC Core for FMX/VCL Designtime</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCUIPackPkgDEDXE12.bpl">TMS FNC UI Pack for FMX/VCL Designtime</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCChartPkgDEDXE12.bpl">TMS FNC Chart for FMX/VCL Designtime</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCUIPackPkgDEDXE12.bpl">TMS FNC UI Pack for FMX/VCL Designtime</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\TMSFNCWXPackPkgDEDXE12.bpl">TMS FNC WX Pack for FMX/VCL Designtime</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -1047,13 +1048,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
