@@ -3535,15 +3535,14 @@ end;
             formatter:    formatter_role_TopRoles,
 //            cellClick:    cellClick_role_Top,
             cellClick: function(e, cell){
-              var pic = e.target.outerHTML;
+//              e.stopPropagation();
+//              var pic = e.target.outerHTML;
 //              var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
 //              var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
-              var tid = pic.substring(pic.indexOf('tid')+4,pic.indexOf('atitle=')-1);
-              let lookuproles = [];
-              lookuproles.push({"ID":parseInt(tid.replace('"','').replace("'",""))});
-//              console.log('dbl click: '+title+' ('+tid+')');
-//              console.log(lookuproles);
-              pas.Main.MainForm.GetLookupList(JSON.stringify(lookuproles));
+//              var tid = pic.substring(pic.indexOf('tid')+4,pic.indexOf('atitle=')-1);
+//              let lookuproles = [];
+//              lookuproles.push({"ID":parseInt(tid.replace('"','').replace("'",""))});
+//              pas.Main.MainForm.GetLookupList(JSON.stringify(lookuproles));
             }
 
         },
@@ -3607,6 +3606,19 @@ end;
           window.rolecount.innerHTML = rows.length;
         }
       }
+    });
+
+    // Another event handler, called when the user clicks on row in the table
+    pas.Main.MainForm.RoleTabulator.on("cellClick", function(e, cell){
+      if (cell.getColumn().getField() == 'ACA') {
+        var pic = e.target.outerHTML;
+        var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
+        var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
+        var tid = pic.substring(pic.indexOf('tid')+4,pic.indexOf('atitle=')-1);
+        let lookuproles = [];
+        lookuproles.push({"ID":parseInt(tid.replace('"','').replace("'",""))});
+        pas.Main.MainForm.GetLookupList(JSON.stringify(lookuproles));
+       }
     });
 
     // Another event handler, called when the user clicks on row in the table
@@ -3895,7 +3907,7 @@ begin
           table1.selectRow(table1.getRowFromPosition(1, true));
 
           // Do what we would do if we had directly clicked on that row
-          window.Actor_Selected(null, table1.getRowFromPosition(1,true));
+          window.Actor_Selected(null, table1.getRowFromPosition(1,true,));
 
         }
         else {
@@ -4612,7 +4624,6 @@ begin
   Progress := TGUID.NewGUID;
   MainForm.Pending.Add(Progress);
   MainForm.CurrentPerson := -1;
-  MainForm.CurrentRole := -1;
 
   // Progress: Error Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
