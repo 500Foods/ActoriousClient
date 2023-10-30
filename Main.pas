@@ -3611,12 +3611,32 @@ end;
     // Another event handler, called when the user clicks on row in the table
     pas.Main.MainForm.RoleTabulator.on("cellClick", function(e, cell){
       if (cell.getColumn().getField() == 'ACA') {
+
+        // Get information for the photo we've clicked on
         var pic = e.target.outerHTML;
         var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
         var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
         var tid = pic.substring(pic.indexOf('tid')+4,pic.indexOf('atitle=')-1);
         let lookuproles = [];
         lookuproles.push({"ID":parseInt(tid.replace('"','').replace("'",""))});
+
+        // Show the photo at the top while we're waiting
+        divPhoto.innerHTML =
+          '<div style="width:185px; height:278px;">'+
+            '<img '+
+              'alt="'+title+'" '+
+              'class="lazy portrait PriorityA" '+
+              'style="width:185px; height:auto;" '+
+              'src='+image+' '+
+              'data-src='+image.replace('/w45/','/w185/')+' '+
+              'onerror="this.onerror=null;this.src=\'img/hourglass.png\'"'+
+            '/>'+
+          '</div>';
+        pas.Main.MainForm.Photo1 = image;
+        pas.Main.MainForm.Photo2 = image.replace('/w45/','/original/');
+        pas.Main.MainForm.PhotoA = title;
+
+        // Go and get the data for the person
         pas.Main.MainForm.GetLookupList(JSON.stringify(lookuproles));
        }
     });
