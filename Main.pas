@@ -173,6 +173,7 @@ type
     WebHTMLDiv11: TWebHTMLDiv;
     WebHTMLDiv14: TWebHTMLDiv;
     linkPizza: TWebHTMLDiv;
+    btnBlockSelect: TWebButton;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -229,6 +230,7 @@ type
     procedure btnBlockZoomResetClick(Sender: TObject);
     procedure btnBlockPreviousClick(Sender: TObject);
     procedure btnBlockNextClick(Sender: TObject);
+    procedure btnBlockSelectClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -346,6 +348,13 @@ begin
   btnSettings.ElementHandle.classlist.replace('btn-primary','btn-secondary');
   btnDiscord.ElementHandle.classlist.replace('btn-primary','btn-secondary');
   btnAbout.ElementHandle.classlist.replace('btn-secondary','btn-primary');
+end;
+
+procedure TMainForm.btnBlockSelectClick(Sender: TObject);
+begin
+  // Select the person from the currently visible photo
+  // The idea is to be able to view the person from their preview
+  showmessage('moving to person');
 end;
 
 procedure TMainForm.btnDiscordClick(Sender: TObject);
@@ -2679,11 +2688,12 @@ end;
   // addPerson
   //////////////////////////////////////////////////////////////////////////////
   asm
-    function addPerson(name, character, photo, adultpic) {
+    function addPerson(tid, name, character, photo, adultpic) {
       let adult = pas.Main.MainForm.AdultContent;
       if ((!adultpic || adult) && (name)) {
         return '<div style="width:45px; height:68px; display:inline-block; color: var(--bs-dark) !important;">'+
                  '<img class="lazy portrait" '+
+                      'tid="'+tid+'" '+
                       'atitle="'+name+'" '+
                       'src="'+photo+'" '+
                       'data-src="'+photo+'" '+
@@ -2748,10 +2758,15 @@ end;
       if ((data !== undefined) && (data.length > 0)) {
         for (var i = 0; i < Math.min(10,data.length); i++) {
 
+          var TID = '';
           var NAM = '';
           var CHR = '';
           var PIC = '';
           var XXX = '';
+
+          if (data[i].ID !== undefined) {
+            TID = data[i].ID;
+          }
 
           if (data[i].NAM !== undefined) {
             NAM = data[i].NAM;
@@ -2771,14 +2786,14 @@ end;
 
           let adult = pas.Main.MainForm.AdultContent;
           if ((!XXX || adult) && (NAM)) {
-            people += addPerson(NAM, CHR, checkImage(PIC,null,null,{imgtype:"person"}), XXX);
+            people += addPerson(TID, NAM, CHR, checkImage(PIC,null,null,{imgtype:"person"}), XXX);
             peoplecount += 1;
           }
         }
       }
 
       for (i = (peoplecount); i < 10; i++) {
-        people += addPerson('','','',pas.Main.MainForm.AdultContent);
+        people += addPerson('','','','',pas.Main.MainForm.AdultContent);
       }
       return people;
     }
@@ -3093,6 +3108,38 @@ end;
   end;
 
   //////////////////////////////////////////////////////////////////////////////
+  // cellDblClick_actor_Top
+  //////////////////////////////////////////////////////////////////////////////
+  asm
+    function cellDblClick_actor_Top(e, cell) {
+
+      var pic = e.target.outerHTML;
+      var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
+      var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
+
+      if (image.indexOf('"Missing Poster placeholder"') == -1) {
+        pas.Main.MainForm.ViewerMode = 'Role';
+        pas.Main.MainForm.ViewerURL1 = image;
+        pas.Main.MainForm.ViewerURL2 = image.replace('/w92/','/original/');
+        pas.Main.MainForm.ViewerURLA = title;
+        pas.Main.MainForm.ViewerURLC = 1;
+        pas.Main.MainForm.ViewerURLT = 1;
+        pas.Main.MainForm.ShowViewer();
+
+        pas.Main.MainForm.TopTitle = title;
+
+        var table = pas.Main.MainForm.RoleTabulator;
+        table.deselectRow();
+        var rows = table.searchRows('NAM',"=",title);
+        if (rows.length > 0) {
+          table.selectRow(rows[0]);
+          table.scrollToRow(rows[0],"top",false);
+        }
+      }
+    }
+  end;
+
+  //////////////////////////////////////////////////////////////////////////////
   // cellClick_role_Top
   //////////////////////////////////////////////////////////////////////////////
   asm
@@ -3230,17 +3277,19 @@ end;
         },
 
         { title: "Top Movies", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
-            headerMenu: headerMenu,
-            tooltip:    tooltip_actor_Top,
-            formatter:  formatter_actor_TopMovies,
-            cellClick:  cellClick_actor_Top
+            headerMenu:   headerMenu,
+            tooltip:      tooltip_actor_Top,
+            formatter:    formatter_actor_TopMovies,
+            cellClick:    cellClick_actor_Top,
+            cellDblClick: cellDblClick_actor_Top
         },
 
         { title: "Top TV Shows", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
-            headerMenu: headerMenu,
-            tooltip:    tooltip_actor_Top,
-            formatter:  formatter_actor_TopTVShows,
-            cellClick:  cellClick_actor_Top
+            headerMenu:   headerMenu,
+            tooltip:      tooltip_actor_Top,
+            formatter:    formatter_actor_TopTVShows,
+            cellClick:    cellClick_actor_Top,
+            cellDblClick: cellDblClick_actor_Top,
         },
 
         // Ensure these are available to Tabulator but otherwise not visible
@@ -3481,10 +3530,22 @@ end;
         },
 
         { title: "Top Roles", field: "ACA", width: 455, minWidth: 160, maxWidth: 455, headerSort: false,
-            headerMenu: headerMenu,
-            tooltip:    tooltip_role_Top,
-            formatter:  formatter_role_TopRoles,
-            cellClick:  cellClick_role_Top
+            headerMenu:   headerMenu,
+            tooltip:      tooltip_role_Top,
+            formatter:    formatter_role_TopRoles,
+//            cellClick:    cellClick_role_Top,
+            cellClick: function(e, cell){
+              var pic = e.target.outerHTML;
+//              var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
+//              var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
+              var tid = pic.substring(pic.indexOf('tid')+4,pic.indexOf('atitle=')-1);
+              let lookuproles = [];
+              lookuproles.push({"ID":parseInt(tid.replace('"','').replace("'",""))});
+//              console.log('dbl click: '+title+' ('+tid+')');
+//              console.log(lookuproles);
+              pas.Main.MainForm.GetLookupList(JSON.stringify(lookuproles));
+            }
+
         },
 
         { title: "Overview", field: "OVR",  widthGrow:4, visible: false,
@@ -5524,6 +5585,8 @@ begin
 
   if displayable then
   begin
+    MainForm.btnBlockSelect.Enabled := False;
+
     if MainForm.ViewerMode = 'Backdrops' then
     begin
       direction := 'landscape';
@@ -5595,9 +5658,15 @@ begin
       then MainForm.btnBlockPrevious.Enabled := False
       else MainForm.btnBlockPrevious.Enabled := True;
 
-      if (MainForm.ViewerURLC = 1)
-      then MainForm.btnBlockNext.Enabled := False
-      else MainForm.btnBlockNext.Enabled := True;
+      if (MainForm.ViewerURLC = 1) then
+      begin
+        MainForm.btnBlockNext.Enabled := False;
+        MainForm.btnBlockSelect.Enabled := True;
+      end
+      else
+      begin
+        MainForm.btnBlockNext.Enabled := True;
+      end;
     end
     else
     begin
@@ -5608,9 +5677,15 @@ begin
       then MainForm.btnBlockNext.Enabled := False
       else MainForm.btnBlockNext.Enabled := True;
 
-      if (MainForm.ViewerURLC = 1)
-      then MainForm.btnBlockPrevious.Enabled := False
-      else MainForm.btnBlockPrevious.Enabled := True;
+      if (MainForm.ViewerURLC = 1) then
+      begin
+        MainForm.btnBlockPrevious.Enabled := False;
+        MainForm.btnBlockSelect.Enabled := True;
+      end
+      else
+      begin
+        MainForm.btnBlockPrevious.Enabled := True;
+      end;
     end;
 
 

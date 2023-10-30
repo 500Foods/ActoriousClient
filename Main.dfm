@@ -462,7 +462,7 @@ object MainForm: TMainForm
                 Left = 5
                 Top = 5
                 Width = 44
-                Height = 22
+                Height = 23
                 Margins.Left = 5
                 Margins.Top = 5
                 Margins.Right = 5
@@ -524,7 +524,7 @@ object MainForm: TMainForm
                 Left = 5
                 Top = 5
                 Width = 44
-                Height = 22
+                Height = 23
                 Margins.Left = 5
                 Margins.Top = 5
                 Margins.Right = 5
@@ -586,7 +586,7 @@ object MainForm: TMainForm
                 Left = 5
                 Top = 5
                 Width = 44
-                Height = 22
+                Height = 23
                 Margins.Left = 5
                 Margins.Top = 5
                 Margins.Right = 5
@@ -2174,7 +2174,7 @@ object MainForm: TMainForm
     Left = 340
     Top = 352
     Width = 48
-    Height = 288
+    Height = 336
     ElementClassName = 'd-none flex-column justify-content-center align-items-end'
     ElementID = 'divBlockControls'
     ChildOrder = 6
@@ -2183,7 +2183,7 @@ object MainForm: TMainForm
     Role = ''
     object btnBlockClose: TWebButton
       Left = 0
-      Top = 240
+      Top = 288
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2199,10 +2199,11 @@ object MainForm: TMainForm
       HeightPercent = 100.000000000000000000
       WidthPercent = 100.000000000000000000
       OnClick = divViewerHolderClick
+      ExplicitTop = 240
     end
     object btnBlockZoomReset: TWebButton
       Left = 0
-      Top = 192
+      Top = 240
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2219,10 +2220,11 @@ object MainForm: TMainForm
       TabOrder = 1
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomResetClick
+      ExplicitTop = 192
     end
     object btnBlockZoomPlus: TWebButton
       Left = 0
-      Top = 96
+      Top = 144
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2239,10 +2241,11 @@ object MainForm: TMainForm
       TabOrder = 2
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomPlusClick
+      ExplicitTop = 96
     end
     object btnBlockZoomMinus: TWebButton
       Left = 0
-      Top = 144
+      Top = 192
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2259,10 +2262,11 @@ object MainForm: TMainForm
       TabOrder = 3
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomMinusClick
+      ExplicitTop = 144
     end
     object btnBlockPrevious: TWebButton
       Left = 0
-      Top = 0
+      Top = 48
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2279,10 +2283,11 @@ object MainForm: TMainForm
       TabOrder = 4
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockPreviousClick
+      ExplicitTop = 0
     end
     object btnBlockNext: TWebButton
       Left = 0
-      Top = 48
+      Top = 96
       Width = 48
       Height = 48
       Cursor = crHandPoint
@@ -2300,6 +2305,29 @@ object MainForm: TMainForm
       TabOrder = 5
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockNextClick
+      ExplicitTop = 48
+    end
+    object btnBlockSelect: TWebButton
+      Left = 0
+      Top = 0
+      Width = 48
+      Height = 48
+      Cursor = crHandPoint
+      Align = alBottom
+      Caption = 
+        '<i class="fa-duotone fa-circle-star fa-2x text-white opacity-75"' +
+        '> </i>'
+      ElementClassName = 'btn btn-link'
+      ElementID = 'btnBlockPrevious'
+      ElementFont = efCSS
+      ElementPosition = epRelative
+      HeightStyle = ssAuto
+      HeightPercent = 100.000000000000000000
+      TabOrder = 4
+      Visible = False
+      WidthStyle = ssAuto
+      WidthPercent = 100.000000000000000000
+      OnClick = btnBlockSelectClick
     end
   end
   object divBlockData: TWebHTMLDiv
