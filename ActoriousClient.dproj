@@ -151,7 +151,7 @@
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
-        <TMSVersion>1.0.3367</TMSVersion>
+        <TMSVersion>1.0.3368</TMSVersion>
         <TMSWebSingleJS>2</TMSWebSingleJS>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
