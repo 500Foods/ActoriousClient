@@ -94,16 +94,7 @@ type
     lblSupport: TWebLabel;
     pageSettings: TWebTabSheet;
     divSettings: TWebHTMLDiv;
-    divSettingsPersonRequests: TWebHTMLDiv;
-    lblLimitData: TWebLabel;
-    switchLimitData: TWebToggleButton;
-    divSettingsTopRequests: TWebHTMLDiv;
-    lblLimitDataTop: TWebLabel;
-    switchLimitDataTop: TWebToggleButton;
     tmrSearch: TWebTimer;
-    divSettingsSearch: TWebHTMLDiv;
-    lblQuickSearch: TWebLabel;
-    switchSearch: TWebToggleButton;
     btnSearch: TWebButton;
     tmrImageCheck: TWebTimer;
     divPhotoSlider: TWebHTMLDiv;
@@ -174,6 +165,9 @@ type
     WebHTMLDiv14: TWebHTMLDiv;
     linkPizza: TWebHTMLDiv;
     btnBlockSelect: TWebButton;
+    WebHTMLDiv1: TWebHTMLDiv;
+    WebHTMLDiv2: TWebHTMLDiv;
+    divSettingsSwitch1: TWebHTMLDiv;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -206,22 +200,19 @@ type
     procedure btnDiscordLaunchClick(Sender: TObject);
     procedure WebFormResize(Sender: TObject);
     procedure btnTop1000Click(Sender: TObject);
-    procedure switchLimitDataClick(Sender: TObject);
+    procedure switchLimitPerson(Checked: Boolean);
     procedure btnAboutClick(Sender: TObject);
     procedure divPrevBirthDayClick(Sender: TObject);
     procedure divPrevDeathDayClick(Sender: TObject);
     procedure divNextDeathDayClick(Sender: TObject);
     procedure divPrevReleaseDayClick(Sender: TObject);
     procedure divNextReleaseDayClick(Sender: TObject);
-    procedure switchLimitDataTopClick(Sender: TObject);
+    procedure switchLimitTop(Checked: Boolean);
     [async] procedure btnSearchClick(Sender: TObject);
     procedure edtSearchChange(Sender: TObject);
     procedure tmrSearchTimer(Sender: TObject);
     procedure edtSearchEnter(Sender: TObject);
-    procedure switchSearchClick(Sender: TObject);
-    procedure lblLimitDataTopClick(Sender: TObject);
-    procedure lblLimitDataClick(Sender: TObject);
-    procedure lblQuickSearchClick(Sender: TObject);
+    procedure switchLimitSearch(Checked: Boolean);
     procedure tmrImageCheckTimer(Sender: TObject);
     [async] procedure btnRelativesClick(Sender: TObject);
     procedure btnSetRelatives(relative: Integer; name: String);
@@ -678,34 +669,23 @@ begin
   edtSearch.SelectAll;
 end;
 
-procedure TMainForm.lblLimitDataClick(Sender: TObject);
-begin
-  switchLimitDataClick(Sender);
-end;
-
-procedure TMainForm.lblLimitDataTopClick(Sender: TObject);
-begin
-  switchLimitDataTopClick(Sender);
-end;
-
-procedure TMainForm.lblQuickSearchClick(Sender: TObject);
-begin
-  switchSearchClick(Sender);
-end;
-
-procedure TMainForm.switchLimitDataClick(Sender: TObject);
+procedure TMainForm.switchLimitPerson(Checked: Boolean);
 var
   i: Integer;
 begin
-  if switchLimitData.Checked then
+  if Checked then
   begin
     DataLimited := True;
-    lblLimitData.Caption := 'Limit Person Requests to 50 Records'
+    asm
+      switchSettingsLabel1.innerHTML = 'Limit Person Requests to 50 Records';
+    end;
   end
   else
   begin
     DataLimited := False;
-    lblLimitData.Caption := 'Person Requests Return All Records'
+    asm
+      switchSettingsLabel1.innerHTML = 'Person Requests Return All Records';
+    end;
   end;
 
   // Reset the cache
@@ -723,21 +703,25 @@ begin
 
 end;
 
-procedure TMainForm.switchLimitDataTopClick(Sender: TObject);
+procedure TMainForm.switchLimitTop(Checked: Boolean);
 var
   i: Integer;
 begin
-  if switchLimitDataTop.Checked then
+  if Checked then
   begin
     DataLimitedTop := True;
-    lblLimitDataTop.Caption := 'Limit Top Requests to 1,000 Records';
     btnTop1000.Caption := 'TMDb Top 1,000 Actors';
+    asm
+      switchSettingsLabel2.innerHTML = 'Limit Top Requests to 1,000 Records';
+    end;
   end
   else
   begin
     DataLimitedTop := False;
-    lblLimitDataTop.Caption := 'Top Requests Return 5,000 Records';
     btnTop1000.Caption := 'TMDb Top 5,000 Actors';
+    asm
+      switchSettingsLabel2.innerHTML = 'Limit Top Requests to 5,000 Records';
+    end;
   end;
 
   // Reset the cache
@@ -753,19 +737,23 @@ begin
 
 end;
 
-procedure TMainForm.switchSearchClick(Sender: TObject);
+procedure TMainForm.switchLimitSearch(Checked: Boolean);
 begin
-  if switchSearch.Checked then
+  if Checked then
   begin
     QuickSearch := True;
-    lblQuickSearch.Caption := 'Limit Quick Search to 20 Results';
-    asm btnSearch.innerHTML = window.icon_magnifying_glass; end;
+    asm
+      switchSettingsLabel3.innerHTML = 'Limit Quick search to 20 Results';
+      btnSearch.innerHTML = window.icon_magnifying_glass;
+    end;
   end
   else
   begin
     QuickSearch := False;
-    lblQuickSearch.Caption := 'Slow Search Limited to 100 Results';
-    asm btnSearch.innerHTML = window.icon_magnifying_glass_swap; end;
+    asm
+      switchSettingsLabel3.innerHTML = 'Slow Search Limited to 100 Results';
+      btnSearch.innerHTML = window.icon_magnifying_glass_swap;
+    end;
   end;
 end;
 
@@ -902,12 +890,26 @@ begin
   // available (which is a little surprising, actually?)
   if AdultContent then
   begin
-    switchLimitData.Checked := False;
-    switchLimitDataTop.Checked := False;
-    switchSearch.Checked := False;
-    switchLimitDataClick(nil);
-    switchLimitDataTopClick(nil);
-    switchSearchClick(nil);
+//    switchLimitData.Checked := False;
+//    switchLimitDataTop.Checked := False;
+//    switchSearch.Checked := False;
+//    switchLimitDataClick(nil);
+//    switchLimitDataTopClick(nil);
+//    switchSearchClick(nil);
+  end;
+
+  // Changed to HTML code for the switches, so here we connect their
+  // events to the original Delphi component events
+  asm
+    switchSettings1.addEventListener("change", function() {
+      pas.Main.MainForm.switchLimitPerson(this.checked);
+    });
+    switchSettings2.addEventListener("change", function() {
+      pas.Main.MainForm.switchLimitTop(this.checked);
+    });
+    switchSettings3.addEventListener("change", function() {
+      pas.Main.MainForm.switchLimitSearch(this.checked);
+    });
   end;
 
   // We use this to know when it is time to request data,

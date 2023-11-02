@@ -112,8 +112,8 @@ object MainForm: TMainForm
       ElementFont = efCSS
       Role = ''
       object divInfoPages: TWebPageControl
-        Left = 0
-        Top = 58
+        Left = -2
+        Top = 62
         Width = 500
         Height = 223
         Margins.Left = 0
@@ -124,7 +124,7 @@ object MainForm: TMainForm
         ElementID = 'divInfoPages'
         ChildOrder = 4
         ElementFont = efCSS
-        TabIndex = 0
+        TabIndex = 7
         ShowTabs = False
         TabOrder = 0
         object pageBio: TWebTabSheet
@@ -332,10 +332,10 @@ object MainForm: TMainForm
           ChildOrder = 5
           ElementFont = efCSS
           object btnRelatives: TWebButton
-            Left = 5
-            Top = 5
+            Left = 4
+            Top = 4
             Width = 96
-            Height = 32
+            Height = 35
             Caption = 'Find Relatives'
             ElementClassName = 'btn btn-sm btn-primary'
             ElementID = 'btnRelatives'
@@ -386,7 +386,6 @@ object MainForm: TMainForm
             Caption = '<i class="fa-brands fa-discord fa-lg"> </i> Launch Discord'
             ElementClassName = 'btn btn-sm btn-primary'
             ElementFont = efCSS
-            HeightStyle = ssAuto
             HeightPercent = 100.000000000000000000
             WidthPercent = 100.000000000000000000
             OnClick = btnDiscordLaunchClick
@@ -413,191 +412,73 @@ object MainForm: TMainForm
             ChildOrder = 2
             ElementFont = efCSS
             Role = ''
-            object divSettingsPersonRequests: TWebHTMLDiv
+            object WebHTMLDiv1: TWebHTMLDiv
               Left = 0
-              Top = 30
+              Top = 76
               Width = 500
-              Height = 30
-              ElementClassName = 'order-0 ms-1 mt-1 d-flex order-1'
-              ElementID = 'divSettingsPersonRequests'
-              HeightStyle = ssAuto
+              Height = 38
+              ElementClassName = 'order-2 ms-1 d-flex Switch'
+              ElementID = 'divSettingsSwitch3'
               WidthStyle = ssAuto
               Align = alTop
               ChildOrder = 2
               ElementPosition = epRelative
               ElementFont = efCSS
+              HTML.Strings = (
+                '<div class="form-check form-switch">'
+                
+                  '  <input class="form-check-input" type="checkbox" id="switchSett' +
+                  'ings3" checked>'
+                
+                  '  <label class="form-check-label" for="siwtchSettings2" id="swit' +
+                  'chSettingsLabel3">Limit Quick Search to 20 Results</label>'
+                '</div>')
               Role = ''
-              OnClick = switchLimitDataClick
-              object lblLimitData: TWebLabel
-                AlignWithMargins = True
-                Left = 58
-                Top = 2
-                Width = 438
-                Height = 24
-                Cursor = crHandPoint
-                Margins.Left = 4
-                Margins.Top = 2
-                Margins.Right = 4
-                Margins.Bottom = 4
-                Align = alClient
-                AutoSize = False
-                Caption = 'Limit Person Requests to 50 Records'
-                ElementClassName = 'text-light ms-2'
-                ElementLabelClassName = 'text-white'
-                ElementID = 'lblLimitData'
-                ElementFont = efCSS
-                ElementPosition = epRelative
-                HeightStyle = ssAuto
-                HeightPercent = 100.000000000000000000
-                WordWrap = True
-                WidthStyle = ssAuto
-                WidthPercent = 100.000000000000000000
-                OnClick = lblLimitDataClick
-                ExplicitTop = 4
-                ExplicitWidth = 406
-                ExplicitHeight = 18
-              end
-              object switchLimitData: TWebToggleButton
-                AlignWithMargins = True
-                Left = 5
-                Top = 5
-                Width = 44
-                Height = 23
-                Margins.Left = 5
-                Margins.Top = 5
-                Margins.Right = 5
-                Margins.Bottom = 2
-                Align = alLeft
-                Checked = True
-                ElementClassName = 'grow-0 shrink--0'
-                ElementID = 'switchLimitData'
-                ElementPosition = epRelative
-                OnClick = switchLimitDataClick
-              end
             end
-            object divSettingsTopRequests: TWebHTMLDiv
+            object WebHTMLDiv2: TWebHTMLDiv
+              Left = 0
+              Top = 38
+              Width = 500
+              Height = 38
+              ElementClassName = 'order-1 ms-1 d-flex Switch'
+              ElementID = 'divSettingsSwitch2'
+              WidthStyle = ssAuto
+              Align = alTop
+              ChildOrder = 1
+              ElementPosition = epRelative
+              ElementFont = efCSS
+              HTML.Strings = (
+                '<div class="form-check form-switch">'
+                
+                  '  <input class="form-check-input" type="checkbox" id="switchSett' +
+                  'ings2" checked>'
+                
+                  '  <label class="form-check-label" for="switchSettings2" id="swit' +
+                  'chSettingsLabel2">Limit Top Requests to 1,000 Records</label>'
+                '</div>')
+              Role = ''
+            end
+            object divSettingsSwitch1: TWebHTMLDiv
               Left = 0
               Top = 0
               Width = 500
-              Height = 30
-              ElementClassName = 'order-1 ms-1 mt-1 d-flex'
-              ElementID = 'divSettingsTopRequests'
-              HeightStyle = ssAuto
+              Height = 38
+              ElementClassName = 'order-0 ms-1 d-flex Switch'
+              ElementID = 'divSettingsSwitch1'
               WidthStyle = ssAuto
               Align = alTop
-              ChildOrder = 2
               ElementPosition = epRelative
               ElementFont = efCSS
+              HTML.Strings = (
+                '<div class="form-check form-switch">'
+                
+                  '  <input class="form-check-input" type="checkbox" id="switchSett' +
+                  'ings1" checked>'
+                
+                  '  <label class="form-check-label" for="switchSettings1" id="swit' +
+                  'chSettingsLabel1">Limit Person Requests to 50 Records</label>'
+                '</div>')
               Role = ''
-              OnClick = switchLimitDataTopClick
-              object lblLimitDataTop: TWebLabel
-                AlignWithMargins = True
-                Left = 58
-                Top = 2
-                Width = 438
-                Height = 24
-                Cursor = crHandPoint
-                Margins.Left = 4
-                Margins.Top = 2
-                Margins.Right = 4
-                Margins.Bottom = 4
-                Align = alClient
-                AutoSize = False
-                Caption = 'Limit Top Requests to 1,000 Records'
-                ElementClassName = 'text-light ms-2'
-                ElementLabelClassName = 'text-white'
-                ElementID = 'lblLimitData'
-                ElementFont = efCSS
-                ElementPosition = epRelative
-                HeightStyle = ssAuto
-                HeightPercent = 100.000000000000000000
-                WordWrap = True
-                WidthStyle = ssAuto
-                WidthPercent = 100.000000000000000000
-                OnClick = lblLimitDataTopClick
-                ExplicitTop = 4
-                ExplicitWidth = 406
-                ExplicitHeight = 18
-              end
-              object switchLimitDataTop: TWebToggleButton
-                AlignWithMargins = True
-                Left = 5
-                Top = 5
-                Width = 44
-                Height = 23
-                Margins.Left = 5
-                Margins.Top = 5
-                Margins.Right = 5
-                Margins.Bottom = 2
-                Align = alLeft
-                Checked = True
-                ElementClassName = 'grow-0 shrink-0'
-                ElementID = 'switchLimitData'
-                ElementPosition = epRelative
-                OnClick = switchLimitDataTopClick
-              end
-            end
-            object divSettingsSearch: TWebHTMLDiv
-              Left = 0
-              Top = 60
-              Width = 500
-              Height = 30
-              ElementClassName = 'order-2 ms-1 mt-1 d-flex'
-              ElementID = 'divSettingsSearch'
-              HeightStyle = ssAuto
-              WidthStyle = ssAuto
-              Align = alTop
-              ChildOrder = 2
-              ElementPosition = epRelative
-              ElementFont = efCSS
-              Role = ''
-              OnClick = switchSearchClick
-              object lblQuickSearch: TWebLabel
-                AlignWithMargins = True
-                Left = 58
-                Top = 2
-                Width = 438
-                Height = 24
-                Cursor = crHandPoint
-                Margins.Left = 4
-                Margins.Top = 2
-                Margins.Right = 4
-                Margins.Bottom = 4
-                Align = alClient
-                AutoSize = False
-                Caption = 'Limit Quick Search to 20 Results'
-                ElementClassName = 'text-light ms-2'
-                ElementLabelClassName = 'text-white'
-                ElementID = 'lblQuickSearch'
-                ElementFont = efCSS
-                ElementPosition = epRelative
-                HeightStyle = ssAuto
-                HeightPercent = 100.000000000000000000
-                WordWrap = True
-                WidthStyle = ssAuto
-                WidthPercent = 100.000000000000000000
-                OnClick = lblQuickSearchClick
-                ExplicitTop = 4
-                ExplicitWidth = 406
-                ExplicitHeight = 18
-              end
-              object switchSearch: TWebToggleButton
-                AlignWithMargins = True
-                Left = 5
-                Top = 5
-                Width = 44
-                Height = 23
-                Margins.Left = 5
-                Margins.Top = 5
-                Margins.Right = 5
-                Margins.Bottom = 2
-                Align = alLeft
-                Checked = True
-                ElementClassName = 'grow-0 shrink--0'
-                ElementID = 'switchLimitData'
-                ElementPosition = epRelative
-                OnClick = switchSearchClick
-              end
             end
           end
         end
@@ -2199,7 +2080,6 @@ object MainForm: TMainForm
       HeightPercent = 100.000000000000000000
       WidthPercent = 100.000000000000000000
       OnClick = divViewerHolderClick
-      ExplicitTop = 240
     end
     object btnBlockZoomReset: TWebButton
       Left = 0
@@ -2220,7 +2100,6 @@ object MainForm: TMainForm
       TabOrder = 1
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomResetClick
-      ExplicitTop = 192
     end
     object btnBlockZoomPlus: TWebButton
       Left = 0
@@ -2241,7 +2120,6 @@ object MainForm: TMainForm
       TabOrder = 2
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomPlusClick
-      ExplicitTop = 96
     end
     object btnBlockZoomMinus: TWebButton
       Left = 0
@@ -2262,7 +2140,6 @@ object MainForm: TMainForm
       TabOrder = 3
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockZoomMinusClick
-      ExplicitTop = 144
     end
     object btnBlockPrevious: TWebButton
       Left = 0
@@ -2283,7 +2160,6 @@ object MainForm: TMainForm
       TabOrder = 4
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockPreviousClick
-      ExplicitTop = 0
     end
     object btnBlockNext: TWebButton
       Left = 0
@@ -2305,7 +2181,6 @@ object MainForm: TMainForm
       TabOrder = 5
       WidthPercent = 100.000000000000000000
       OnClick = btnBlockNextClick
-      ExplicitTop = 48
     end
     object btnBlockSelect: TWebButton
       Left = 0

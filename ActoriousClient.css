@@ -191,6 +191,23 @@ div.rounded-start,
 
 
 /* Customize switches (Settings page) */
+.Switch > div > label {
+  color: white;
+  padding-left: 10px;
+  padding-top: 8px;
+  cursor:pointer !important;
+}
+.Switch > div > input {
+  width: 60px !important;
+  height: 35px;
+  border-radius: 4px !important;
+  cursor:pointer !important;
+}
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
 .slider {
   border-radius: 0.4rem;
 }
