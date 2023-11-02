@@ -137,22 +137,22 @@
         <Icon_MainIcon>ActoriousClient_Icon.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>iconx\favicon-48x48.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>iconx\apple-touch-icon-152x152.png</UWP_DelphiLogo150>
-        <TMSWebDebugInfo>2</TMSWebDebugInfo>
-        <TMSWebEcmaScript>2</TMSWebEcmaScript>
-        <TMSWebObfuscation>1</TMSWebObfuscation>
-        <TMSApplicationDescription>Connections</TMSApplicationDescription>
-        <TMSWebPWAStartURL>https://www.actorious.com/</TMSWebPWAStartURL>
+        <TMSWebPrivExts>$(TMSWebPrivExts);*.svg, *.ico</TMSWebPrivExts>
+        <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
+        <TMSWebPWAStartURL>/</TMSWebPWAStartURL>
+        <TMSVersionAuto>2</TMSVersionAuto>
         <TMSWebPWAResIconLowFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-64x64.png</TMSWebPWAResIconLowFile>
         <TMSWebPWAResIconMidFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-256x256.png</TMSWebPWAResIconMidFile>
-        <TMSWebPrivExts>$(TMSWebPrivExts);*.svg, *.ico</TMSWebPrivExts>
-        <TMSVersionAuto>2</TMSVersionAuto>
-        <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
-        <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
+        <TMSWebObfuscation>1</TMSWebObfuscation>
+        <TMSWebSingleJS>2</TMSWebSingleJS>
+        <TMSWebDebugInfo>2</TMSWebDebugInfo>
+        <TMSApplicationDescription>Connections</TMSApplicationDescription>
+        <TMSVersion>1.0.3399</TMSVersion>
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
-        <TMSWebSingleJS>2</TMSWebSingleJS>
-        <TMSVersion>1.0.3394</TMSVersion>
+        <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

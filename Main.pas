@@ -1201,7 +1201,7 @@ begin
         if (window.innerWidth > 1800) {
           btnSettings.innerHTML   = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_sliders+'Settings</div>';
           btnDiscord.innerHTML    = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_bell_concierge+'Support</div>';
-          btnAbout.innerHTML      = '<div class="d-flex align-items-center justify-content-center"><div style="margin-top:-2px;""><img style="height:24px; width:24px; margin-right:6px;" src="img/actorious-logo-100x100.svg" alt="Actorious Icon"></div>About Actorious</div>';
+          btnAbout.innerHTML      = '<div class="d-flex align-items-center justify-content-center"><div style="margin-top:-2px;""><img style="height:24px; width:24px; margin-right:6px;" src="img/actorious-logo-100x100.svg" alt="Actorious Icon" aria-label="About Actorious"></div>About Actorious</div>';
 
           if (pas.Main.MainForm.BioWords > 1) { btnBio.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_tv_swap+'Overview ('+pas.Main.MainForm.BioWords+' words)</div>'; }
           else { btnBio.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_tv_swap+'Overview (none)</div>'; }
@@ -1232,14 +1232,14 @@ begin
 
       }
 
-      btnBio.setAttribute('aria-label', btnBio.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnPhoto.setAttribute('aria-label', btnPhoto.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnVideo.setAttribute('aria-label', btnVideo.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnBackground.setAttribute('aria-label', btnBackground.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnConnect.setAttribute('aria-label', btnConnect.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnSettings.setAttribute('aria-label', btnSettings.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnDiscord.setAttribute('aria-label', btnDiscord.textContent.replace('.fa-secondary{opacity:.4}',''));
-      btnAbout.setAttribute('aria-label', btnAbout.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnBio.setAttribute('aria-label', btnBio.textContent.replace('.fa-secondary{opacity:.4}','') || 'Biography' );
+      btnPhoto.setAttribute('aria-label', btnPhoto.textContent.replace('.fa-secondary{opacity:.4}','') || 'Photo' );
+      btnVideo.setAttribute('aria-label', btnVideo.textContent.replace('.fa-secondary{opacity:.4}','') || 'Video' );
+      btnBackground.setAttribute('aria-label', btnBackground.textContent.replace('.fa-secondary{opacity:.4}','') || 'Background');
+      btnConnect.setAttribute('aria-label', btnConnect.textContent.replace('.fa-secondary{opacity:.4}','') || 'Connect');
+      btnSettings.setAttribute('aria-label', btnSettings.textContent.replace('.fa-secondary{opacity:.4}','') || 'Settings');
+      btnDiscord.setAttribute('aria-label', btnDiscord.textContent.replace('.fa-secondary{opacity:.4}','') || 'Support');
+      btnAbout.setAttribute('aria-label', btnAbout.textContent.replace('.fa-secondary{opacity:.4}','') || 'About Actorious');
 
     }
 
