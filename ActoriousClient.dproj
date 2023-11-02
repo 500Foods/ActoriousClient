@@ -152,7 +152,7 @@
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebSingleJS>2</TMSWebSingleJS>
-        <TMSVersion>1.0.3391</TMSVersion>
+        <TMSVersion>1.0.3394</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -1048,13 +1048,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

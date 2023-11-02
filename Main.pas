@@ -1123,14 +1123,14 @@ begin
       if (pas.Main.MainForm.MenuType == 0) {
         // Drawing the top menu for the selected Person
 
-        btnBio.setAttribute('aria-label', 'Biography');
-        btnPhoto.setAttribute('aria-label', 'Photos');
-        btnVideo.setAttribute('aria-label', 'Videos');
-        btnBackground.setAttribute('aria-label', 'Backgrounds');
-        btnConnect.setAttribute('aria-label', 'Connections');
-        btnSettings.setAttribute('aria-label', 'Settings');
-        btnDiscord.setAttribute('aria-label', 'Support');
-        btnAbout.setAttribute('aria-label', 'About');
+//        btnBio.setAttribute('aria-label', 'Biography');
+//        btnPhoto.setAttribute('aria-label', 'Photos');
+//        btnVideo.setAttribute('aria-label', 'Videos');
+//        btnBackground.setAttribute('aria-label', 'Backgrounds');
+//        btnConnect.setAttribute('aria-label', 'Connections');
+//        btnSettings.setAttribute('aria-label', 'Settings');
+//        btnDiscord.setAttribute('aria-label', 'Support');
+//        btnAbout.setAttribute('aria-label', 'About');
 
         if (divInfo.getBoundingClientRect().width > 800) {
           btnConnect.innerHTML    = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_people_arrows_swap+'Connections</div>';
@@ -1231,7 +1231,19 @@ begin
         btnConnect.classList.add('d-none');
 
       }
+
+      btnBio.setAttribute('aria-label', btnBio.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnPhoto.setAttribute('aria-label', btnPhoto.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnVideo.setAttribute('aria-label', btnVideo.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnBackground.setAttribute('aria-label', btnBackground.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnConnect.setAttribute('aria-label', btnConnect.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnSettings.setAttribute('aria-label', btnSettings.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnDiscord.setAttribute('aria-label', btnDiscord.textContent.replace('.fa-secondary{opacity:.4}',''));
+      btnAbout.setAttribute('aria-label', btnAbout.textContent.replace('.fa-secondary{opacity:.4}',''));
+
     }
+
+
     window.RefreshMenu = RefreshMenu;
 
 
