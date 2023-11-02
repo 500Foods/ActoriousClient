@@ -148,7 +148,7 @@
         <TMSWebSingleJS>2</TMSWebSingleJS>
         <TMSWebDebugInfo>2</TMSWebDebugInfo>
         <TMSApplicationDescription>Connections</TMSApplicationDescription>
-        <TMSVersion>1.0.3399</TMSVersion>
+        <TMSVersion>1.0.3419</TMSVersion>
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>

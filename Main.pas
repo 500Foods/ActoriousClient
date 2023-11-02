@@ -457,10 +457,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -499,7 +499,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -545,7 +545,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -575,9 +575,9 @@ begin
   then CurrentDeathDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentDeathDate,1,4)),StrToInt(Copy(CurrentDeathDate,6,2)),StrToInt(Copy(CurrentDeathDate,9,2)))+1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Deathdate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -592,9 +592,9 @@ begin
   then CurrentReleaseDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentReleaseDate,1,4)),StrToInt(Copy(CurrentReleaseDate,6,2)),StrToInt(Copy(CurrentReleaseDate,9,2)))+1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Releasedate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -609,9 +609,9 @@ begin
   then CurrentBirthDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentBirthDate,1,4)),StrToInt(Copy(CurrentBirthDate,6,2)),StrToInt(Copy(CurrentBirthDate,9,2)))-1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Birthdate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -626,9 +626,9 @@ begin
   then CurrentDeathDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentDeathDate,1,4)),StrToInt(Copy(CurrentDeathDate,6,2)),StrToInt(Copy(CurrentDeathDate,9,2)))-1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Deathdate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -643,9 +643,9 @@ begin
   then CurrentReleaseDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentReleaseDate,1,4)),StrToInt(Copy(CurrentReleaseDate,6,2)),StrToInt(Copy(CurrentReleaseDate,9,2)))-1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Releasedate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -676,16 +676,16 @@ begin
   if Checked then
   begin
     DataLimited := True;
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel1.innerHTML = 'Limit Person Requests to 50 Records';
-    end;
+  } end; {$ENDIF}
   end
   else
   begin
     DataLimited := False;
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel1.innerHTML = 'Person Requests Return All Records';
-    end;
+    } end; {$ENDIF}
   end;
 
   // Reset the cache
@@ -711,17 +711,17 @@ begin
   begin
     DataLimitedTop := True;
     btnTop1000.Caption := 'TMDb Top 1,000 Actors';
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel2.innerHTML = 'Limit Top Requests to 1,000 Records';
-    end;
+    } end; {$ENDIF}
   end
   else
   begin
     DataLimitedTop := False;
     btnTop1000.Caption := 'TMDb Top 5,000 Actors';
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel2.innerHTML = 'Limit Top Requests to 5,000 Records';
-    end;
+    } end; {$ENDIF}
   end;
 
   // Reset the cache
@@ -742,18 +742,18 @@ begin
   if Checked then
   begin
     QuickSearch := True;
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel3.innerHTML = 'Limit Quick search to 20 Results';
       btnSearch.innerHTML = window.icon_magnifying_glass;
-    end;
+    } end; {$ENDIF}
   end
   else
   begin
     QuickSearch := False;
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettingsLabel3.innerHTML = 'Slow Search Limited to 100 Results';
       btnSearch.innerHTML = window.icon_magnifying_glass_swap;
-    end;
+    } end; {$ENDIF}
   end;
 end;
 
@@ -767,7 +767,7 @@ begin
   reload := 0;
 
   // We only want to do this once, normally
-  asm
+  {$IFNDEF WIN32} asm {
   	var errorElements = document.querySelectorAll(".lazy.entered.loaded");
 	  errorElements.forEach(el => {
       if (el.src.indexOf('hourglass') > 0) {
@@ -778,7 +778,7 @@ begin
       }
     });
     if (reload > 0) window.lazyLoadInstance.update();
-  end;
+  } end; {$ENDIF}
 
   if (reload = 0) then
   begin
@@ -859,10 +859,10 @@ begin
 
 
   // Sort out Version Information
-  asm
+  {$IFNDEF WIN32} asm {
     this.Version = window.ProjectName;
     this.Release = new luxon.DateTime.fromISO(new Date(document.lastModified).toISOString()).toFormat('yyyy-MMM-dd');
-  end;
+  } end; {$ENDIF}
 
   VersionNum := StringReplace(Copy(Version, Pos('ActoriousClient',Version)+16,Length(Version)),'_','.',[rfReplaceAll]);
   VersionCheck := True;
@@ -900,7 +900,7 @@ begin
 
   // Changed to HTML code for the switches, so here we connect their
   // events to the original Delphi component events
-  asm
+  {$IFNDEF WIN32} asm {
     switchSettings1.addEventListener("change", function() {
       pas.Main.MainForm.switchLimitPerson(this.checked);
     });
@@ -910,7 +910,7 @@ begin
     switchSettings3.addEventListener("change", function() {
       pas.Main.MainForm.switchLimitSearch(this.checked);
     });
-  end;
+  } end; {$ENDIF}
 
   // We use this to know when it is time to request data,
   // basically once the Tabulator tables announce that
@@ -1024,7 +1024,7 @@ begin
   linkTour.ElementHandle.style.setProperty('opacity','1.0'); // Always available
 
   // Setup the main UI
-  asm
+  {$IFNDEF WIN32} asm {
 
     // FlatPickr Navigation Icons
     divPrevBirthDay.innerHTML = window.icon_chveron_left;
@@ -1247,7 +1247,7 @@ begin
     window.RefreshMenu = RefreshMenu;
 
 
-  end;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // This sets up our image lazy loading system.  Just need to add "lazy" as
@@ -1261,7 +1261,7 @@ begin
   // this addresses the 429 issue and it is exceedingly rare for TMDb to give
   // an image reference that is invalid, so we'll go with this appraoch for now.
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     window.lazyLoadInstance = new LazyLoad({
       callback_error: (img) => {
 
@@ -1345,14 +1345,15 @@ begin
     }});
     var config = { childList: true, subtree: true };
     observer.observe(document.documentElement, config);
-  end;
+
+  } end; {$ENDIF}
 
 
 
   //////////////////////////////////////////////////////////////////////////////
   // This sets up the main photo/poster image slider
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     window.swiper = new Swiper('.swiper', {
       slidesPerView: 'auto',
       preLoadImages: false,
@@ -1416,7 +1417,8 @@ begin
       pas.Main.MainForm.ViewerURLT = pas.Main.MainForm.BackgroundCount;
       pas.Main.MainForm.ShowViewer();
     });
-  end;
+
+  } end; {$ENDIF}
 
 
 
@@ -1424,7 +1426,7 @@ begin
   // This creates a FlatPickr instances (date/time pickers)
   // The displayed date is something like "January 20"
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     var GetBirthDays = this.GetBirthDays;
     this.Birthdate = flatpickr("#divFlatPickr", {
       altFormat: "F d",
@@ -1493,7 +1495,8 @@ begin
       pas.Main.MainForm.Releasedate.setDate(new Date(),true);
     }
     window.releasedate_today = releasedate_today;
-  end;
+
+  } end; {$ENDIF}
 
 
 
@@ -1504,7 +1507,7 @@ begin
   // Define column header menu as column visibility toggle.  Used for both
   // Tabulator tables, basically appears on all columns
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     var headerMenu = function(){
       var menu = [];
       var columns = this.getColumns();
@@ -1626,14 +1629,15 @@ begin
       return menu;
     };
 
-  end;
+  } end; {$ENDIF}
 
 
-  asm
-  if (divTop.parentNode.childNodes[1].nodeType == 3) {
-    divTop.parentNode.childNodes[1].remove()
-}
-end;
+  {$IFNDEF WIN32} asm {
+    if (divTop.parentNode.childNodes[1].nodeType == 3) {
+      divTop.parentNode.childNodes[1].remove()
+    }
+  } end; {$ENDIF}
+
 
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1641,7 +1645,7 @@ end;
   //
   // Define Header Filter for Name column
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     var headerNameFilter = function(e, column, onRendered){
       var container = document.createElement("div");
       container.classList.add("rounded", "border-2", "bg-dark", "mt-2");
@@ -1713,15 +1717,15 @@ end;
       return container;
     }
 
-  end;
+  } end; {$ENDIF}
 
 
   //create "Name" header filter to allow popup to filter
-  asm
+  {$IFNDEF WIN32} asm {
     var nameHeaderFilter = function(){
       return document.createElement("span");
     }
-  end;
+  } end; {$ENDIF}
 
 
 
@@ -1730,7 +1734,7 @@ end;
   // Make sure this is executed before any Tabulator tables are created
   // This saves us from having to repeate these defintions for every table.
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     Tabulator.defaultOptions.rowHeight = 68;
     Tabulator.defaultOptions.initialSort = [{column:"PopInt", dir:"desc"}],
     Tabulator.defaultOptions.index = "ID";
@@ -1752,7 +1756,7 @@ end;
       headerSortStartingDir:"desc",
       headerSortTristate:true
     };
-  end;
+  } end; {$ENDIF}
 
 
 
@@ -1762,7 +1766,7 @@ end;
   // Used to convert the image URL coming from TMDb to a local placeholder
   // value if the TMDb data is missing for that particular image
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     var checkImage = function(value, data, type, params, component){
       if ((value == null) || (value == '') || (value == '""')) {
         if      (params.imgtype == "person")   { return 'img/person-placeholder.png'; }
@@ -1805,8 +1809,7 @@ end;
         }
       }
     }
-  end;
-
+  } end; {$ENDIF}
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1816,7 +1819,7 @@ end;
   // Used to convert the Popularity value (float) into an integer
   // number of stars, stratified in some fashion
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function PopularityInt(value, data, type, params, component) {
       // This isn't actually a field, so we pull in data from an actual field
       var starcount = parseInt(data.POP);
@@ -1827,7 +1830,8 @@ end;
       else if ( starcount <= 40) { return 4+(data.POP/40);   }
       else                       { return 5+(data.POP/1000); }
     }
-  end;
+    window.PopularityInt = PopularityInt;
+  } end; {$ENDIF}
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1835,7 +1839,7 @@ end;
   //
   // Updates the link icons with the current info for the selected actor, movie or tv show
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     // Enable/populate the links at the top based on whatever external links we've been able
     // to cobble together from both TMDb and WikiData.  Got to do some basic checking as well
     // as sometimes there are links without data.  Something similar is done with the Links
@@ -1858,7 +1862,7 @@ end;
       }
     }
     window.SetLNK = SetLNK;
-  end;
+  } end; {$ENDIF}
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1867,7 +1871,7 @@ end;
   // Updates the link icons appearing in the table with the current info for the selected actor,
   // movie or tv show
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function SetTableLNK(cell,key,prefix,icon,alt){
       if (cell.getRow().getCell(key) !== false) {
         var LNK = cell.getRow().getCell(key).getValue();
@@ -1882,7 +1886,8 @@ end;
         return '';
       }
     }
-  end;
+    window.SetTableLNK = SetTableLNK;
+  } end; {$ENDIF}
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1891,7 +1896,7 @@ end;
   // This is called when a row is selected from the Actor table and is what
   // updates everything at the top of the interface.
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function Role_Selected(e, row) {
       if ((!(row.getCell('ID').getValue() == pas.Main.MainForm.CurrentRole)) || (pas.Main.MainForm.MenuType == 0)) {
 
@@ -2115,7 +2120,8 @@ end;
       }
     };
     window.Role_Selected = Role_Selected;
-  end;
+
+  } end; {$ENDIF}
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2124,7 +2130,7 @@ end;
   // This is called when a row is selected from the Actor table and is what
   // updates everything at the top of the interface.
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function Actor_Selected(e, row){
 
       if ((!(row.getCell('TID').getValue() == pas.Main.MainForm.CurrentPerson)) || !(pas.Main.MainForm.MenuType == 0)) {
@@ -2382,13 +2388,13 @@ end;
       }
     };
     window.Actor_Selected = Actor_Selected;
-  end;
+  } end; {$ENDIF}
 
 
   //////////////////////////////////////////////////////////////////////////////
   // tooltip_actor_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function tooltip_actor_PIC(e, cell, onRendered) {
       var rect = e.target.getBoundingClientRect();
       var x = e.clientX - rect.left;
@@ -2405,12 +2411,13 @@ end;
       el.innerHTML = '<div class="tooltip-inner">'+cell.getRow().getCell('NAM').getValue()+'<br /><img alt="Photo of "'+cell.getRow().getCell('NAM').getValue()+'" class="lazy" src='+image+' data-src='+image.replace("/w45/","/w185/")+' width=92 height=auto></div>';
       return el;
     }
-  end;
+    window.tooltip_actor_PIC = tooltip_actor_PIC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // tooltip_role_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function tooltip_role_PIC(e, cell, onRendered) {
       var rect = e.target.getBoundingClientRect();
       var x = e.clientX - rect.left;
@@ -2427,12 +2434,13 @@ end;
       el.innerHTML = '<div class="tooltip-inner">'+cell.getRow().getCell('NAM').getValue()+'<br /><img alt="Poster of '+cell.getRow().getCell('NAM').getValue()+'" src='+image+' width=92 height=auto></div>';
       return el;
     }
-  end;
+    window.tooltip_role_PIC = tooltip_role_PIC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // tooltip_role_NAM
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function tooltip_role_NAM(e, cell, onRendered) {
       var rect = e.target.getBoundingClientRect();
       var x = e.clientX - rect.left;
@@ -2454,12 +2462,13 @@ end;
       el.innerHTML = '<div class="tooltip-inner"><strong>'+NAM+'</strong><br />'+CHX+'</div>';
       return el;
     }
-  end;
+    window.tooltip_role_NAM = tooltip_role_NAM;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // tooltip_actor_Top (TopMovies and TopTVShows)
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function tooltip_actor_Top(e, cell, onRendered) {
       var pic = e.target.outerHTML;
       var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
@@ -2483,12 +2492,13 @@ end;
         return ''
       }
     }
-  end;
+    window.tooltip_actor_Top = tooltip_actor_Top;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // tooltip_role_Top
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function tooltip_role_Top(e, cell, onRendered) {
       let pic = e.target.outerHTML;
       if ((pic.indexOf('atitle') > 0) && (pic.indexOf('Missing Person Placeholder') == -1)) {
@@ -2516,12 +2526,13 @@ end;
         return ''
       }
     }
-  end;
+    window.tooltip_role_Top = tooltip_role_Top;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_PIC(cell, formatterParams, onRendered) {
       let image = checkImage(cell.getValue(),null,null,{imgtype:"person"});
       return '<div style="color:transparent;">'+
@@ -2535,12 +2546,13 @@ end;
                   '>'+
                 '</div>';
     }
-  end;
+    window.formatter_actor_PIC = formatter_actor_PIC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_NAM
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_NAM(cell, formatterParams, onRendered) {
       var actor = '<div style="padding:0px 4px;"><strong>'+cell.getRow().getCell('NAM').getValue()+'</strong>';
       var homepage = cell.getRow().getCell('WWW').getValue();
@@ -2554,12 +2566,13 @@ end;
 
       return actor+birthplace+homepage;
     }
-  end;
+    window.formatter_actor_NAM = formatter_actor_NAM;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_DOB
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_DOB(cell, formatterParams, onRendered) {
       var dob = cell.getValue();
       var dod = cell.getRow().getCell('DOD').getValue();
@@ -2579,12 +2592,13 @@ end;
         return '<div></div>';
       }
     }
-  end;
+    window.formatter_actor_DOB = formatter_actor_DOB;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_DOD
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_DOD(cell, formatterParams, onRendered) {
       var dod = cell.getValue();
       var dob = cell.getRow().getCell('DOB').getValue();
@@ -2615,12 +2629,13 @@ end;
         return '<div></div>';
       }
     }
-  end;
+    window.formatter_actor_DOD = formatter_actor_DOD
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_CTZ
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_CTZ(cell, formatterParams, onRendered) {
       var country = cell.getValue();
       if (country !== undefined) {
@@ -2630,12 +2645,13 @@ end;
         return '';
       }
     }
-  end;
+    window.formatter_actor_CTZ = formatter_actor_CTZ
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_HT1
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_HT1(cell, formatterParams, onRendered) {
       var ht = cell.getValue();
       if (ht !== undefined) {
@@ -2645,12 +2661,13 @@ end;
         return '';
       }
     }
-  end;
+    window.formatter_actor_HT1 = formatter_actor_HT1
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_SOC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_SOC(cell, formatterParams, onRendered) {
       var links = '';
       links += SetTableLNK(cell,'TID','https://www.themoviedb.org/person/', 'img/tmdb_icon.svg',           'TMDb Link');
@@ -2669,12 +2686,13 @@ end;
 
       return '<div style="white-space:normal;">'+links+'</div>';
     }
-  end;
+    window.formatter_actor_SOC = formatter_actor_SOC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // addPoster
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function addPoster(cell, title, picture, adultpic, type) {
       let adult = pas.Main.MainForm.AdultContent;
       let image = checkImage(cell.getRow().getCell(picture).getValue(),null,type,{imgtype:type});
@@ -2696,12 +2714,13 @@ end;
         return '<img alt="Missing Poster Placeholder" atitle="" src="img/dark_space.png" width=45 height=68>';
       }
     }
-  end;
+    window.addPoster = addPoster;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // addPerson
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function addPerson(tid, name, character, photo, adultpic) {
       let adult = pas.Main.MainForm.AdultContent;
       if ((!adultpic || adult) && (name)) {
@@ -2723,12 +2742,13 @@ end;
         return '<img alt="Missing Person Placeholder" atitle="" src="img/dark_space.png" width=45 height=auto>';
       }
     }
-  end;
+    window.addPerson = addPerson;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_TopMovies
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_TopMovies(cell, formatterParams, onRendered) {
       cell.getElement().style.background="var(--bs-dark)";
       let posters = '';
@@ -2741,12 +2761,13 @@ end;
 
       return posters
     }
-  end;
+    window.formatter_actor_TopMovies = formatter_actor_TopMovies;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_actor_TopTVShows
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_actor_TopTVShows(cell, formatterParams, onRendered) {
       cell.getElement().style.background="var(--bs-dark)";
       let posters = '';
@@ -2758,12 +2779,13 @@ end;
       posters += addPoster(cell, 'TT5', 'TP5', 'TX5', 'tv');
       return posters
     }
-  end;
+    window.formatter_actor_TopTVShows = formatter_actor_TopTVShows;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_TopRoles
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_TopRoles(cell, formatterParams, onRendered) {
       cell.getElement().style.background="var(--bs-dark)";
       var data = cell.getRow().getCell('ACA').getValue();
@@ -2811,12 +2833,13 @@ end;
       }
       return people;
     }
-  end;
+    window.formatter_role_TopRoles = formatter_role_TopRoles;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_PIC(cell, formatterParams, onRendered) {
       var image = checkImage(cell.getValue(),null,cell.getRow().getCell('TYP').getValue(),{imgtype:"tvmovie"});
       return '<div style="color:transparent; width: 45px; height: 68px;">'+
@@ -2830,12 +2853,13 @@ end;
                   '>'+
                 '</div>';
     }
-  end;
+    window.formatter_role_PIC = formatter_role_PIC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_NAM
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_NAM(cell, formatterParams, onRendered) {
       var title = cell.getValue();
       var character = cell.getRow().getCell('CHX').getValue();
@@ -2852,12 +2876,13 @@ end;
 
       return '<div style="padding:0px 4px; white-space:normal"><strong>'+title+'</strong>'+character+'</div>';
     }
-  end;
+    window.formatter_role_NAM = formatter_role_NAM;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_TYP
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_TYP(cell, formatterParams, onRendered) {
       if (cell.getValue() == 'tv') {
         return '<div class="d-flex h-100 align-items-center justify-content-center" style="transform:scale(1.5)">'+window.icon_tv+'</div>';
@@ -2866,12 +2891,13 @@ end;
         return '<div class="d-flex h-100 align-items-center justify-content-center" style="transform:scale(1.5)">'+window.icon_film+'</div>';
       }
     }
-  end;
+    window.formatter_role_TYP = formatter_role_TYP;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_REL
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_REL(cell, formatterParams, onRendered) {
       var rel = cell.getValue();
       var typ = cell.getRow().getCell('TYP').getValue();
@@ -2943,12 +2969,13 @@ end;
         }
       }
     }
-  end;
+    window.formatter_role_REL = formatter_role_REL;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_REV
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_REV(cell, formatterParams, onRendered) {
       var revenue = cell.getValue();
       var budget = cell.getRow().getCell('BUD').getValue();
@@ -3028,12 +3055,13 @@ end;
 
       return result;
     }
-  end;
+    window.formatter_role_REV = formatter_role_REV;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_RTM
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_RTM(cell, formatterParams, onRendered) {
       var runtime = cell.getValue();
       if (runtime > 0) {
@@ -3043,12 +3071,13 @@ end;
         return '';
       }
     }
-  end;
+    window.formatter_role_RTM = formatter_role_RTM;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_CTG
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_CTG(cell, formatterParams, onRendered) {
       let countries = cell.getValue();
       if (countries !== undefined) {
@@ -3062,21 +3091,23 @@ end;
         return '';
       }
     }
-  end;
+    window.formatter_role_CTG = formatter_role_CTG
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // formatter_role_OVR
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function formatter_role_OVR(cell, formatterParams, onRendered) {
       return '<div style="height:68px; white-space:normal; padding: 2px 4px; line-height:1; font-size: 14px; overflow-y:auto;"">'+cell.getValue()+'</div>';
     }
-  end;
+    window.formatter_role_OVR = formatter_role_OVR;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // cellClick_actor_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function cellClick_actor_PIC(e, cell) {
       let image = checkImage(cell.getValue(),null,null,{imgtype:"person"})
       pas.Main.MainForm.ViewerMode = 'Person';
@@ -3087,12 +3118,13 @@ end;
       pas.Main.MainForm.ViewerURLT = cell.getTable().getDataCount();
       pas.Main.MainForm.ShowViewer();
     }
-  end;
+    window.cellClick_actor_PIC = cellClick_actor_PIC;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // cellClick_actor_Top
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function cellClick_actor_Top(e, cell) {
 
       var pic = e.target.outerHTML;
@@ -3119,44 +3151,13 @@ end;
         }
       }
     }
-  end;
-
-  //////////////////////////////////////////////////////////////////////////////
-  // cellDblClick_actor_Top
-  //////////////////////////////////////////////////////////////////////////////
-  asm
-    function cellDblClick_actor_Top(e, cell) {
-
-      var pic = e.target.outerHTML;
-      var image = pic.substring(pic.indexOf('src')+4,pic.indexOf('data-src=')-1);
-      var title = pic.substring(pic.indexOf('atitle')+8,pic.indexOf('src=')-2);
-
-      if (image.indexOf('"Missing Poster placeholder"') == -1) {
-        pas.Main.MainForm.ViewerMode = 'Role';
-        pas.Main.MainForm.ViewerURL1 = image;
-        pas.Main.MainForm.ViewerURL2 = image.replace('/w92/','/original/');
-        pas.Main.MainForm.ViewerURLA = title;
-        pas.Main.MainForm.ViewerURLC = 1;
-        pas.Main.MainForm.ViewerURLT = 1;
-        pas.Main.MainForm.ShowViewer();
-
-        pas.Main.MainForm.TopTitle = title;
-
-        var table = pas.Main.MainForm.RoleTabulator;
-        table.deselectRow();
-        var rows = table.searchRows('NAM',"=",title);
-        if (rows.length > 0) {
-          table.selectRow(rows[0]);
-          table.scrollToRow(rows[0],"top",false);
-        }
-      }
-    }
-  end;
+    window.cellClick_actor_Top = cellClick_actor_Top
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // cellClick_role_Top
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function cellClick_role_Top(e, cell) {
 
       var pic = e.target.outerHTML;
@@ -3175,12 +3176,13 @@ end;
         pas.Main.MainForm.TopTitle = title;
       }
     }
-  end;
+    window.cellClick_role_Top = cellClick_role_Top;
+  } end; {$ENDIF}
 
   //////////////////////////////////////////////////////////////////////////////
   // cellClick_role_PIC
   //////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     function cellClick_role_PIC(e, cell) {
       let image = checkImage(cell.getValue(),null,cell.getRow().getCell('TYP').getValue(),{imgtype:"tvmovie"})
       pas.Main.MainForm.ViewerMode = 'Role';
@@ -3191,7 +3193,8 @@ end;
       pas.Main.MainForm.ViewerURLT = cell.getTable().getDataCount();
       pas.Main.MainForm.ShowViewer();
     }
-  end;
+    window.cellClick_role_PIC = cellClick_role_PIC;
+  } end; {$ENDIF}
 
 
 
@@ -3202,7 +3205,7 @@ end;
   // few are actually displayed in the table.  For example, the entire second table
   // (RoleTabulator) is stored in the Work field of each row of this table (as JSON).
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
 
     var getage = pas.Main.MainForm.GetAge;
     pas.Main.MainForm.ActorTabulator = new Tabulator("#divActorTabulator", {
@@ -3294,16 +3297,14 @@ end;
             headerMenu:   headerMenu,
             tooltip:      tooltip_actor_Top,
             formatter:    formatter_actor_TopMovies,
-            cellClick:    cellClick_actor_Top,
-            cellDblClick: cellDblClick_actor_Top
+            cellClick:    cellClick_actor_Top
         },
 
         { title: "Top TV Shows", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
             headerMenu:   headerMenu,
             tooltip:      tooltip_actor_Top,
             formatter:    formatter_actor_TopTVShows,
-            cellClick:    cellClick_actor_Top,
-            cellDblClick: cellDblClick_actor_Top,
+            cellClick:    cellClick_actor_Top
         },
 
         // Ensure these are available to Tabulator but otherwise not visible
@@ -3379,6 +3380,11 @@ end;
       // add a little element in the right spot and then we can update that whenever we want, and
       // Tabulator will be none the wiser.
       window.actorcount.innerHTML = "";
+
+//      divActorTabulator.firstElementChild.setAttribute('role','rowgroup');
+//      divActorTabulator.firstElementChild.firstElementChild.setAttribute('role','rowheader');
+//      divActorTabulator.firstElementChild.removeAttribute('role');
+//      divActorTabulator.firstElementChild.firstElementChild.removeAttribute('role');
     });
 
     // Another event handler, called when the user clicks on row in the table
@@ -3410,7 +3416,7 @@ end;
       }
     });
 
-  end;
+  } end; {$ENDIF}
 
 
 
@@ -3418,7 +3424,7 @@ end;
   // This is the other Tabulator table defintion, for Roles.
   // The bottom-right table.  Much simpler, nothing quite as fancy going on here.
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  asm
+  {$IFNDEF WIN32} asm {
     pas.Main.MainForm.RoleTabulator = new Tabulator("#divRoleTabulator", {
  	    columns:[
 
@@ -3605,6 +3611,11 @@ end;
         }
       }
 
+//      divRoleTabulator.firstElementChild.setAttribute('role','rowgroup');
+//      divRoleTabulator.firstElementChild.firstElementChild.setAttribute('role','rowheader');
+//      divRoleTabulator.firstElementChild.removeAttribute('role');
+//      divRoleTabulator.firstElementChild.firstElementChild.removeAttribute('role');
+
       // Signal the tmrStartup that we are ready togo
       pas.Main.MainForm.TablesReady += 1;
     });
@@ -3671,12 +3682,12 @@ end;
       }
     });
 
-  end;
+  } end; {$ENDIF}
 
 
   // Base Encoder for Encoding/Decoding IDs passed as Parameters
 
-  asm
+  {$IFNDEF WIN32} asm {
     // https://github.com/marko-36/base29-shortener
     // We don't want the string too short, so we start at 10,000
     // But we do want it short, so we add more than 29 characters to the encoding list
@@ -3703,7 +3714,7 @@ end;
       return i - 10000;
     }
     window.from29 = from29;
-  end;
+  } end; {$ENDIF}
 
 
 
@@ -3711,9 +3722,6 @@ end;
 
   StopLinkerRemoval(@PreventCompilerHint);
 end;
-
-
-
 
 
 procedure TMainForm.WebFormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
@@ -3728,11 +3736,11 @@ end;
 procedure TMainForm.WebFormResize(Sender: TObject);
 begin
 
-  asm
+  {$IFNDEF WIN32} asm {
     if (typeof window.RefreshMenu === 'function') {
       window.RefreshMenu();
     }
-  end;
+  } end; {$ENDIF}
 
   // Resize viewer if it is currently showing
   if ViewerVisible then
@@ -3742,7 +3750,7 @@ begin
   end;
 
   // Try and deal with narrow screens
-  asm
+  {$IFNDEF WIN32} asm {
     var switchHeight = divInfo.getBoundingClientRect().top + divInfo.getBoundingClientRect().height;
     if (switchHeight < window.innerHeight * 0.75) {
       document.body.style.setProperty('width','100vw');
@@ -3754,18 +3762,17 @@ begin
       document.body.style.setProperty('height','unset');
       divBottom.style.setProperty('max-height','75vh');
     }
-  end;
-
+  } end; {$ENDIF}
 
 end;
 
 procedure TMainForm.WebFormShow(Sender: TObject);
 begin
-  asm
+  {$IFNDEF WIN32} asm {
     // Lets make sure all our Bootstrap tooltips are accessible
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-  end;
+  } end; {$ENDIF}
 end;
 
 procedure TMainForm.CheckVersion;
@@ -3788,7 +3795,7 @@ begin
         // Lets setup as much of the UI as we can from this query
         v1 := String(Response.Response);
 
-        asm
+        {$IFNDEF WIN32} asm {
           var FirstData = JSON.parse(v1);
 
           // Main Image
@@ -3831,7 +3838,7 @@ begin
 
           pas.Main.MainForm.MenuType = 0; // Person
           pas.Main.MainForm.PhotoCount = FirstData['NUM'];
-        end;
+        } end; {$ENDIF}
       end;
       divProgressSpinner.HTML.Text := '';
 
@@ -3844,7 +3851,7 @@ begin
 
       // JS Script to compare version numbers
       // https://helloacm.com/the-javascript-function-to-compare-version-number-strings/
-      asm
+      {$IFNDEF WIN32} asm {
         function compareVersion(v1, v2) {
           if (typeof v1 !== 'string') return false;
           if (typeof v2 !== 'string') return false;
@@ -3871,7 +3878,8 @@ begin
         else {
           console.log('Application is up to date.');
         }
-      end;
+      } end; {$ENDIF}
+
     except on E: Exception do
       begin
       // don't care
@@ -3879,9 +3887,9 @@ begin
     end;
   end;
 
-  asm
+  {$IFNDEF WIN32} asm {
     window.RefreshMenu(true);
-  end;
+  } end; {$ENDIF}
   MainForm.VersionCheck := False;
 end;
 
@@ -3903,7 +3911,7 @@ begin
   begin
     CacheData := MainForm.BirthdayCacheData[DayNum];
     MainForm.CurrentPerson := -1;
-    asm
+    {$IFNDEF WIN32} asm {
       var table1 = pas.Main.MainForm.ActorTabulator;
       var table2 = pas.Main.MainForm.RoleTabulator;
       var actorData = CacheData;
@@ -3949,7 +3957,7 @@ begin
         }
 
       });
-    end;
+    } end; {$ENDIF}
     exit;
   end;
 
@@ -4031,10 +4039,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+  } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -4076,7 +4084,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -4122,7 +4130,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -4157,7 +4165,7 @@ begin
     CacheData := MainForm.DeathdayCacheData[DayNum];
     MainForm.CurrentPerson := -1;
     MainForm.CurrentRole := -1;
-    asm
+    {$IFNDEF WIN32} asm {
       var table1 = pas.Main.MainForm.ActorTabulator;
       var table2 = pas.Main.MainForm.RoleTabulator;
       var actorData = CacheData;
@@ -4203,7 +4211,7 @@ begin
         }
 
       });
-    end;
+    } end; {$ENDIF}
     exit;
   end;
 
@@ -4285,10 +4293,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -4330,7 +4338,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -4376,7 +4384,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -4407,7 +4415,7 @@ begin
     CacheData := MainForm.Top1000CacheData;
     MainForm.CurrentPerson := -1;
     MainForm.CurrentRole := -1;
-    asm
+    {$IFNDEF WIN32} asm {
       var table1 = pas.Main.MainForm.ActorTabulator;
       var table2 = pas.Main.MainForm.RoleTabulator;
       var actorData = CacheData;
@@ -4453,7 +4461,7 @@ begin
         }
 
       });
-    end;
+    } end; {$ENDIF}
     exit;
   end;
 
@@ -4536,10 +4544,10 @@ begin
 
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
 
   except on E: Exception do
     begin
@@ -4582,7 +4590,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -4628,7 +4636,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -4730,10 +4738,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -4773,7 +4781,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -4821,7 +4829,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -4918,18 +4926,18 @@ begin
     begin
       id := Copy(ReferenceList[i],2,Length(ReferenceList[i]));
       if (Pos('-',id) > 0) then id := Copy(id,1,Pos('-',id)-1);
-      asm
+      {$IFNDEF WIN32} asm {
         var nid = window.from29(id);
         LookupRef['PPL'].push(JSON.parse('{"ID":'+nid+'}'));
-      end;
+      } end; {$ENDIF}
     end;
   end;
 
   // Only unique values please, don't want entries appearing multiple times
-  asm
+  {$IFNDEF WIN32} asm {
     // https://javascript.plainenglish.io/the-easy-way-to-create-a-unique-array-of-json-objects-in-javascript-5634254b17aa
     LookupRef['PPL'] = [... new Set(LookupRef['PPL'].map(JSON.stringify))].map(JSON.parse)
-  end;
+  } end; {$ENDIF}
 
   // Progress: Loading Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
@@ -4947,10 +4955,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -4990,7 +4998,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
     var actorData = Data;
@@ -5038,7 +5046,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -5095,7 +5103,7 @@ procedure TMainForm.btnBlockNextClick(Sender: TObject);
 begin
   if ViewerMode = 'Person' then
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       var ActorTable = pas.Main.MainForm.ActorTabulator;
       var rows = ActorTable.getSelectedRows();
       if (rows.length == 1) {
@@ -5118,11 +5126,11 @@ begin
           pas.Main.MainForm.ShowViewer();
         }
       }
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'Role' then
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       var RoleTable = pas.Main.MainForm.RoleTabulator;
       var rows = RoleTable.getSelectedRows();
       if (rows.length == 1) {
@@ -5145,11 +5153,11 @@ begin
           pas.Main.MainForm.ShowViewer();
         }
       }
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'PersonPhotos' then  // Swiper
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       pas.Main.MainForm.ViewerURLN = Math.max(pas.Main.MainForm.ViewerURLN - 1, 0);
       var clickedslide = window.swiper.slides[pas.Main.MainForm.ViewerURLN];
       pas.Main.MainForm.ViewerMode = 'PersonPhotos';
@@ -5160,11 +5168,11 @@ begin
       pas.Main.MainForm.ViewerURLC = pas.Main.MainForm.ViewerURLN+1;
       pas.Main.MainForm.ViewerURLT = pas.Main.MainForm.PhotoCount;
       pas.Main.MainForm.ShowViewer();
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'Backdrops' then  // Swiper3
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       pas.Main.MainForm.ViewerURLN = Math.max(pas.Main.MainForm.ViewerURLN - 1, 0);
       var clickedslide = window.swiper3.slides[pas.Main.MainForm.ViewerURLN];
       pas.Main.MainForm.ViewerMode = 'Backdrops';
@@ -5175,7 +5183,7 @@ begin
       pas.Main.MainForm.ViewerURLC = pas.Main.MainForm.ViewerURLN+1;
       pas.Main.MainForm.ViewerURLT = pas.Main.MainForm.BackgroundCount;
       pas.Main.MainForm.ShowViewer();
-    end;
+    } end; {$ENDIF}
   end;
 
   Mainform.tmrImageCheck.Enabled := True;
@@ -5186,7 +5194,7 @@ procedure TMainForm.btnBlockPreviousClick(Sender: TObject);
 begin
   if ViewerMode = 'Person' then
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       var ActorTable = pas.Main.MainForm.ActorTabulator;
       var rows = ActorTable.getSelectedRows();
       if (rows.length == 1) {
@@ -5209,11 +5217,11 @@ begin
           pas.Main.MainForm.ShowViewer();
         }
       }
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'Role' then
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       var RoleTable = pas.Main.MainForm.RoleTabulator;
       var rows = RoleTable.getSelectedRows();
       if (rows.length == 1) {
@@ -5236,11 +5244,11 @@ begin
           pas.Main.MainForm.ShowViewer();
         }
       }
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'PersonPhotos' then  // Swiper
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       pas.Main.MainForm.ViewerURLN = Math.min(pas.Main.MainForm.ViewerURLN + 1, window.swiper.slides.length-1);
       var clickedslide = window.swiper.slides[pas.Main.MainForm.ViewerURLN];
       pas.Main.MainForm.ViewerMode = 'PersonPhotos';
@@ -5251,11 +5259,11 @@ begin
       pas.Main.MainForm.ViewerURLC = pas.Main.MainForm.ViewerURLN+1;
       pas.Main.MainForm.ViewerURLT = pas.Main.MainForm.PhotoCount;
       pas.Main.MainForm.ShowViewer();
-    end;
+    } end; {$ENDIF}
   end
   else if ViewerMode = 'Backdrops' then  // Swiper3
   begin
-    asm
+    {$IFNDEF WIN32} asm {
       pas.Main.MainForm.ViewerURLN = Math.min(pas.Main.MainForm.ViewerURLN + 1, window.swiper3.slides.length-1);
       var clickedslide = window.swiper3.slides[pas.Main.MainForm.ViewerURLN];
       pas.Main.MainForm.ViewerMode = 'Backdrops';
@@ -5266,7 +5274,7 @@ begin
       pas.Main.MainForm.ViewerURLC = pas.Main.MainForm.ViewerURLN+1;
       pas.Main.MainForm.ViewerURLT = pas.Main.MainForm.BackgroundCount;
       pas.Main.MainForm.ShowViewer();
-    end;
+    } end; {$ENDIF}
   end;
 
   Mainform.tmrImageCheck.Enabled := True;
@@ -5275,24 +5283,24 @@ end;
 
 procedure TMainForm.btnBlockZoomMinusClick(Sender: TObject);
 begin
-  asm
+  {$IFNDEF WIN32} asm {
     pas.Main.MainForm.pz.zoomOut();
-  end;
+  } end; {$ENDIF}
 end;
 
 
 procedure TMainForm.btnBlockZoomPlusClick(Sender: TObject);
 begin
-  asm
+  {$IFNDEF WIN32} asm {
     pas.Main.MainForm.pz.zoomIn();
-  end;
+  } end; {$ENDIF}
 end;
 
 procedure TMainForm.btnBlockZoomResetClick(Sender: TObject);
 begin
-  asm
+  {$IFNDEF WIN32} asm {
     pas.Main.MainForm.pz.reset();
-  end;
+  } end; {$ENDIF}
 end;
 
 procedure TMainForm.btnConnectClick(Sender: TObject);
@@ -5414,10 +5422,10 @@ begin
     ]));
     Blob := Response.Result;
     Data := '[]';
-    asm
+    {$IFNDEF WIN32} asm {
       Data = await Blob.text();
       Data = JSON.parse(Data);
-    end;
+    } end; {$ENDIF}
   except on E: Exception do
     begin
       if (MainForm.Client <> nil) then MainForm.Client.Free;
@@ -5456,7 +5464,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
 
-  asm
+  {$IFNDEF WIN32} asm {
     var actorData = Data;
 
     // Filter out Adult content
@@ -5500,7 +5508,7 @@ begin
         }
 
       });
-  end;
+  } end; {$ENDIF}
 
   // Progress: Ready Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
@@ -5526,9 +5534,9 @@ begin
   if MainForm.btnRelatives.Tag > 0
   then MainForm.btnRelatives.Enabled := True
   else MainForm.btnRelatives.Enabled := False;
-  asm
+  {$IFNDEF WIN32} asm {
     btnRelatives.innerHTML = '<div style="display:flex; fill:white;">'+window.icon_family+'<div class="ms-1"> Friends and Family of '+aName+'</div></div>';
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(aName);
@@ -5582,9 +5590,9 @@ begin
   then CurrentBirthDate := FormatDateTime('yyyy-mm-dd', Now);
 
   NewDate := FormatDateTime('yyyy-mm-dd',EncodeDate(StrToInt(Copy(CurrentBirthDate,1,4)),StrToInt(Copy(CurrentBirthDate,6,2)),StrToInt(Copy(CurrentBirthDate,9,2)))+1);
-  asm
+  {$IFNDEF WIN32} asm {
     this.Birthdate.setDate(NewDate,true);
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(NewDate);
@@ -5651,12 +5659,12 @@ begin
       divBlockControls.ElementHandle.classList.remove('d-none');
       divBlockData.ElementHandle.classList.remove('d-none');
 
-      asm
+      {$IFNDEF WIN32} asm {
         pagetop = 20.0;
         pageleft = 20.0;
         pagewidth = document.documentElement.clientWidth - 90.0;
         pageheight = document.documentElement.clientHeight - 40.0;
-      end;
+      } end; {$ENDIF}
 
       if (pagewidth / pageheight) > aspect then
       begin
@@ -5744,14 +5752,14 @@ begin
     MainForm.tmrImageCheckEnable();
 
     // This loads up our pan/zoom functionality
-    asm
+    {$IFNDEF WIN32} asm {
       var element = divViewer.firstElementChild;
       pas.Main.MainForm.pz = Panzoom(element, {
         maxScale: 100,
         minScale: 0.75
       });
       element.parentElement.addEventListener('wheel',pas.Main.MainForm.pz.zoomWithWheel)
-    end;
+    } end; {$ENDIF}
   end;
 
 end;
@@ -5769,11 +5777,11 @@ begin
   divBlockData.ElementHandle.classList.add('d-none');
 
   // Unload pan/zoom functionality
-  asm
+  {$IFNDEF WIN32} asm {
     var element = document.querySelector('#Viewer');
     element.parentElement.removeEventListener('wheel',pas.Main.MainForm.pz.zoomWithWheel)
     pas.Main.MainForm.pz.destroy();
-  end;
+  } end; {$ENDIF}
 
 end;
 
@@ -5819,14 +5827,14 @@ begin
   btn := button.ElementHandle;
   title := button.Hint;
   button.Hint := '';
-  asm
+  {$IFNDEF WIN32} asm {
     var tooltip = new bootstrap.Tooltip(btn, {
       title: title,
       placement: placement,
       customClass: 'custom-tooltip',
       delay: { "show": 1500, "hide": 100 }
     });
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(btn);
@@ -5841,7 +5849,7 @@ var
 begin
   btn := element.ElementHandle;
   title := hint;
-  asm
+  {$IFNDEF WIN32} asm {
     // NOTE: html and sanitize are added here to allow displaying tables
     var tooltip = new bootstrap.Tooltip(btn, {
       title: title,
@@ -5851,7 +5859,7 @@ begin
       customClass: 'custom-tooltip',
       delay: { "show": 1500, "hide": 100 }
     });
-  end;
+  } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(btn);

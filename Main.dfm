@@ -124,7 +124,7 @@ object MainForm: TMainForm
         ElementID = 'divInfoPages'
         ChildOrder = 4
         ElementFont = efCSS
-        TabIndex = 7
+        TabIndex = 0
         ShowTabs = False
         TabOrder = 0
         object pageBio: TWebTabSheet
@@ -2293,6 +2293,7 @@ object MainForm: TMainForm
     Top = 124
   end
   object tmrImageCheck: TWebTimer
+    Enabled = False
     Interval = 500
     OnTimer = tmrImageCheckTimer
     Left = 268
@@ -2301,7 +2302,7 @@ object MainForm: TMainForm
   object WebHttpRequest1: TWebHttpRequest
     Headers.Strings = (
       'Cache-Control=no-cache, no-store, must-revalidate')
-    Left = 491
-    Top = 350
+    Left = 523
+    Top = 310
   end
 end
