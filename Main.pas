@@ -881,21 +881,27 @@ begin
   // Basically switches between different XData Service Endpoints
   // based on whether a limited ata option is set, which is the
   // default.  But can be changed in the app settings.
-  DataLimited := True;
+  DataLimited    := True;
   DataLImitedTop := True;
-  QuickSearch := True;
-  NowSearching := False;
+  QuickSearch    := True;
+  NowSearching   := False;
 
   // If viewing adult content, remove these filters as there is far less data
   // available (which is a little surprising, actually?)
   if AdultContent then
   begin
-//    switchLimitData.Checked := False;
-//    switchLimitDataTop.Checked := False;
-//    switchSearch.Checked := False;
-//    switchLimitDataClick(nil);
-//    switchLimitDataTopClick(nil);
-//    switchSearchClick(nil);
+    DataLimited    := False;
+    DataLImitedTop := False;
+    QuickSearch    := False;
+    NowSearching   := False;
+    asm
+      switchSettings1.setAttribute('disabled','');
+      switchSettings1.removeAttribute('checked');
+      switchSettings2.setAttribute('disabled','');
+      switchSettings2.removeAttribute('checked');
+      switchSettings3.setAttribute('disabled','');
+      switchSettings3.removeAttribute('checked');
+    end;
   end;
 
   // Changed to HTML code for the switches, so here we connect their
