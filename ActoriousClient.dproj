@@ -148,10 +148,10 @@
         <TMSWebSingleJS>2</TMSWebSingleJS>
         <TMSWebDebugInfo>2</TMSWebDebugInfo>
         <TMSApplicationDescription>Connections</TMSApplicationDescription>
-        <TMSVersion>1.0.3422</TMSVersion>
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSVersion>1.0.3440</TMSVersion>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
@@ -1030,13 +1030,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1054,7 +1054,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

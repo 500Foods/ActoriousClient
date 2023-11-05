@@ -890,6 +890,8 @@ begin
   // available (which is a little surprising, actually?)
   if AdultContent then
   begin
+    btnTop1000.Caption := 'TMDb Top Adult Actors';
+
     DataLimited    := False;
     DataLImitedTop := False;
     QuickSearch    := False;
@@ -901,7 +903,21 @@ begin
       switchSettings2.removeAttribute('checked');
       switchSettings3.setAttribute('disabled','');
       switchSettings3.removeAttribute('checked');
+
+      var root = document.querySelector(':root');
+      setTimeout(function(){
+        document.body.style.setProperty('background-color','#300000', 'important');
+        root.style.setProperty('--bs-dark-rgb','96,0,0');
+        root.style.setProperty('--bs-dark','#600000');
+        root.style.setProperty('--bg-dark','#600000');
+        root.style.setProperty('--bs-secondary','maroon');
+      },10);
+
     end;
+  end
+  else
+  begin
+    btnTop1000.Caption := 'TMDb Top 1,000 Actors';
   end;
 
   // Changed to HTML code for the switches, so here we connect their
@@ -1117,7 +1133,6 @@ begin
         btnActors.innerHTML = 'Actors';
         btnWriters.innerHTML = 'Writers';
         btnDirectors.innerHTML = 'Directors';
-        btnTop1000.innerHTML = 'TMDb Top 1,000 Actors';
 
         linkEMail.style.opacity = 1.0;
 
@@ -2069,8 +2084,8 @@ begin
                                     '<img '+
                                       'class="lazy landscape" '+
                                       'style="cursor: pointer; width: 206px; height: 116px; border-radius: 4px;"'+
-                                      'src="https://img.youtube.com/vi/'+image+'/default.jpg" '+
-                                      'data-src="https://img.youtube.com/vi/'+image+'/mqdefault.jpg" '+
+                                      'src="https://i.ytimg.com/vi/'+image+'/default.jpg" '+
+                                      'data-src="https://i.ytimg.com/vi/'+image+'/mqdefault.jpg" '+
                                       'alt='+altvideo+
                                       'onerror="this.onerror=null;this.src=\'img/hourglass_wide.png\'"'+
                                     '/>'+
@@ -4413,6 +4428,7 @@ var
   Progress: String;               // Used to lookup progress on the request later
   Endpoint: String;               // The service endpoint for this request
   CacheData: String;
+  Segment: String;
 begin
 
   // If we've already got the data in the past six hours, let's use it
@@ -4533,6 +4549,7 @@ begin
   if DataLimitedTop
   then Endpoint := 'IActorInfoService.TopOneThousand'
   else Endpoint := 'IActorInfoService.TopFiveThousand';
+  Segment := 'A';
 
   // Progress: Loading Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
@@ -4545,6 +4562,7 @@ begin
   try
     Response := await(MainForm.Client.RawInvokeAsync(Endpoint, [
       window.atob('TGVlbG9vRGFsbGFzTXVsdGlQYXNz'),   // Secret
+      Segment,                                       // Segment
       Progress                                       // Progress Reference
     ]));
 
