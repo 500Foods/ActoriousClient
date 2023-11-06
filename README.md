@@ -1,9 +1,10 @@
 # ActoriousClient
-This is the main web application for the [Actorious](https://www.actorious.com) website. It has been developed using Delphi and TMS WEB Core along with many other very capable JavaScript libraries. In particular, Tabulator.
+This is the main web client app for the Actorious project, which is currently published live as the [www.actorious.com](https://www.actorious.com) website. It has been developed using Delphi and [TMS WEB Core](https://www.tmssoftware.com/site/tmswebcore.asp) along with many other very capable JavaScript libraries. In particular, [Tabulator](https://tabulator.info/). The Actorious project started out as a [TMS Software blog post](https://www.tmssoftware.com/site/blog.asp?post=949), with its own associated GitHub repository, [ActorInfo](https://github.com/500Foods/TMS-WEB-Core-ActorInfo).
 
 ![Screenshot_20231017_141418](https://github.com/500Foods/ActoriousClient/assets/41052272/9b2d2191-3f14-4cb4-b9e3-ae14e837270c)
+[www.actorious.com](https://www.actorious.com/)
 
-The website uses the APIs from The Movie Database and WikiData for the majority of its data, using the TMDb's identifiers to map data between the two in order to perform searches based on birthdays and other criteria not natively supported by TMDb.
+The Actorious project makes use of data from [The Movie Database](https://www.themoviedb.org/?language=en-CA) and [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) via their REST APIs for all of its data. TMDb's identifiers are used to combine its data with similar data from Wikidata filling in the gaps. In particular, Wikidata is used to retrieve information on birthdays and other date-related information that can't be as easily searched using the TMDb API.
 
 ## Repository Information
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
