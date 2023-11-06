@@ -428,7 +428,7 @@ div.swiper3 > div > .swiper-slide > img {
 ** it uses up all the space in some of the very narrow columns we have. */
 .tabulator-header-popup-button {
   padding: 0px 6px 0px 0px !important;
-  color: var(--bs-secondary);
+  color: var(--bs-gray-500);
 }
 
 

@@ -528,8 +528,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -2364,10 +2364,10 @@ begin
             // update the first column header to show a count
             var rowCount = RoleTable.getDataCount("active");
             if (RoleTable.getDataCount() !== rowCount) {
-              window.rolecount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>';
+              window.rolecount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>';
             }
             else {
-              window.rolecount.innerHTML = rowCount;
+              window.rolecount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>';
             };
 
             var title = pas.Main.MainForm.TopTitle;
@@ -3314,14 +3314,14 @@ begin
             }
         },
 
-        { title: "Top Movies", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
+        { title: "Top 5 Movies", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
             headerMenu:   headerMenu,
             tooltip:      tooltip_actor_Top,
             formatter:    formatter_actor_TopMovies,
             cellClick:    cellClick_actor_Top
         },
 
-        { title: "Top TV Shows", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
+        { title: "Top 5 TV Shows", width: 230, minWidth: 160, maxWidth: 230, headerSort: false,
             headerMenu:   headerMenu,
             tooltip:      tooltip_actor_Top,
             formatter:    formatter_actor_TopTVShows,
@@ -3391,6 +3391,9 @@ begin
     pas.Main.MainForm.ActorTabulator.on("tableBuilt", function() {
       // We should only have to look this up this one time
       window.actorcount = document.getElementsByClassName('ActorRowCount')[0].firstElementChild.firstElementChild.firstElementChild;
+      window.actorcount.addEventListener('click', function() {
+        pas.Main.MainForm.ActorTabulator.scrollToRow(pas.Main.MainForm.ActorTabulator.getRowFromPosition(1),"top");
+      });
 
       // Signal the tmrStartup that we are ready to go
       pas.Main.MainForm.TablesReady += 1;
@@ -3419,10 +3422,10 @@ begin
       // update the first column header to show a count of records filtered
       if (window.actorcount !== undefined) {
         if (pas.Main.MainForm.ActorTabulator.getDataCount() !== rows.length) {
-          window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rows.length+'</span>';
+          window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rows.length+'</span>';
         }
         else {
-          window.actorcount.innerHTML = rows.length;
+          window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rows.length+'</span>';
         }
       }
     });
@@ -3570,7 +3573,7 @@ begin
             formatter:  formatter_actor_SOC
         },
 
-        { title: "Top Roles", field: "ACA", width: 455, minWidth: 160, maxWidth: 455, headerSort: false,
+        { title: "Top 10 Roles", field: "ACA", width: 455, minWidth: 160, maxWidth: 455, headerSort: false,
             headerMenu:   headerMenu,
             tooltip:      tooltip_role_Top,
             formatter:    formatter_role_TopRoles,
@@ -3617,6 +3620,9 @@ begin
 
       // We should only have to look this up this one time
       window.rolecount = document.getElementsByClassName('RoleRowCount')[0].firstElementChild.firstElementChild.firstElementChild;
+      window.rolecount.addEventListener('click', function() {
+        pas.Main.MainForm.RoleTabulator.scrollToRow(pas.Main.MainForm.RoleTabulator.getRowFromPosition(1),"top");
+      });
 
       // Setup some fancy Column Header Tooltips
       var collection = document.getElementsByClassName('tabulator-col MovieTVColumn');
@@ -3646,10 +3652,10 @@ begin
       // update the first column header to show a count of records filtered
       if (window.rolecount !== undefined) {
         if (pas.Main.MainForm.RoleTabulator.getDataCount() !== rows.length) {
-          window.rolecount.innerHTML = '<span style="color: var(--bs-warning);">'+rows.length+'</span>';
+          window.rolecount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rows.length+'</span>';
         }
         else {
-          window.rolecount.innerHTML = rows.length;
+          window.rolecount.innerHTML = '<span style="cursor:pointer;">'+rows.length+'</span>';
         }
       }
     });
@@ -3701,6 +3707,12 @@ begin
           seps[i].classList.add('pe-none');
         }
       }
+    });
+
+    // Another event handler, called when the user clicks on a column header
+    pas.Main.MainForm.RoleTabulator.on("rowClick", function(e, row){
+      this.selectRow(row);
+      window.Role_Selected(e, row);
     });
 
   } end; {$ENDIF}
@@ -3961,8 +3973,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4134,8 +4146,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4215,8 +4227,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4388,8 +4400,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4466,8 +4478,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4643,8 +4655,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -4834,8 +4846,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -5051,8 +5063,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
-        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
@@ -5515,8 +5527,8 @@ begin
 
         // update the first column header to show a count
         var rowCount = pas.Main.MainForm.ActorTabulator.getDataCount("active");
-        if (pas.Main.MainForm.ActorTabulator.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="color: var(--bs-warning);">'+rowCount+'</span>'; }
-        else { window.actorcount.innerHTML = rowCount; };
+        if (pas.Main.MainForm.ActorTabulator.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
 
