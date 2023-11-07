@@ -6,6 +6,22 @@ This is the main web client app for the Actorious project, which is currently pu
 
 The Actorious project makes use of data from [The Movie Database](https://www.themoviedb.org/?language=en-CA) and [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) via their REST APIs for all of its data. TMDb's identifiers are used to combine its data with similar data from Wikidata filling in the gaps. In particular, Wikidata is used to retrieve information on birthdays and other date-related information that can't be as easily searched using the TMDb API.
 
+## Key Dependencies
+As with any modern web application, other JavaScript libraries/dependencies have been used in this project. Most of the time, this is handled via a CDN link (usually JSDelivr) in the Project.html file. In some cases, for performance or other reasons, they may be included directly.
+- [TMS WEB Core](https://www.tmssoftware.com/site/tmswebcore.asp) - This is a TMS WEB Core project, after all
+- [Bootstrap](https://getbootstrap.com/) - No introduction needed
+- [Tabulator](https://www.tabulator.info) - Fantastic pure JavaScript web data tables
+- [Font Awesome](https://www.fontawesome.com) - The very best icons
+- [SwiperJS](https://swiperjs.com) - Currently works well with v10
+- [FlatPickr](https://flatpickr.js.org) - Main UI date pickers
+- [Vanilla Lazy Load](https://github.com/verlok/vanilla-lazyload) - So placeholders can be used
+- [Luxon](https://moment.github.io/luxon/#/) - For handling date/time conversions
+- [FlagPack](https://github.com/jackiboy/flagpack) - For displaying citizenship flags
+- [PanZoom](https://github.com/timmywil/panzoom) - Used when viewing photos/posters/backgrounds
+- [HackTimer](https://github.com/turuslan/HackTimer) - Bypasses normal JavaScript timer behaviour
+
+## Additional Notes
+While this project is currently under active development, feel free to give it a try and post any issues you encounter.  Or start a discussion if you would like to help steer the project in a particular direction.  Early days yet, so a good time to have your voice heard.  As the project unfolds, additional resources will be made available, including platform binaries, more documentation, demos, and so on.
 ## Repository Information
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
 ```
