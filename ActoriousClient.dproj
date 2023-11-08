@@ -151,7 +151,7 @@
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>
-        <TMSVersion>1.0.3449</TMSVersion>
+        <TMSVersion>1.0.3451</TMSVersion>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
@@ -1042,13 +1042,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="iconx\apple-touch-icon-120x120.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\apple-touch-icon-120x120.png" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
