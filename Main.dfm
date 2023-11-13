@@ -1409,6 +1409,7 @@ object MainForm: TMainForm
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
+          OnClick = linkTourClick
         end
         object linkLink: TWebHTMLDiv
           Left = 0

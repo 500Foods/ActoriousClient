@@ -222,6 +222,8 @@ type
     procedure btnBlockPreviousClick(Sender: TObject);
     procedure btnBlockNextClick(Sender: TObject);
     procedure btnBlockSelectClick(Sender: TObject);
+    procedure CreateTour;
+    procedure linkTourClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -3926,6 +3928,36 @@ begin
   MainForm.VersionCheck := False;
 end;
 
+procedure TMainForm.CreateTour;
+begin
+  asm
+    const tour = new Shepherd.Tour({
+      useModalOverlay: true,
+      defaultStepOptions: {
+        classes: 'shadow-md bg-purple-dark',
+        scrollTo: true
+      }
+    });
+
+    tour.addStep({
+      id: 'example-step',
+      text: 'Welcome to Actorious!<br>It looks like this might be your first visit. Would you be interested in a quick tour?',
+      buttons: [
+        {
+          text: 'No thanks',
+          action: tour.complete
+        },
+        {
+          text: 'Next',
+          action: tour.next
+        }
+      ]
+    });
+    window.tour = tour;
+  end;
+
+end;
+
 procedure TMainForm.GetBirthDays(aMonth: Integer; aDay: Integer);
 var
   Response: TXDataClientResponse; // The response coming back
@@ -4685,6 +4717,14 @@ begin
   MainForm.PreventCompilerHint(CacheData);
   MainForm.PreventCompilerHint(Blob);
 
+end;
+
+procedure TMainForm.linkTourClick(Sender: TObject);
+begin
+  createTour;
+  asm
+    tour.start();
+  end;
 end;
 
 procedure TMainForm.GetLookupList(LookupList: String);

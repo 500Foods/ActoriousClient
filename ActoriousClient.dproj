@@ -71,11 +71,11 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <SanitizedProjectName>ActoriousClient</SanitizedProjectName>
+        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
+        <TMSPWAManifestFile>Manifest.json</TMSPWAManifestFile>
+        <TMSWebHTMLFile>ActoriousClient.html</TMSWebHTMLFile>
         <TMSWebPWAResIconLowFile>IconResLow.png</TMSWebPWAResIconLowFile>
         <TMSWebPWAResIconMidFile>IconResMid.png</TMSWebPWAResIconMidFile>
-        <TMSPWAManifestFile>Manifest.json</TMSPWAManifestFile>
-        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
-        <TMSWebHTMLFile>ActoriousClient.html</TMSWebHTMLFile>
         <TMSWebPWAServiceWorkerFile>ServiceWorker.js</TMSWebPWAServiceWorkerFile>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -151,8 +151,8 @@
         <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>
-        <TMSVersion>1.0.3452</TMSVersion>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
+        <TMSVersion>1.0.3455</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -1030,6 +1030,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1043,12 +1049,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="iconx\apple-touch-icon-120x120.png" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
