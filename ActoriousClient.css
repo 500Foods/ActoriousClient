@@ -764,6 +764,62 @@ div.flatpickr-months > div > div > select {
 
 
 /*******************************************************************************
+** Shepherd                                                                   **
+**                                                                            **
+** The tour styling by default is pretty generic. Here we're just adding a    **
+** few touches here and there to better fit in with the rest of the Actorious **
+** theme which, itself, is also pretty generic                                **
+*******************************************************************************/
+
+/* Darken the overlay */
+.shepherd-modal-overlay-container.shepherd-modal-is-visible {
+  opacity: 0.8;
+}
+
+/* Add a thicker, rounder border */
+.shepherd-element {
+  border-radius: 15px;
+  border: 3px solid var(--bs-secondary);
+}
+
+/* Match rounding in header, tamp down the padding */
+.shepherd-header {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.shepherd-title {
+  color: white;
+}
+.shepherd-has-title .shepherd-content .shepherd-header {
+  background: var(--bs-dark);
+}
+
+/* Adjust the footer and in particular the button arrangement */
+.shepherd-footer {
+  padding: 5px;
+  justify-content: space-between;
+}
+.shepherd-button {
+  background: var(--bs-primary);
+  border-radius: 9px;
+  margin-right: 5px;
+}
+/* if only one button, push it right */
+.shepherd-button:last-child {
+  margin-left: auto;
+}
+
+/* Adjust the close button */
+.shepherd-cancel-icon {
+  font-size: 4em;
+  font-weight: 700;
+  height: 0px;
+  position: absolute;
+  top: 3px;
+  right: 5px;
+}
+
+/*******************************************************************************
 **                                                                            **
 ** This is the end!                                                           **
 **                                                                            **

@@ -22,6 +22,7 @@ uses
   XData.Web.JsonDataset,
   XData.Web.Dataset,
 
+  WEBLib.Storage,
   WEBLib.Graphics,
   WEBLib.Controls,
   WEBLib.Forms,
@@ -222,7 +223,7 @@ type
     procedure btnBlockPreviousClick(Sender: TObject);
     procedure btnBlockNextClick(Sender: TObject);
     procedure btnBlockSelectClick(Sender: TObject);
-    procedure CreateTour;
+    procedure LaunchTour(TourMode: String);
     procedure linkTourClick(Sender: TObject);
   private
     { Private declarations }
@@ -898,7 +899,7 @@ begin
     DataLImitedTop := False;
     QuickSearch    := False;
     NowSearching   := False;
-    asm
+    {$IFNDEF WIN32} asm {
       switchSettings1.setAttribute('disabled','');
       switchSettings1.removeAttribute('checked');
       switchSettings2.setAttribute('disabled','');
@@ -915,7 +916,7 @@ begin
         root.style.setProperty('--bs-secondary','maroon');
       },10);
 
-    end;
+    } end; {$ENDIF}
   end
   else
   begin
@@ -3575,7 +3576,7 @@ begin
             formatter:  formatter_actor_SOC
         },
 
-        { title: "Top 10 Roles", field: "ACA", width: 455, minWidth: 160, maxWidth: 455, headerSort: false,
+        { title: "Top 10 Roles", field: "ACA", width: 455, minWidth: 160, maxWidth: 455, headerSort: false, cssClass: 'Top10Column',
             headerMenu:   headerMenu,
             tooltip:      tooltip_role_Top,
             formatter:    formatter_role_TopRoles,
@@ -3928,33 +3929,213 @@ begin
   MainForm.VersionCheck := False;
 end;
 
-procedure TMainForm.CreateTour;
+procedure TMainForm.LaunchTour(TourMode: String);
 begin
-  asm
+  {$IFNDEF WIN32} asm {
+
+    // We might have extra steps at the beginning, so here we're just explicitly stating a number
+    // which we can then use in the progress indicator
+    var TourSteps = 16;
+    var TourIcon = '<img style="position:absolute; top:5px; left:5px; height:38px; width:38px;" src="img/actorious-logo-100x100.svg" alt="Actorious Icon">';
+
+    // This is the main tour object
     const tour = new Shepherd.Tour({
       useModalOverlay: true,
       defaultStepOptions: {
         classes: 'shadow-md bg-purple-dark',
-        scrollTo: true
+        scrollTo: true,
+        floatingUIOptions: {
+          middleware: [window.FloatingUIDOM.offset({ mainAxis: 15 })]
+        },
+        cancelIcon: {
+          enabled: true,
+          label: 'cancel tour'
+        },
+        when: {
+          show: function () {
+            const currentStep = tour.getCurrentStep();
+            const currentStepElement = currentStep.getElement();
+            if (currentStep.id.indexOf('-0') == -1) {
+              const footer = currentStepElement.querySelector('.shepherd-footer');
+              const progress = document.createElement('div');
+              progress.style.cssText = 'position:absolute; bottom:13px; pointer-events:none; width:394px; text-align:center;';
+              progress.innerText = currentStep.id.split('-').slice(-1)+' of '+TourSteps;
+              footer.parentElement.appendChild(progress);
+            }
+          }
+	      }
       }
     });
 
+    // Say hello if this is a new visitor
+    if (TourMode == 'New') {
+
+      tour.addStep({
+        id: 'step-welcome-0',
+        title: TourIcon+'<div style="padding-left:35px;">Welcome to Actorious!</div>',
+        text: 'It looks like this might be your first visit. Would you be interested in a quick tour?',
+        buttons: [
+          { text: 'No thanks', action: () => { tour.show('step-tour-0', true); }},
+          { text: 'Yes please', action: () => { tour.show('step-tour-1', true); }}
+        ]
+      });
+
+      tour.addStep({
+        id: 'step-tour-0',
+        title: 'Maybe Later?',
+        text: 'If you would like to take the tour at another time, just click this icon.',
+        attachTo: { element: '#linkTour', on: 'right' },
+        buttons: [{ text: 'Ok',action: tour.complete }]
+      });
+    }
+
+    if (TourMode == 'Update') {
+
+      tour.addStep({
+        id: 'step-welcome-0',
+        title: TourIcon+'<div style="padding-left:35px;">Actorious Updated.</div>',
+        text: 'It looks like there has been an update since your last visit. Would you be interested in a quick tour?',
+        buttons: [
+          { text: 'No thanks', action: tour.complete },
+          { text: 'Yes please', action: () => { tour.show('step-tour-1', true); }}
+        ]
+      });
+
+    }
+
+    // Otherwise, just jump into the tour
     tour.addStep({
-      id: 'example-step',
-      text: 'Welcome to Actorious!<br>It looks like this might be your first visit. Would you be interested in a quick tour?',
-      buttons: [
-        {
-          text: 'No thanks',
-          action: tour.complete
-        },
-        {
-          text: 'Next',
-          action: tour.next
-        }
-      ]
+      id: 'step-tour-1',
+      title: 'Birthdays and More',
+      text: 'Use these controls to select a birthday or another date to bring up a list of actors with the same birthdate, movies with the same release date, and so on.',
+      attachTo: { element: '#divMain', on: 'right' },
+      buttons: [{ text: 'Next', action: tour.next }]
     });
-    window.tour = tour;
-  end;
+
+    tour.addStep({
+      id: 'step-tour-2',
+      title: 'Search for Actors, Movies, or TV Shows',
+      text: 'Enter something to search for here. The search results will appear below. You can search for actor names, movie or TV Show titles, or roles.',
+      attachTo: { element: '#divSearchNav', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-3',
+      title: 'Top 1,000 Actors',
+      text: 'If you would like to see the most recent Top 1,000 Actors, as rated by TMDb, use this button.',
+      attachTo: { element: '#btnTop1000', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-4',
+      title: 'Current Person (Photo)',
+      text: 'This highlights the currently selected person, movie, or TV Show. When first visiting Actorious, this will show the most popular actor with a birthday today. The list of other actors with birthdays today is shown in the bottom-left table.',
+      attachTo: { element: '#divPhoto', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-5',
+      title: 'Account Buttons',
+      text: 'These buttons provide access to login/logout and other features specific to an account.',
+      attachTo: { element: '#divLinkSet1', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-6',
+      title: 'Sytstem Buttons',
+      text: 'These buttons provide access to specific Actorious features, link permalinks, tours, e-mail subscriptions, and more.',
+      attachTo: { element: '#divLinkSet2', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-7',
+      title: 'Award Buttons',
+      text: 'These buttons provide access award information about the selected person or title.',
+      attachTo: { element: '#divLinkSet3', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-8',
+      title: 'Reference Links',
+      text: 'Links to the person or title in other repositories, like TMDb, Google, Wikipedia, IMDB, Rotten Tomatoes, and more.',
+      attachTo: { element: '#divLinkSet4', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-9',
+      title: 'Social Media Links',
+      text: 'Links to the social medial accounts of the person or title currently selected.',
+      attachTo: { element: '#divLinkSet5', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-10',
+      title: 'Additional Pages',
+      text: 'These buttons lead to other content, depending on the person or title selected. This may include biographies or title summaries, photos, video clips, and so on.',
+      attachTo: { element: '#divButtonHolder', on: 'bottom' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-11',
+      title: 'People',
+      text: 'This is a list of people, usually selected using either the dates or search criteria at the top-left of the page, or by selecting a person photo from the bottom-right table, or by using one of the Connections buttons found in the top-right pages.',
+      attachTo: { element: '#divActorTabulatorHolder', on: 'top' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-12',
+      title: 'People Columns',
+      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header.',
+      attachTo: { element: '#divActorTabulator .tabulator-header', on: 'bottom' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-13',
+      title: 'Roles - Movies and TV Shows',
+      text: 'When a person is selected from the left table, the list of roles for that person (all the Movies and TV Shows they have appeared in) is shown in this table. This may also be populated based on dates or searches selected from the top-left section of the page.',
+      attachTo: { element: '#divRoleTabulatorHolder', on: 'top' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-14',
+      title: 'Role Columns',
+      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header.',
+      attachTo: { element: '#divRoleTabulator .tabulator-header', on: 'bottom' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-15',
+      title: 'Show All Roles',
+      text: 'Clicking on an icon in the Movie or TV Show column will populate the table on the left with all of the people that appeared in the selected title.',
+      attachTo: { element: '#divRoleTabulator .tabulator-header .MovieTVColumn', on: 'bottom' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-16',
+      title: 'Select Person',
+      text: 'Clicking on the photo of one of these people will load them into the table on left, which in turn will then show all of the roles that the selected person has had.',
+      attachTo: { element: '#divRoleTabulator .tabulator-header .Top10Column', on: 'bottom' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Done', action: tour.complete }]
+    });
+
+    tour.start();
+
+  } end; {$ENDIF}
+
 
 end;
 
@@ -4721,10 +4902,7 @@ end;
 
 procedure TMainForm.linkTourClick(Sender: TObject);
 begin
-  createTour;
-  asm
-    tour.start();
-  end;
+  LaunchTour('OnDemand');
 end;
 
 procedure TMainForm.GetLookupList(LookupList: String);
@@ -5957,6 +6135,8 @@ begin
 end;
 
 procedure TMainForm.tmrStartTimer(Sender: TObject);
+var
+  TourVersion: String;
 begin
   if (TablesReady = 2) then
   begin
@@ -5976,6 +6156,19 @@ begin
       Startup := False;
       GetBirthdays(MonthOfTheYear(Now), DayOfTheMonth(Now));
     end;
+
+    TourVersion := TWebLocalStorage.GetValue('Actorious Tour Version');
+// LaunchTour('New');
+    if TourVersion = '' then
+    begin
+      LaunchTour('New');
+    end
+    else if TourVersion <> Version then
+    begin
+      LaunchTour('Update');
+    end;
+    TWebLocalStorage.SetValue('Actorious Tour Version', Version);
+
   end;
 end;
 

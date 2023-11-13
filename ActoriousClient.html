@@ -71,31 +71,9 @@
     </style>
 
 
-    <!-- This is the combined request to JSDelivr: Bootstrap, FlatPickr, Tabulator, Vanilla LazyLoad, Luxon -->
-    <!-- For some reason, flagpack stopped working when included as part of the set -->
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/tabulator-tables@5/dist/css/tabulator.min.css">
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.css">
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/flagpack@1/dist/flagpack.min.css">
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/css/shepherd.css"/>
-    <link rel="stylesheet" crossorigin="anonymous" href="ActoriousClient.css?$(ProjectName)">
-
-    <script src="https://cdn.jsdelivr.net/npm/hacktimer@latest/HackTimer.silent.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hacktimer@latest/HackTimerWorker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/luxon@latest/build/global/luxon.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tabulator-tables@5/dist/js/tabulator.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/flatpickr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17/dist/lazyload.min.js"></script>  
-    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/js/shepherd.min.js"></script>
-    <script src="https://kit.fontawesome.com/24746b3b71.js"></script>
-
     <!-- Lots of stuff to provide icons to an iOS PWA app -->
     <link rel="icon" href="favicon-64x64.png" type="image/png">
-    <link rel="apple-touch-icon" href="iconx/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" href="iconx/apple-touch-icon.png">
     <link rel="apple-touch-startup-image" media="screen and (device-width:  428px) and (device-height:  926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="splashscreens/iPhone_13_Pro_Max__iPhone_12_Pro_Max_landscape.png">
     <link rel="apple-touch-startup-image" media="screen and (device-width:  834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splashscreens/11__iPad_Pro__10.5__iPad_Pro_landscape.png">
     <link rel="apple-touch-startup-image" media="screen and (device-width:  414px) and (device-height:  896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splashscreens/iPhone_11__iPhone_XR_landscape.png">
@@ -473,7 +451,7 @@
 
 
       // While we're here, let's preload some images so they're ready when we need them very shortly
-	  var images = new Array();
+      var images = new Array();
       function preload() {
         for (var i = 0; i < preload.arguments.length; i++) {
           images[i] = new Image()
@@ -514,6 +492,29 @@
 
     <script src="$(ProjectName).js" type="text/javascript"></script>
 
+    <!-- This is the combined request to JSDelivr: Bootstrap, FlatPickr, Tabulator, Vanilla LazyLoad, Luxon -->
+    <!-- For some reason, flagpack stopped working when included as part of the set -->
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/tabulator-tables@5/dist/css/tabulator.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/flagpack@1/dist/flagpack.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/css/shepherd.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="ActoriousClient.css?$(ProjectName)">
+
+    <script src="https://kit.fontawesome.com/24746b3b71.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hacktimer@latest/HackTimer.silent.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hacktimer@latest/HackTimerWorker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@latest/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tabulator-tables@5/dist/js/tabulator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.5.0/dist/floating-ui.core.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.5.3/dist/floating-ui.dom.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/js/shepherd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.5/dist/lazyload.min.js"></script>
   </head>
 
   <body>
