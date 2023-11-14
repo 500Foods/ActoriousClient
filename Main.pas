@@ -3975,15 +3975,15 @@ begin
         title: TourIcon+'<div style="padding-left:35px;">Welcome to Actorious!</div>',
         text: 'It looks like this might be your first visit. Would you be interested in a quick tour?',
         buttons: [
-          { text: 'No thanks', action: () => { tour.show('step-tour-0', true); }},
-          { text: 'Yes please', action: () => { tour.show('step-tour-1', true); }}
+          { text: 'No, thanks', action: () => { tour.show('step-tour-0', true); }},
+          { text: 'Yes, please', action: () => { tour.show('step-tour-1', true); }}
         ]
       });
 
       tour.addStep({
         id: 'step-tour-0',
         title: 'Maybe Later?',
-        text: 'If you would like to take the tour at another time, just click this icon.',
+        text: 'If you would like to take the tour at another time, just click this button.',
         attachTo: { element: '#linkTour', on: 'right' },
         buttons: [{ text: 'Ok',action: tour.complete }]
       });
@@ -3996,42 +3996,43 @@ begin
         title: TourIcon+'<div style="padding-left:35px;">Actorious Updated.</div>',
         text: 'It looks like there has been an update since your last visit. Would you be interested in a quick tour?',
         buttons: [
-          { text: 'No thanks', action: tour.complete },
-          { text: 'Yes please', action: () => { tour.show('step-tour-1', true); }}
+          { text: 'No, thanks', action: tour.complete },
+          { text: 'Yes, please', action: () => { tour.show('step-tour-1', true); }}
         ]
       });
 
     }
 
     // Otherwise, just jump into the tour
+
     tour.addStep({
       id: 'step-tour-1',
       title: 'Birthdays and More',
-      text: 'Use these controls to select a birthday or another date to bring up a list of actors with the same birthdate, movies with the same release date, and so on.',
+      text: 'Use these options to select a birthday or another day to retrieve a list of People with the same birthday, Movies or TV Shows with the same release day, etc.',
       attachTo: { element: '#divMain', on: 'right' },
       buttons: [{ text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-2',
-      title: 'Search for Actors, Movies, or TV Shows',
-      text: 'Enter something to search for here. The search results will appear below. You can search for actor names, movie or TV Show titles, or roles.',
+      title: 'Search for People, Movies, or TV Shows',
+      text: 'Enter search terms here. The search results will appear below. You can search for People (by actor name or role), Movies (by title), or TV Shows (by title).',
       attachTo: { element: '#divSearchNav', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-3',
-      title: 'Top 1,000 Actors',
-      text: 'If you would like to see the most recent Top 1,000 Actors, as rated by TMDb, use this button.',
+      title: 'Top 1,000 People',
+      text: 'This will retrieve the most recent list of Top 1,000 People, updated daily, as rated by The Movie Database.',
       attachTo: { element: '#btnTop1000', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-4',
-      title: 'Current Person (Photo)',
-      text: 'This highlights the currently selected person, movie, or TV Show. When first visiting Actorious, this will show the most popular actor with a birthday today. The list of other actors with birthdays today is shown in the bottom-left table.',
+      title: 'Current Selection',
+      text: 'The currently selected Person (photo), Movie (poster), or TV Show (poster) appears here. Initially, this will show the most popular Person with a birthday today.',
       attachTo: { element: '#divPhoto', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4039,7 +4040,7 @@ begin
     tour.addStep({
       id: 'step-tour-5',
       title: 'Account Buttons',
-      text: 'These buttons provide access to login/logout and other features specific to an account.',
+      text: 'These buttons provide access to login to Actorious, enabling access to advanced features, like favorites, lists, and more.',
       attachTo: { element: '#divLinkSet1', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4047,23 +4048,23 @@ begin
     tour.addStep({
       id: 'step-tour-6',
       title: 'Sytstem Buttons',
-      text: 'These buttons provide access to specific Actorious features, link permalinks, tours, e-mail subscriptions, and more.',
+      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Ssubscriptions, and more.',
       attachTo: { element: '#divLinkSet2', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-7',
-      title: 'Award Buttons',
-      text: 'These buttons provide access award information about the selected person or title.',
+      title: 'Awards and Lists',
+      text: 'These buttons provide access Awards and other lists, and changes to reflect the selected Person, Movie, or TV Show, show.',
       attachTo: { element: '#divLinkSet3', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-8',
-      title: 'Reference Links',
-      text: 'Links to the person or title in other repositories, like TMDb, Google, Wikipedia, IMDB, Rotten Tomatoes, and more.',
+      title: 'Rsource Links',
+      text: 'Links to other resourcess about the selected Person, Movie, or TV Show from TMDb, Wikidata, Wikipedia, Google, IMDB, Rotten Tomatoes, and more.',
       attachTo: { element: '#divLinkSet4', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4071,63 +4072,63 @@ begin
     tour.addStep({
       id: 'step-tour-9',
       title: 'Social Media Links',
-      text: 'Links to the social medial accounts of the person or title currently selected.',
+      text: 'Links to the social medial accounts of the selected Person, Movie, or TV Show.',
       attachTo: { element: '#divLinkSet5', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-10',
-      title: 'Additional Pages',
-      text: 'These buttons lead to other content, depending on the person or title selected. This may include biographies or title summaries, photos, video clips, and so on.',
+      title: 'Additional Information',
+      text: 'These buttons lead to other content, depending on the Person, Movie, or TVS Show selected. This may include biographies, summaries, photos, video clips, and so on. The available pages change when a Person is selected vs. when a Movie or TV Show is selected.',
       attachTo: { element: '#divButtonHolder', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-11',
-      title: 'People',
-      text: 'This is a list of people, usually selected using either the dates or search criteria at the top-left of the page, or by selecting a person photo from the bottom-right table, or by using one of the Connections buttons found in the top-right pages.',
+      title: 'People - Table',
+      text: 'This is a list of People, selected using either the criteria from the top-left section, the bottom-right table, or the Connections found in the top-right sections.',
       attachTo: { element: '#divActorTabulatorHolder', on: 'top' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-12',
-      title: 'People Columns',
-      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header.',
+      title: 'People - Columns',
+      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header. Many other columns are available.',
       attachTo: { element: '#divActorTabulator .tabulator-header', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-13',
-      title: 'Roles - Movies and TV Shows',
-      text: 'When a person is selected from the left table, the list of roles for that person (all the Movies and TV Shows they have appeared in) is shown in this table. This may also be populated based on dates or searches selected from the top-left section of the page.',
+      title: 'Movies and TV Shows - Table',
+      text: 'When a Person is selected from the People Table, all their Movies and TV Shows are listed in this table. This may also be populated based on criteria from the top-left section.',
       attachTo: { element: '#divRoleTabulatorHolder', on: 'top' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-14',
-      title: 'Role Columns',
-      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header.',
+      title: 'Movies and TV Shows - Columns',
+      text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header. Many other columns are available.',
       attachTo: { element: '#divRoleTabulator .tabulator-header', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-15',
-      title: 'Show All Roles',
-      text: 'Clicking on an icon in the Movie or TV Show column will populate the table on the left with all of the people that appeared in the selected title.',
+      title: 'Show All People',
+      text: 'Clicking a Movie or TV icon in this column will update the table on the left with all of the People that appeared in the selected Movie or TV Show.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .MovieTVColumn', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-16',
-      title: 'Select Person',
-      text: 'Clicking on the photo of one of these people will load them into the table on left, which in turn will then show all of the roles that the selected person has had.',
+      title: 'Show One Person',
+      text: 'Clicking on a photo of a Person in this column will select that Person and retrieve all their Movies and TV Shows.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .Top10Column', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Done', action: tour.complete }]
     });
@@ -4135,7 +4136,6 @@ begin
     tour.start();
 
   } end; {$ENDIF}
-
 
 end;
 

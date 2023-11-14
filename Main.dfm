@@ -1148,7 +1148,7 @@ object MainForm: TMainForm
             HeightPercent = 100.000000000000000000
             MaxLength = 25
             SpellCheck = False
-            TextHint = 'Find Actors or Roles...'
+            TextHint = 'Search...'
             WidthPercent = 100.000000000000000000
             OnChange = edtSearchChange
             OnEnter = edtSearchEnter
