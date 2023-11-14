@@ -4063,8 +4063,8 @@ begin
 
     tour.addStep({
       id: 'step-tour-8',
-      title: 'Rsource Links',
-      text: 'Links to other resourcess about the selected Person, Movie, or TV Show from TMDb, Wikidata, Wikipedia, Google, IMDB, Rotten Tomatoes, and more.',
+      title: 'Resource Links',
+      text: 'Links to other resources about the selected Person, Movie, or TV Show from TMDb, Wikidata, Wikipedia, Google, IMDB, Rotten Tomatoes, and more.',
       attachTo: { element: '#divLinkSet4', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4119,7 +4119,7 @@ begin
 
     tour.addStep({
       id: 'step-tour-15',
-      title: 'Show All People',
+      title: 'Select All People',
       text: 'Clicking a Movie or TV icon in this column will update the table on the left with all of the People that appeared in the selected Movie or TV Show.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .MovieTVColumn', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
@@ -4127,8 +4127,8 @@ begin
 
     tour.addStep({
       id: 'step-tour-16',
-      title: 'Show One Person',
-      text: 'Clicking on a photo of a Person in this column will select that Person and retrieve all their Movies and TV Shows.',
+      title: 'Select One Person',
+      text: 'Clicking on a photo of a Person in this column will select that Person and then retrieve all the Movies and TV Shows that they have appeared in.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .Top10Column', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Done', action: tour.complete }]
     });
