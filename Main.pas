@@ -3993,7 +3993,7 @@ begin
 
       tour.addStep({
         id: 'step-welcome-0',
-        title: TourIcon+'<div style="padding-left:35px;">Actorious Updated.</div>',
+        title: TourIcon+'<div style="padding-left:35px;">Actorious Updated</div>',
         text: 'It looks like there has been an update since your last visit. Would you be interested in a quick tour?',
         buttons: [
           { text: 'No, thanks', action: tour.complete },
