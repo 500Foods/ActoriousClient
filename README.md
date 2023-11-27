@@ -26,17 +26,23 @@ While this project is currently under active development, feel free to give it a
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
 <!--CLOC-START -->
 ```
-Last Updated at 2023-11-27 01:52:22 UTC
+Last Updated at 2023-11-27 02:08:05 UTC
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Pascal                           2             48             62            160
-Delphi Form                      1              0              0             39
-Markdown                         1              8              2             39
-YAML                             2             11             13             33
-HTML                             2              7              0             23
+Pascal                           2            871           2591           2736
+Delphi Form                      1             40              0           2269
+SVG                              7              0              0           1758
+JSON                             2              0              0            932
+CSS                              1             93            190            544
+HTML                             2             72             10            471
+Markdown                         1              5              2             38
+YAML                             2              8             12             33
+JavaScript                       1              2              0             25
+XML                              1              0              0             12
+Text                             1              0              0              2
 -------------------------------------------------------------------------------
-SUM:                             8             74             77            294
+SUM:                            21           1091           2805           8820
 -------------------------------------------------------------------------------
 ```
 <!--CLOC-END-->
