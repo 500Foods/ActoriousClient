@@ -1344,23 +1344,6 @@ object MainForm: TMainForm
         ElementPosition = epRelative
         ElementFont = efCSS
         Role = ''
-        object linkList4: TWebHTMLDiv
-          Left = 0
-          Top = 140
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 
-            'order-5 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
-          ElementID = 'linkList4'
-          ChildOrder = 3
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          Role = ''
-        end
         object linkList3: TWebHTMLDiv
           Left = 0
           Top = 70
@@ -1403,7 +1386,7 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-7 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-6 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkTour'
           ChildOrder = 4
           ElementPosition = epRelative
@@ -1471,6 +1454,31 @@ object MainForm: TMainForm
           ChildOrder = 5
           ElementPosition = epRelative
           ElementFont = efCSS
+          Role = ''
+        end
+        object linkPizza: TWebHTMLDiv
+          Left = 0
+          Top = 141
+          Width = 32
+          Height = 32
+          Cursor = crHandPoint
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 'order-5 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkPizza'
+          ChildOrder = 5
+          ElementPosition = epRelative
+          ElementFont = efCSS
+          HTML.Strings = (
+            
+              '<a href="https://www.buymeacoffee.com/andrewsimard500" style="te' +
+              'xt-decoration:none;" target="_blank" aria-label="Buy Me a Pizza"' +
+              '>'
+            
+              '  <img style="padding:2px;" alt="Pizza" src="img/pizza_promo_ico' +
+              'n.png" height=100% width=100%>'
+            '</a>')
           Role = ''
         end
       end
@@ -1918,29 +1926,21 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
         end
-        object linkPizza: TWebHTMLDiv
-          Left = 1
+        object linkList4: TWebHTMLDiv
+          Left = 0
           Top = 245
           Width = 32
           Height = 32
-          Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-8 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkPizza'
-          ChildOrder = 5
+          ElementClassName = 
+            'order-5 opacity-25 bg-dark border  border-secondary rounded over' +
+            'flow-hidden'
+          ElementID = 'linkList4'
+          ChildOrder = 3
           ElementPosition = epRelative
           ElementFont = efCSS
-          HTML.Strings = (
-            
-              '<a href="https://www.buymeacoffee.com/andrewsimard500" style="te' +
-              'xt-decoration:none;" target="_blank" aria-label="Buy Me a Pizza"' +
-              '>'
-            
-              '  <img style="padding:2px;" alt="Pizza" src="img/pizza_promo_ico' +
-              'n.png" height=100% width=100%>'
-            '</a>')
           Role = ''
         end
       end

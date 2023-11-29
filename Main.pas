@@ -1018,7 +1018,7 @@ begin
 //  SetBootstrapTooltipDiv(linkLink, 'Link to Content', 'right');
   SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
   SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
-  SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actiorious Project via Buy Me a Pizza', 'right');
+  SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
 
 
   // Shade all the link buttons to start with
@@ -4040,7 +4040,7 @@ begin
     tour.addStep({
       id: 'step-tour-5',
       title: 'Account Buttons',
-      text: 'These buttons provide access to login to Actorious, enabling access to advanced features, like favorites, lists, and more.',
+      text: 'These buttons are used to login to Actorious and access its advanced features, like favorites, lists, and more.',
       attachTo: { element: '#divLinkSet1', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4048,7 +4048,7 @@ begin
     tour.addStep({
       id: 'step-tour-6',
       title: 'Sytstem Buttons',
-      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Ssubscriptions, and more.',
+      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Subscriptions, and more.',
       attachTo: { element: '#divLinkSet2', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
