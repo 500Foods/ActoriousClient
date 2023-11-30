@@ -1954,24 +1954,26 @@ begin
         // Convert \n characters into paragraphs
         // Add word count just for fun
         pas.Main.MainForm.BioWords = 0;
+        var biotext = '<h5>No summary information was found.<h5>';
         if (row.getCell('OVR').getValue()) {
           try {
-            var biotext = decodeURIComponent(row.getCell('OVR').getValue());
+            biotext = decodeURIComponent(row.getCell('OVR').getValue());
           } catch {
-            var biotext = (row.getCell('OVR').getValue());
+            biotext = (row.getCell('OVR').getValue());
           }
-          if ((biotext == 'undefined') || (biotext == '')) {
+          if ((biotext == 'undefined') || (biotext == '') ) {
             biotext = '<h5>No summary information was found.<h5>';
             pas.Main.MainForm.BioWords = 0;
           }
           else {
             pas.Main.MainForm.BioWords = biotext.trim().split(/\s+/).length;
           }
+        }
         divBiography.innerHTML = '<div class="w-100 h-100 ps-2 pe-2 pb-4" style="white-space:normal; overflow-y:auto;">'+
             '<h4>'+row.getCell('NAM').getValue()+'</h4>'+
             '<h5>'+(row.getCell('TGL').getValue() || '')+'</h5>'+
             '<p>'+biotext.replace("\n","</p><p>")+'</p></div>';
-        }
+
 
         // Populate some buttons
         window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', linkTMDb,     'img/tmdb_icon.svg',           'TMDb Link');
@@ -2202,10 +2204,11 @@ begin
         // Convert \n characters into paragraphs
         // Add word count just for fun
         pas.Main.MainForm.BioWords = 0;
+        var biotext = '<h5>No biographical information was found.<h5>';
         try {
-          var biotext = decodeURIComponent(row.getCell('BIO').getValue());
+          biotext = decodeURIComponent(row.getCell('BIO').getValue());
         } catch {
-         var biotext = row.getCell('BIO').getValue();
+          biotext = row.getCell('BIO').getValue();
         }
         if ((biotext == 'undefined') || (biotext == '')) {
           biotext = '<h5>No biographical information was found.<h5>';
@@ -3853,12 +3856,12 @@ begin
             pas.Main.MainForm.Photo2 = FirstData['PIC'];
           }
           pas.Main.MainForm.PhotoA = FirstData['NAM'];
-
+          var biotext = '<h5>No biographical information was found.<h5>';
           // Biography information
           try {
-            var biotext = decodeURIComponent(FirstData['BIO']);
+            biotext = decodeURIComponent(FirstData['BIO']);
           } catch {
-            var biotext = FirstData['BIO'];
+            biotext = FirstData['BIO'];
           }
           if ((biotext == 'undefined') || (biotext == '')) {
             biotext = '<h5>No biographical information was found.<h5>';
