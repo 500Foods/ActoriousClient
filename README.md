@@ -31,7 +31,7 @@ While this project is currently under active development, feel free to give it a
 [![Count Lines of Code](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml/badge.svg)](https://github.com/500Foods/ActoriousClient/actions/workflows/main.yml)
 <!--CLOC-START -->
 ```
-Last updated at 2023-11-30 02:21:04 UTC
+Last updated at 2023-12-04 03:47:38 UTC
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -41,13 +41,13 @@ SVG                              7              0              0           1758
 JSON                             2              0              0            932
 CSS                              1             93            190            544
 HTML                             2             72             10            471
-Markdown                         1              5              2             45
+Markdown                         1              8              2             47
 YAML                             2              8             13             35
 JavaScript                       1              2              0             25
 XML                              1              0              0             12
 Text                             1              0              0              2
 -------------------------------------------------------------------------------
-SUM:                            21           1091           2807           8831
+SUM:                            21           1094           2807           8833
 -------------------------------------------------------------------------------
 331 Files (without source code) were skipped
 ```
