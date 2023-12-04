@@ -1,6 +1,7 @@
 # ActoriousClient
 
 Visit:  https://www.actorious.com
+
 Follow on 𝕏: @actorious_today
 
 This is the main web client app for the Actorious project, which is currently published live as the [www.actorious.com](https://www.actorious.com) website. It has been developed using Delphi and [TMS WEB Core](https://www.tmssoftware.com/site/tmswebcore.asp) along with many other very capable JavaScript libraries. In particular, [Tabulator](https://tabulator.info/). The Actorious project started out as a [TMS Software blog post](https://www.tmssoftware.com/site/blog.asp?post=949), with its own associated GitHub repository, [ActorInfo](https://github.com/500Foods/TMS-WEB-Core-ActorInfo).
