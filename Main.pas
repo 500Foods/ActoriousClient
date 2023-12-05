@@ -390,6 +390,8 @@ begin
   MainForm.divProgressSpinner.HTML.Text := '<div style="width:100%; height:100%; font-size:11em; color:var(--bs-danger); opacity:0.75; text-align: center;"><i class="fa-regular fa-loader fa-spin"></i></div>';
 
   Progress := TGUID.NewGUID;
+  if AdultContent then Progress := Progress + '[Adult]';
+  
   MainForm.CurrentPerson := -1;
   MainForm.CurrentRole := -1;
 
@@ -792,11 +794,12 @@ end;
 
 procedure TMainForm.tmrSearchTimer(Sender: TObject);
 begin
-  if (NowSearching = False) then
-  begin
-    btnSearchClick(Sender);
-    tmrSearch.Enabled := False;
-  end;
+  tmrSearch.Enabled := False;
+//  if (NowSearching = False) then
+//  begin
+//    btnSearchClick(Sender);
+//    tmrSearch.Enabled := False;
+//  end;
 end;
 
 procedure TMainForm.WebFormCreate(Sender: TObject);
@@ -3767,8 +3770,16 @@ procedure TMainForm.WebFormKeyDown(Sender: TObject; var Key: Word;  Shift: TShif
 begin
 
   // Hide Viewer if ESC is pressed
-  if (Key = VK_ESCAPE) and not(divViewerHolder.ElementHandle.classList.contains('d-none'))
+  if ((Key = VK_ESCAPE) or (Key = VK_RETURN)) and not(divViewerHolder.ElementHandle.classList.contains('d-none'))
   then divViewerHolderClick(nil);
+
+  // Search after Enter is pressed
+  if (Key = VK_RETURN) and
+     (NowSearching = False) and
+     (divViewerHolder.ElementHandle.classList.contains('d-none')) and
+     (Length(edtSearch.Text) >= 3)
+  then btnSearchClick(Sender);
+
 
 end;
 

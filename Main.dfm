@@ -2288,7 +2288,7 @@ object MainForm: TMainForm
   end
   object tmrSearch: TWebTimer
     Enabled = False
-    Interval = 500
+    Interval = 5000
     OnTimer = tmrSearchTimer
     Left = 268
     Top = 124
