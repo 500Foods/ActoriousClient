@@ -130,7 +130,7 @@ type
     linkList2: TWebHTMLDiv;
     linkTour: TWebHTMLDiv;
     linkLink: TWebHTMLDiv;
-    linkList1: TWebHTMLDiv;
+    linkRelatives: TWebHTMLDiv;
     linkEMail: TWebHTMLDiv;
     linkRating: TWebHTMLDiv;
     divLinkSet4: TWebHTMLDiv;
@@ -391,7 +391,7 @@ begin
 
   Progress := TGUID.NewGUID;
   if AdultContent then Progress := Progress + '[Adult]';
-  
+
   MainForm.CurrentPerson := -1;
   MainForm.CurrentRole := -1;
 
@@ -1022,6 +1022,7 @@ begin
   SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
   SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
   SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
+  SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
 
 
   // Shade all the link buttons to start with
@@ -1119,6 +1120,7 @@ begin
     linkLink.innerHTML = '<div style="padding:2px 2px; fill:var(--bs-gray-200);">'+window.icon_link+'</div>';
     linkEMail.innerHTML = window.icon_envelope_open_text;
     linkTour.innerHTML = window.icon_signs_post;
+    linkRelatives.innerHTML = window.icon_family;
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -5799,11 +5801,22 @@ var
 begin
   aName := Name;
   MainForm.btnRelatives.Tag := relative;
-  if MainForm.btnRelatives.Tag > 0
-  then MainForm.btnRelatives.Enabled := True
-  else MainForm.btnRelatives.Enabled := False;
+  if MainForm.btnRelatives.Tag > 0 then
+  begin
+    MainForm.btnRelatives.Enabled := True;
+    MainFOrm.linkRelatives.ElementHandle.style.setProperty('opacity','1.0');
+    SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family of '+aName, 'right');
+  end
+  else
+  begin
+    MainForm.btnRelatives.Enabled := False;
+    MainFOrm.linkRelatives.ElementHandle.style.setProperty('opacity','0.25');
+    SetBootstrapTooltipDiv(linkRelatives, 'Relatives', 'right');
+  end;
+
   {$IFNDEF WIN32} asm {
     btnRelatives.innerHTML = '<div style="display:flex; fill:white;">'+window.icon_family+'<div class="ms-1"> Friends and Family of '+aName+'</div></div>';
+
   } end; {$ENDIF}
 
   // Suppress Delphi Hint "Local variable is assigned but never used"

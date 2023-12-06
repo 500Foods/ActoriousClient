@@ -152,7 +152,7 @@
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
-        <TMSVersion>1.0.3546</TMSVersion>
+        <TMSVersion>1.0.3551</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

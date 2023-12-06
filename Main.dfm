@@ -124,7 +124,7 @@ object MainForm: TMainForm
         ElementID = 'divInfoPages'
         ChildOrder = 4
         ElementFont = efCSS
-        TabIndex = 0
+        TabIndex = 5
         ShowTabs = False
         TabOrder = 0
         object pageBio: TWebTabSheet
@@ -1409,7 +1409,7 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
         end
-        object linkList1: TWebHTMLDiv
+        object linkRelatives: TWebHTMLDiv
           Left = 0
           Top = 0
           Width = 32
@@ -1417,10 +1417,8 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-1 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
-          ElementID = 'linkList1'
+          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkRelatives'
           ChildOrder = 5
           ElementPosition = epRelative
           ElementFont = efCSS
