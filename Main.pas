@@ -226,6 +226,7 @@ type
     procedure LaunchTour(TourMode: String);
     procedure linkTourClick(Sender: TObject);
     procedure linkRelativesClick(Sender: TObject);
+    procedure HideToolTips;
   private
     { Private declarations }
   public
@@ -324,6 +325,34 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TMainForm.HideToolTips;
+begin
+  {$IFNDEF WIN32} asm {
+    setTimeout(function() {
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach( (e) => e.setAttribute('data-bs-delay', '{"show": 1000, "hide": 100}'));
+      var tooltipList = tooltipTriggerList.map( function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl, {
+          trigger : 'hover'
+        });
+      });
+    },500);
+
+    setTimeout(function() {
+      var badtooltips = document.getElementsByClassName('bs-tooltip-auto');
+      if (badtooltips.length > 0) {
+        for (var i = 0; i < badtooltips.length; i++) {
+          badtooltips[i].style.setProperty('opacity','0');
+          var x = badtooltips[i];
+          setTimeout(function() {
+            x.remove()
+          }, 500);
+        }
+      }
+    },1250);
+  } end; {$ENDIF}
+end;
 
 procedure TMainForm.tmrImageCheckEnable;
 begin
@@ -1186,7 +1215,7 @@ begin
 
         btnVideo.classList.add('d-none');
         btnBackground.classList.add('d-none');
-        btnConnect.classList.remove('d-none');
+//        btnConnect.classList.remove('d-none');
 
       }
       else if (pas.Main.MainForm.MenuType == 1) {
@@ -1222,7 +1251,7 @@ begin
 
         btnVideo.classList.remove('d-none');
         btnBackground.classList.remove('d-none');
-        btnConnect.classList.add('d-none');
+//        btnConnect.classList.add('d-none');
 
       }
       else if (pas.Main.MainForm.MenuType == 2) {
@@ -1258,7 +1287,7 @@ begin
 
         btnVideo.classList.remove('d-none');
         btnBackground.classList.remove('d-none');
-        btnConnect.classList.add('d-none');
+//        btnConnect.classList.add('d-none');
 
       }
 
@@ -1883,7 +1912,7 @@ begin
         }
         else {
           button.style.opacity = 1.0;
-          button.innerHTML = '<a aria-label="'+alt+'" target=_blank href='+prefix+LNK+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
+          button.innerHTML = '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+prefix+LNK+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
         }
       }
       else {
@@ -1906,7 +1935,7 @@ begin
       if (cell.getRow().getCell(key) !== false) {
         var LNK = cell.getRow().getCell(key).getValue();
         if (!((LNK == null) || (LNK == ""))) {
-          return '<a aria-label="'+alt+'" target=_blank href='+prefix+LNK+'><img src='+icon+' height=34 width=34 style="margin-left:2px; margin-right:2px;" alt="'+alt+'"></a>';
+          return '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+prefix+LNK+'><img src='+icon+' height=34 width=34 style="margin-left:2px; margin-right:2px;" alt="'+alt+'"></a>';
         }
         else {
           return '';
@@ -2000,16 +2029,16 @@ begin
         var pop = row.getCell('POP').getValue();
         var LNK = row.getCell('TID').getValue();
         linkScore.style.opacity = 1.0;
-        linkScore.innerHTML = '<div style="margin-top:1px; width:100%; height:100%; text-align:center; vertical-align:middle;"><a aria-label="Link Score on TMDb" style="text-decoration:none; font-size:12px; color:#01b4e4;" target=_blank href=https://www.themoviedb.org/person/'+LNK+'><strong>'+pop.toFixed(0)+'</strong></a></div>';
+        linkScore.innerHTML = '<div style="margin-top:1px; width:100%; height:100%; text-align:center; vertical-align:middle;"><a aria-label="Link Score on TMDb" style="text-decoration:none; font-size:12px; color:#01b4e4;" rel="noopener noreferrer" target="_blank" href=https://www.themoviedb.org/person/'+LNK+'><strong>'+pop.toFixed(0)+'</strong></a></div>';
 
         // Populate the linkLINK button
         linkLink.style.opacity = 1.0;
         pas.Main.MainForm.SetBootstrapTooltipDiv(pas.Main.MainForm.linkLink, 'PermaLink to '+row.getCell('NAM').getValue(), 'right');
-        linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" target=_blank style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R='+row.getCell('TYP').getValue().slice(0,1).toUpperCase()+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
+        linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" rel="noopener noreferrer" target="_blank" style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R='+row.getCell('TYP').getValue().slice(0,1).toUpperCase()+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
 
         // Populate the linkGoogleImageSearch button
         linkGoogleImageSearch.style.opacity = 1.0;
-        linkGoogleImageSearch.innerHTML = '<a target=_blank aria-label="Google Image Search" style="text-decoration:none;" href="https://www.google.com/search?q='+row.getCell('NAM').getValue().replaceAll(' ','+')+'+'+row.getCell('TYP').getValue()+'&tbm=isch"><img style="padding:3px; width:100%; height:100%;" alt="Google Images Logo" src="img/google_icon.png"></a>';
+        linkGoogleImageSearch.innerHTML = '<a rel="noopener noreferrer" target="_blank" aria-label="Google Image Search" style="text-decoration:none;" href="https://www.google.com/search?q='+row.getCell('NAM').getValue().replaceAll(' ','+')+'+'+row.getCell('TYP').getValue()+'&tbm=isch"><img style="padding:3px; width:100%; height:100%;" alt="Google Images Logo" src="img/google_icon.png"></a>';
 
         // This fills in the Height/Runtime figure, in amongst the other buttons above
         var runtime = '';
@@ -2091,7 +2120,7 @@ begin
               if (imagelist[i].indexOf('YouTube:') !== -1) {
                 var image = imagelist[i].substr(8,50);
                 slides = slides+'<div class="swiper-slide" style="width:206px !important; height:116px !important;">'+
-                                  '<a href="https://www.youtube.com/watch?v='+image+'" target=_blank aria-label='+altvideo+'>'+
+                                  '<a href="https://www.youtube.com/watch?v='+image+'" rel="noopener noreferrer" target="_blank" aria-label='+altvideo+'>'+
                                     '<img '+
                                       'class="lazy landscape" '+
                                       'style="cursor: pointer; width: 206px; height: 116px; border-radius: 4px;"'+
@@ -2245,11 +2274,11 @@ begin
         // This fills in linkLINK
         linkLink.style.opacity = 1.0;
         pas.Main.MainForm.SetBootstrapTooltipDiv(pas.Main.MainForm.linkLink, 'PermaLink to '+row.getCell('NAM').getValue(), 'right');
-        linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" target=_blank style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R=P'+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
+        linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" rel="noopener noreferrer" target="_blank" style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R=P'+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
 
         // This fills in linkGoogleImageSearch
         linkGoogleImageSearch.style.opacity = 1.0;
-        linkGoogleImageSearch.innerHTML = '<a aria-label="Google Image Search" target=_blank style="text-decoration:none;" href="https://www.google.com/search?q='+row.getCell('NAM').getValue().replaceAll(' ','+')+'&tbm=isch"><img style="padding:3px; width:100%; height:100%;" alt="Google Images Logo" src="img/google_icon.png"></a></div>';
+        linkGoogleImageSearch.innerHTML = '<a aria-label="Google Image Search" rel="noopener noreferrer" target="_blank" style="text-decoration:none;" href="https://www.google.com/search?q='+row.getCell('NAM').getValue().replaceAll(' ','+')+'&tbm=isch"><img style="padding:3px; width:100%; height:100%;" alt="Google Images Logo" src="img/google_icon.png"></a></div>';
 
 
         // This fills in the Actorious Points figure, in amongst the other buttons above
@@ -2595,7 +2624,7 @@ begin
       else {birthplace = '<br />'+birthplace };
 
       if (homepage == null) { homepage = '<br /></div>' }
-      else {homepage = '<br /><small><strong><a aria-label="Personal Website" style="text-decoration:none;" href="'+decodeURIComponent(homepage)+'" target="_blank">'+decodeURIComponent(homepage)+'</a></strong></small></div>'};
+      else {homepage = '<br /><small><strong><a aria-label="Personal Website" style="text-decoration:none;" href="'+decodeURIComponent(homepage)+'" rel="noopener noreferrer" target="_blank">'+decodeURIComponent(homepage)+'</a></strong></small></div>'};
 
       return actor+birthplace+homepage;
     }
@@ -2715,7 +2744,7 @@ begin
       links += SetTableLNK(cell,'MID','https://www.models.com/people/',     'img/models_icon.png',         'Models.com Link');
       links += SetTableLNK(cell,'WWW','',                                   'img/web_icon.png',            'Website Link');
 
-//      links += '<a target=_blank aria-label="Social Media" style="text-decoration:none;" href="https://www.google.com/search?q='+cell.getRow().getCell('NAM').getValue().replaceAll(' ','+')+'&tbm=isch"><img style="margin-left:2px; margin-right:2px; width:34px; height:34px" alt="Google Image Search" src="img/google_icon.png"></a>';              links += SetTableLNK(cell,'FID','https://www.facebook.com/',          'img/facebook_icon.png',       'Facebook Link');
+//      links += '<a rel="noopener noreferrer" target="_blank" aria-label="Social Media" style="text-decoration:none;" href="https://www.google.com/search?q='+cell.getRow().getCell('NAM').getValue().replaceAll(' ','+')+'&tbm=isch"><img style="margin-left:2px; margin-right:2px; width:34px; height:34px" alt="Google Image Search" src="img/google_icon.png"></a>';              links += SetTableLNK(cell,'FID','https://www.facebook.com/',          'img/facebook_icon.png',       'Facebook Link');
 
       return '<div style="white-space:normal;">'+links+'</div>';
     }
@@ -4064,17 +4093,17 @@ begin
 
     tour.addStep({
       id: 'step-tour-6',
-      title: 'Sytstem Buttons',
-      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Subscriptions, and more.',
-      attachTo: { element: '#divLinkSet2', on: 'right' },
+      title: 'Awards and Lists',
+      text: 'These buttons provide access Awards and other lists, and changes to reflect the selected Person, Movie, or TV Show, show.',
+      attachTo: { element: '#divLinkSet3', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-7',
-      title: 'Awards and Lists',
-      text: 'These buttons provide access Awards and other lists, and changes to reflect the selected Person, Movie, or TV Show, show.',
-      attachTo: { element: '#divLinkSet3', on: 'right' },
+      title: 'Sytstem Buttons',
+      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Subscriptions, and more.',
+      attachTo: { element: '#divLinkSet2', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
@@ -5795,6 +5824,7 @@ begin
   Mainform.tmrImageCheck.Enabled := True;
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
+  HideTooltips;
   MainForm.PreventCompilerHint(Data);
   MainForm.PreventCompilerHint(Blob);
 

@@ -590,7 +590,7 @@ object MainForm: TMainForm
             Margins.Bottom = 0
             Align = alLeft
             ChildOrder = 4
-            ElementClassName = 'btn btn-sm btn-secondary px-1'
+            ElementClassName = 'btn btn-sm btn-secondary px-1 d-none'
             ElementID = 'btnConnect'
             ElementFont = efCSS
             ElementPosition = epRelative
@@ -1193,7 +1193,6 @@ object MainForm: TMainForm
         Height = 277
         ElementClassName = 'order-0 d-flex flex-column gap-1'
         ElementID = 'divLinkSet1'
-        ChildOrder = 4
         ElementPosition = epRelative
         ElementFont = efCSS
         Role = ''
@@ -1334,13 +1333,13 @@ object MainForm: TMainForm
         end
       end
       object divLinkSet2: TWebHTMLDiv
-        Left = 36
+        Left = 72
         Top = 0
         Width = 32
         Height = 277
-        ElementClassName = 'order-1 d-flex flex-column gap-1'
+        ElementClassName = 'order-2 d-flex flex-column gap-1'
         ElementID = 'divLinkSet2'
-        ChildOrder = 4
+        ChildOrder = 2
         ElementPosition = epRelative
         ElementFont = efCSS
         Role = ''
@@ -1475,8 +1474,8 @@ object MainForm: TMainForm
               'xt-decoration:none;" target="_blank" aria-label="Buy Me a Pizza"' +
               '>'
             
-              '  <img style="padding:2px;" alt="Pizza" src="img/pizza_promo_ico' +
-              'n.png" height=100% width=100%>'
+              '  <img style="filter:grayscale(1); padding:2px;" alt="Pizza" src' +
+              '="img/pizza_promo_icon.png" height=100% width=100%>'
             '</a>')
           Role = ''
         end
@@ -1646,7 +1645,7 @@ object MainForm: TMainForm
         Top = 0
         Width = 32
         Height = 277
-        ElementClassName = 'order-3 d-flex flex-column gap-1'
+        ElementClassName = 'order-4 d-flex flex-column gap-1'
         ElementID = 'divLinkSet5'
         ChildOrder = 4
         ElementPosition = epRelative
@@ -1799,7 +1798,7 @@ object MainForm: TMainForm
         end
       end
       object divLinkSet3: TWebHTMLDiv
-        Left = 72
+        Left = 36
         Top = 1
         Width = 32
         Height = 277
@@ -1807,9 +1806,9 @@ object MainForm: TMainForm
         Margins.Top = 0
         Margins.Right = 1
         Margins.Bottom = 0
-        ElementClassName = 'order-2 d-flex flex-column gap-1'
+        ElementClassName = 'order-1 d-flex flex-column gap-1'
         ElementID = 'divLinkSet3'
-        ChildOrder = 4
+        ChildOrder = 1
         ElementPosition = epRelative
         ElementFont = efCSS
         Role = ''
