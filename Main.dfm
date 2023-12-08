@@ -1423,6 +1423,7 @@ object MainForm: TMainForm
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
+          OnClick = linkRelativesClick
         end
         object linkEMail: TWebHTMLDiv
           Left = 0

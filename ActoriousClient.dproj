@@ -152,7 +152,7 @@
         <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
         <TMSWebEcmaScript>2</TMSWebEcmaScript>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
-        <TMSVersion>1.0.3551</TMSVersion>
+        <TMSVersion>1.0.3557</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -1030,6 +1030,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1049,12 +1055,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

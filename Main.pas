@@ -1,4 +1,4 @@
-unit Main;
+﻿unit Main;
 
 interface
 
@@ -225,6 +225,7 @@ type
     procedure btnBlockSelectClick(Sender: TObject);
     procedure LaunchTour(TourMode: String);
     procedure linkTourClick(Sender: TObject);
+    procedure linkRelativesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1012,7 +1013,7 @@ begin
   SetBootstrapTooltipDiv(linkWikipedia, 'Wikipedia', 'right');
   SetBootstrapTooltipDiv(linkFacebook, 'Facebook', 'right');
   SetBootstrapTooltipDiv(linkInstagram, 'Instagram', 'right');
-  SetBootstrapTooltipDiv(linkTwitter, 'Twitter', 'right');
+  SetBootstrapTooltipDiv(linkTwitter, '𝕏', 'right');
   SetBootstrapTooltipDiv(linkModels, 'Models.com', 'right');
   SetBootstrapTooltipDiv(linkShare, 'Share', 'right');
 
@@ -1120,7 +1121,7 @@ begin
     linkLink.innerHTML = '<div style="padding:2px 2px; fill:var(--bs-gray-200);">'+window.icon_link+'</div>';
     linkEMail.innerHTML = window.icon_envelope_open_text;
     linkTour.innerHTML = window.icon_signs_post;
-    linkRelatives.innerHTML = window.icon_family;
+    linkRelatives.innerHTML = window.icon_relatives;
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1991,7 +1992,7 @@ begin
         window.SetLNK(row,'WIK','',                                   linkWikipedia,                           'img/wikipedia_icon.png',      'Wikipedia Link');
         window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,                            'img/facebook_icon.png',       'Facebook Link');
         window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,                           'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://www.twitter.com/',           linkTwitter,                             'img/twitter_icon.png',        'Twitter Link');
+        window.SetLNK(row,'TWT','https://www.x.com/',                 linkTwitter,                             'img/twitter_icon.png',        '𝕏 Link');
         window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,                              'img/models_icon.png',         'Models.com Link');
 
         // Populate the Pop button
@@ -2238,7 +2239,7 @@ begin
         window.SetLNK(row,'WIK','',                                   linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
         window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
         window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://www.twitter.com/',           linkTwitter,        'img/twitter_icon.png',        'Twitter Link');
+        window.SetLNK(row,'TWT','https://www.x.com/',                 linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
         window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,         'img/models_icon.png',         'Models.com Link');
 
         // This fills in linkLINK
@@ -2704,7 +2705,7 @@ begin
       var links = '';
       links += SetTableLNK(cell,'TID','https://www.themoviedb.org/person/', 'img/tmdb_icon.svg',           'TMDb Link');
       links += SetTableLNK(cell,'FID','https://www.facebook.com/',          'img/facebook_icon.png',       'Facebook Link');
-      links += SetTableLNK(cell,'TWT','https://www.twitter.com/',           'img/twitter_icon.png',        'Twitter Link');
+      links += SetTableLNK(cell,'TWT','https://www.X.com/',                 'img/twitter_icon.png',        '𝕏 Link');
       links += SetTableLNK(cell,'INS','https://www.instagram.com/',         'img/instagram_icon.png',      'Instagram Link');
       links += SetTableLNK(cell,'WID','',                                   'img/wikidata_icon.png',       'WikiData Link');
       links += SetTableLNK(cell,'WIK','',                                   'img/wikipedia_icon.png',      'Wikipedia Link');
@@ -4914,6 +4915,11 @@ begin
   MainForm.PreventCompilerHint(CacheData);
   MainForm.PreventCompilerHint(Blob);
 
+end;
+
+procedure TMainForm.linkRelativesClick(Sender: TObject);
+begin
+  btnRelativesClick(Sender);
 end;
 
 procedure TMainForm.linkTourClick(Sender: TObject);
