@@ -127,7 +127,7 @@ type
     divLinkSet2: TWebHTMLDiv;
     linkList4: TWebHTMLDiv;
     linkList3: TWebHTMLDiv;
-    linkList2: TWebHTMLDiv;
+    linkFrequent: TWebHTMLDiv;
     linkTour: TWebHTMLDiv;
     linkLink: TWebHTMLDiv;
     linkRelatives: TWebHTMLDiv;
@@ -1053,7 +1053,7 @@ begin
   SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
   SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
   SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
-
+  SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
 
   // Shade all the link buttons to start with
   linkLogin.ElementHandle.style.setProperty('opacity','0.25');
@@ -1151,6 +1151,7 @@ begin
     linkEMail.innerHTML = window.icon_envelope_open_text;
     linkTour.innerHTML = window.icon_signs_post;
     linkRelatives.innerHTML = window.icon_relatives;
+    linkFrequent.innerHTML = window.icon_people_arrows2;
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -5842,12 +5843,18 @@ begin
     MainForm.btnRelatives.Enabled := True;
     MainFOrm.linkRelatives.ElementHandle.style.setProperty('opacity','1.0');
     SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family of '+aName, 'right');
+
+    MainFOrm.linkFrequent.ElementHandle.style.setProperty('opacity','1.0');
+    SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures with '+aName, 'right');
   end
   else
   begin
     MainForm.btnRelatives.Enabled := False;
     MainFOrm.linkRelatives.ElementHandle.style.setProperty('opacity','0.25');
-    SetBootstrapTooltipDiv(linkRelatives, 'Relatives', 'right');
+    SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
+
+    MainFOrm.linkFrequent.ElementHandle.style.setProperty('opacity','0.25');
+    SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
   end;
 
   {$IFNDEF WIN32} asm {

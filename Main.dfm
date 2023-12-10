@@ -1360,7 +1360,7 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
         end
-        object linkList2: TWebHTMLDiv
+        object linkFrequent: TWebHTMLDiv
           Left = 0
           Top = 35
           Width = 32
@@ -1368,10 +1368,8 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-2 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
-          ElementID = 'linkList2'
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkFrequent'
           ChildOrder = 1
           ElementPosition = epRelative
           ElementFont = efCSS
