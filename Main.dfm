@@ -1088,6 +1088,7 @@ object MainForm: TMainForm
             ElementID = 'btnDirectors'
             ElementFont = efCSS
             ElementPosition = epRelative
+            Enabled = False
             HeightPercent = 100.000000000000000000
             TabOrder = 1
             TabStop = False
@@ -1105,6 +1106,7 @@ object MainForm: TMainForm
             ElementID = 'btnWriters'
             ElementFont = efCSS
             ElementPosition = epRelative
+            Enabled = False
             HeightPercent = 100.000000000000000000
             TabOrder = 2
             TabStop = False
@@ -1374,6 +1376,7 @@ object MainForm: TMainForm
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
+          OnClick = linkFrequentClick
         end
         object linkTour: TWebHTMLDiv
           Left = 0

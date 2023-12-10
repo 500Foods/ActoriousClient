@@ -227,12 +227,14 @@ type
     procedure linkTourClick(Sender: TObject);
     procedure linkRelativesClick(Sender: TObject);
     procedure HideToolTips;
+    [async] procedure linkFrequentClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     Startup: Boolean;
     StartupMode: String;
+    TourActive: Boolean;
 
     ActorTabulator: JSValue;
     RoleTabulator: JSValue;
@@ -3322,6 +3324,10 @@ begin
             headerMenu: headerMenu
         },
 
+        { title: "Count", field: "Count", visible: false, width: 80,
+            headerMenu: headerMenu
+        },
+
         { title: "Points", field: "PTS", visible: false, sorter:"number",
             headerMenu: headerMenu
         },
@@ -3814,6 +3820,21 @@ begin
   then btnSearchClick(Sender);
 
 
+  // Tour handling of Enter key - cancel if welcome, otherwise go to next step
+  if (Key = VK_Return) and TourActive then
+  begin
+    asm
+      if (Shepherd.activeTour) {
+        if (Shepherd.activeTour.getCurrentStep().id.indexOf('welcome') > -1) {
+          Shepherd.activeTour.cancel();
+        }
+        else {
+          Shepherd.activeTour.next();
+        }
+      }
+    end;
+  end;
+
 end;
 
 procedure TMainForm.WebFormResize(Sender: TObject);
@@ -3978,6 +3999,8 @@ end;
 
 procedure TMainForm.LaunchTour(TourMode: String);
 begin
+  TourActive := True;
+
   {$IFNDEF WIN32} asm {
 
     // We might have extra steps at the beginning, so here we're just explicitly stating a number
@@ -4947,6 +4970,92 @@ begin
 
 end;
 
+procedure TMainForm.linkFrequentClick(Sender: TObject);
+begin
+  // What we're trying to do here is find, for a selected person, the list of the 25 most common costars (aka frequent figures).
+  // We already have everything needed to generate the list onhand, we just need to quickly sort the list and then make the request
+  // as if we were doing any other kind of lookup, as with the Friends and Family situation or when listing all the roles for the
+  // currently selected Movie or TV Show.
+
+  asm
+    const This = pas.Main.MainForm;
+    const table = This.ActorTabulator;
+    const tabledata = table.getData();
+    const person = tabledata.find(el => el.TID == This.CurrentPerson);
+    const roles = person.WRK;
+
+    let frequent = [[]]; // 2d array
+    let figures = [];
+    let match = -1;
+    let found = -1;
+
+    // Process list of roles
+    for (let i = 0; i < roles.length; i++) {
+
+      // Process list of figures
+      // try to exclude TV talk shows as best we can ;-)
+
+      if (!((roles[i].TYP == 'tv') && (roles[i].CHR.indexOf('Self') >= 0))) {
+
+        figures = roles[i].ACA;
+
+        for (let j = 0; j < figures.length; j++) {
+
+          // See if there is a match previously
+          match = figures[j].ID;
+
+          if (match !== undefined) {
+            found = frequent.findIndex(el => el[0] == match);
+            if (found !== -1) {
+              frequent[found] = [frequent[found][0], frequent[found][1]+1, Math.min(frequent[found][2],j)];
+            }
+            else {
+              frequent.push([match, 1, j]);
+            }
+          }
+        }
+      }
+    }
+
+    // Sort by frequency - 2nd column, descending sort, top 25 only
+    let topfigures = frequent.sort((a, b) => b[1] - a[1] || a[2] - b[2]);
+
+    console.log(topfigures);
+
+    // Compose the list to retrieve, placing the selected person first on the list
+    let lookuproles = [{"ID":This.CurrentPerson}];
+    for (let i = 1; i < topfigures.length; i++) {
+      if ((i < 250) && (topfigures[i][0] !== This.CurrentPerson)) {
+        lookuproles.push({"ID":topfigures[i][0]});
+      }
+    }
+
+    // Retrieve the list
+    await This.GetLookupList(JSON.stringify(lookuproles));
+
+    // Fix up the list
+    // - needs to be sorted by the order of number of matches, so no sorting at all
+    // - Highlight the first row, which should be the person we're working with
+    // - Hide the tooltips
+    // - Update the Count field to correspond to how many Movies or TV Shows they worked on together
+
+    // Just for fun, let's try and populate the counts
+    for (let i = 0; i < topfigures.length; i++) {
+      var rows = table.searchRows("TID", "=", topfigures[i][0]);
+      if (rows.length == 1) {
+        rows[0].getCell('Count').setValue(topfigures[i][1]);
+      }
+    }
+
+    table.deselectRow();
+    table.selectRow(1);
+    window.Actor_Selected(null, table.getRow(1));
+    table.clearSort();
+    This.HideToolTips();
+
+  end;
+end;
+
 procedure TMainForm.linkRelativesClick(Sender: TObject);
 begin
   btnRelativesClick(Sender);
@@ -5813,6 +5922,8 @@ begin
           pas.Main.MainForm.RoleTabulator.clearData();
         }
 
+        pas.Main.MainForm.HideToolTips();
+
       });
   } end; {$ENDIF}
 
@@ -5825,7 +5936,6 @@ begin
   Mainform.tmrImageCheck.Enabled := True;
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
-  HideTooltips;
   MainForm.PreventCompilerHint(Data);
   MainForm.PreventCompilerHint(Blob);
 
@@ -6228,7 +6338,7 @@ begin
     end;
 
     TourVersion := TWebLocalStorage.GetValue('Actorious Tour Version');
-// LaunchTour('New');
+    TourActive := False;
     if TourVersion = '' then
     begin
       LaunchTour('New');
