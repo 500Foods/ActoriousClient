@@ -896,6 +896,11 @@ begin
   end;
 
 
+  // Global Sleep function :)
+  {$IFNDEF WIN32} asm {
+    window.sleep = async function(msecs) {return new Promise((resolve) => setTimeout(resolve, msecs)); }
+  } end; {$ENDIF}
+
   // Sort out Version Information
   {$IFNDEF WIN32} asm {
     this.Version = window.ProjectName;
@@ -4977,7 +4982,11 @@ begin
   // as if we were doing any other kind of lookup, as with the Friends and Family situation or when listing all the roles for the
   // currently selected Movie or TV Show.
 
-  asm
+  {$IFNDEF WIN32} asm {
+    linkFrequent.style.setProperty('background','darkgreen','important');
+
+    await sleep(10);
+
     const This = pas.Main.MainForm;
     const table = This.ActorTabulator;
     const tabledata = table.getData();
@@ -5020,12 +5029,14 @@ begin
     // Sort by frequency - 2nd column, descending sort, top 25 only
     let topfigures = frequent.sort((a, b) => b[1] - a[1] || a[2] - b[2]);
 
-    console.log(topfigures);
-
     // Compose the list to retrieve, placing the selected person first on the list
+    // The more obscure entries (not cached already, ie, not in top 5,000) will not
+    // be returned, but we don't know what those are from this vantage point.
+    // So a limit is set at 125, and we'll likely get back fewer than that, but
+    // ideally somewhere around 100 or so
     let lookuproles = [{"ID":This.CurrentPerson}];
     for (let i = 1; i < topfigures.length; i++) {
-      if ((i < 250) && (topfigures[i][0] !== This.CurrentPerson)) {
+      if ((i < 125) && (topfigures[i][0] !== This.CurrentPerson)) {
         lookuproles.push({"ID":topfigures[i][0]});
       }
     }
@@ -5053,7 +5064,9 @@ begin
     table.clearSort();
     This.HideToolTips();
 
-  end;
+    linkFrequent.style.removeProperty('background');
+
+  } end; {$ENDIF}
 end;
 
 procedure TMainForm.linkRelativesClick(Sender: TObject);
@@ -5764,6 +5777,11 @@ var
   Endpoint: String;               // The service endpoint for this request
 begin
 
+  {$IFNDEF WIN32} asm {
+    linkRelatives.style.setProperty('background','darkgreen','important');
+    await sleep(10);
+  } end; {$ENDIF}
+
   MainForm.NowSearching := True;
   MainForm.CurrentPerson := -1;
   MainForm.CurrentRole := -1;
@@ -5923,7 +5941,7 @@ begin
         }
 
         pas.Main.MainForm.HideToolTips();
-
+        linkRelatives.style.removeProperty('background');
       });
   } end; {$ENDIF}
 
