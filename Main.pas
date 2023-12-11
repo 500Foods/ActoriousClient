@@ -2774,7 +2774,7 @@ begin
                       'src="'+image+'" '+
                       'data-src="'+image+'" '+
                       'width=45 '+
-                      'height=auto '+
+                      'height=68 '+
                       'alt="Poster for '+cell.getRow().getCell(title).getValue()+'" '+
                       'onerror="this.onerror=null;this.src=\'img/hourglass.png\';"'+
                     '>'+
@@ -2801,7 +2801,7 @@ begin
                       'src="'+photo+'" '+
                       'data-src="'+photo+'" '+
                       'width=45 '+
-                      'height=auto '+
+                      'height=68 '+
                       'acharacter="'+character+'" '+
                       'alt="Photo of '+name+'" '+
                       'onerror="this.onerror=null;this.src=\'img/hourglass.png\';"'+
@@ -2918,7 +2918,7 @@ begin
                     'data-src='+image+' '+
                     'alt="Poster"'+
                     'width=45 '+
-                    'height=auto '+
+                    'height=68 '+
                     'onerror="this.onerror=null;this.src=\'img/hourglass.png\';"'+
                   '>'+
                 '</div>';
