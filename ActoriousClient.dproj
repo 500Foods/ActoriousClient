@@ -151,7 +151,7 @@
         <TMSWebSingleJS>2</TMSWebSingleJS>
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
-        <TMSVersion>1.0.3651</TMSVersion>
+        <TMSVersion>1.0.3654</TMSVersion>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">

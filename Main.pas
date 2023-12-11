@@ -2029,7 +2029,7 @@ begin
         window.SetLNK(row,'WIK','',                                   linkWikipedia,                           'img/wikipedia_icon.png',      'Wikipedia Link');
         window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,                            'img/facebook_icon.png',       'Facebook Link');
         window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,                           'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://www.x.com/',                 linkTwitter,                             'img/twitter_icon.png',        '𝕏 Link');
+        window.SetLNK(row,'TWT','https://x.com/',                     linkTwitter,                             'img/twitter_icon.png',        '𝕏 Link');
         window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,                              'img/models_icon.png',         'Models.com Link');
 
         // Populate the Pop button
@@ -2276,7 +2276,7 @@ begin
         window.SetLNK(row,'WIK','',                                   linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
         window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
         window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://www.x.com/',                 linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
+        window.SetLNK(row,'TWT','https://x.com/',                     linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
         window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,         'img/models_icon.png',         'Models.com Link');
 
         // This fills in linkLINK
@@ -2742,7 +2742,7 @@ begin
       var links = '';
       links += SetTableLNK(cell,'TID','https://www.themoviedb.org/person/', 'img/tmdb_icon.svg',           'TMDb Link');
       links += SetTableLNK(cell,'FID','https://www.facebook.com/',          'img/facebook_icon.png',       'Facebook Link');
-      links += SetTableLNK(cell,'TWT','https://www.X.com/',                 'img/twitter_icon.png',        '𝕏 Link');
+      links += SetTableLNK(cell,'TWT','https://x.com/',                     'img/twitter_icon.png',        '𝕏 Link');
       links += SetTableLNK(cell,'INS','https://www.instagram.com/',         'img/instagram_icon.png',      'Instagram Link');
       links += SetTableLNK(cell,'WID','',                                   'img/wikidata_icon.png',       'WikiData Link');
       links += SetTableLNK(cell,'WIK','',                                   'img/wikipedia_icon.png',      'Wikipedia Link');
