@@ -71,12 +71,12 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <SanitizedProjectName>ActoriousClient</SanitizedProjectName>
-        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
-        <TMSWebPWAResIconLowFile>IconResLow.png</TMSWebPWAResIconLowFile>
-        <TMSWebPWAServiceWorkerFile>ServiceWorker.js</TMSWebPWAServiceWorkerFile>
-        <TMSWebPWAResIconMidFile>IconResMid.png</TMSWebPWAResIconMidFile>
         <TMSPWAManifestFile>Manifest.json</TMSPWAManifestFile>
         <TMSWebHTMLFile>ActoriousClient.html</TMSWebHTMLFile>
+        <TMSWebPWAServiceWorkerFile>ServiceWorker.js</TMSWebPWAServiceWorkerFile>
+        <TMSWebPWAResIconLowFile>IconResLow.png</TMSWebPWAResIconLowFile>
+        <TMSWebPWAResIconMidFile>IconResMid.png</TMSWebPWAResIconMidFile>
+        <TMSWebPWAResIconHighFile>IconResHigh.png</TMSWebPWAResIconHighFile>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;fmxase;DBXDb2Driver;DBXInterBaseDriver;VCLTMSFNCChartPkgDXE12;TMSLogging;vclactnband;FmxTeeUI926;vclFireDAC;emsclientfiredac;tethering;svnui;DataSnapFireDAC;FireDACADSDriver;FMXfrxDB26;DBXMSSQLDriver;TMSQueryStudio;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXfrxIBX26;vcltouch;FMXTMSFNCUIPackPkgDXE12;JSExtend;vcldb;bindcompfmx;svn;TMSWEBCorePkgLibDXE12;DBXOracleDriver;rbUSERDesign2126;inetdb;IcsFmxD103Run;CEF4Delphi;IcsVclD103Run;rbTC2126;FMXTMSFNCWXPackPkgDXE12;TMSScripter_Memo;emsedge;fmx;FireDACIBDriver;fmxdae;FMXfrx26;vclib;rbBDE2126;FireDACDBXDriver;dbexpress;IndyCore;DCEF_XE5;xdata;vclx;dsnap;emsclient;DataSnapCommon;rbRCL2126;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;FMXfs26;VCLRESTComponents;soapserver;TMSScripter_Legacy;remotedb;vclie;TMSScripter_VCL;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;CData.QuickBooksOnline.D26;FMXTeeDB926;FireDACCommonODBC;FireDACCommonDriver;VCLTMSFNCCorePkgDXE12;DataSnapClient;inet;rbTCUI2126;IndyIPCommon;bindcompdbx;vcl;IndyIPServer;DBXSybaseASEDriver;sparkle;tmsbcl;IndySystem;FireDACDb2Driver;FMXTee926;dsnapcon;FMXfrxTee26;FMXTMSFNCCorePkgDXE12;TMSWorkflow;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FMXfsIBX26;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;advmemopkgdXE12;DBXOdbcDriver;FireDACTDataDriver;TMSDiagram;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;emsserverresource;DbxClientDriver;ibxbindings;DBXSybaseASADriver;TMSScripter_IDE;CustomIPTransport;vcldsnap;rbIDE2126;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;EurekaLogCore;rbCloudSC2126;bindcompvcl;IcsCommonD103Run;TMSCryptoPkgDXE12;rbUSER2126;dclTMSQueryStudio;TMSWEBCorePkgDXE12;FMXfsDB26;FMXfrxe26;dbxcds;VclSmp;adortl;FireDACODBCDriver;VCLTMSFNCWXPackPkgDXE12;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;FMXfrxDBX26;FMXTMSFNCChartPkgDXE12;TMSCryptoPkgDEDXE12;FMXfsTee26;DataSnapServerMidas;$(DCC_UsePackage)</DCC_UsePackage>
@@ -149,9 +149,9 @@
         <TMSWebPWAResIconMidFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-256x256.png</TMSWebPWAResIconMidFile>
         <TMSWebDebugInfo>2</TMSWebDebugInfo>
         <TMSWebSingleJS>2</TMSWebSingleJS>
-        <TMSVersion>1.0.3646</TMSVersion>
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
+        <TMSVersion>1.0.3651</TMSVersion>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
@@ -565,7 +565,7 @@
             <ResourceId>PngImage_97</ResourceId>
         </RcItem>
         <None Include="robots.txt"/>
-        <None Include="serviceworker.js"/>
+        <None Include="ServiceWorker.js"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -1000,6 +1000,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="ServiceWorker.js" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="splashscreens\iphone6_splash.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1024,6 +1030,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="splashscreens\11__iPad_Pro__10.5__iPad_Pro_portrait.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1043,12 +1055,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1337,12 +1343,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="splashscreens\9.7__iPad_Pro__7.9__iPad_mini__9.7__iPad_Air__9.7__iPad_portrait.png" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="serviceworker.js" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
