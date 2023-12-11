@@ -3541,6 +3541,11 @@ begin
             }
         },
 
+        { title: "Genres", field: "GEN", width: 145, visible: false,
+            headerMenu: headerMenu,
+            formatter: "textarea"
+        },
+
         { title: "Release", field: "REL", width: 145,
             headerMenu: headerMenu,
             formatter:  formatter_role_REL,
@@ -5004,7 +5009,7 @@ begin
       // Process list of figures
       // try to exclude TV talk shows as best we can ;-)
 
-      if (!((roles[i].TYP == 'tv') && (roles[i].CHR.indexOf('Self') >= 0))) {
+      if (!((roles[i].TYP == 'tv') && ((roles[i].CHR.toUpperCase().indexOf('SELF') >= 0) || (roles[i].GEN.toUpperCase().indexOf('TALK') >= 0)))) {
 
         figures = roles[i].ACA;
 

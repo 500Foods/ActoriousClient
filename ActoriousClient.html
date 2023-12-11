@@ -549,7 +549,7 @@
       var origOpen = XMLHttpRequest.prototype.open;
       XMLHttpRequest.prototype.open = function() {
         this.addEventListener('progress', function(e) {
-          if (e.srcElement.responseURL.indexOf('ActorInfoService') > 0)  {
+          if (e.srcElement.responseURL.indexOf('ActorInfoService') >= 0)  {
             if (e.srcElement.getResponseHeader('x-uncompressed-content-length') !== null) {
               var progress = document.getElementById('divProgress');
               var total = e.total ||  e.srcElement.getResponseHeader('x-uncompressed-content-length');
@@ -558,7 +558,7 @@
               progress.style.top = ((1-percent) * 277) +'px';
         }}});
         this.addEventListener('loadend', function(e) {
-          if (e.srcElement.responseURL.indexOf('ActorInfoService') > 0) {
+          if (e.srcElement.responseURL.indexOf('ActorInfoService') >= 0) {
             var progress = document.getElementById('divProgress');
             progress.style.height = 0 + 'px';
         }});

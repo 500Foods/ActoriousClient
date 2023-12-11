@@ -137,22 +137,22 @@
         <Icon_MainIcon>ActoriousClient_Icon.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>iconx\favicon-48x48.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>iconx\apple-touch-icon-152x152.png</UWP_DelphiLogo150>
-        <TMSWebPrivExts>$(TMSWebPrivExts);*.svg, *.ico</TMSWebPrivExts>
-        <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
+        <TMSWebPrivExts>$(TMSWebPrivExts);*.ico;*.svg</TMSWebPrivExts>
+        <TMSApplicationDescription>Connections</TMSApplicationDescription>
         <TMSWebPWAStartURL>/</TMSWebPWAStartURL>
+        <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
+        <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
         <TMSVersionAuto>2</TMSVersionAuto>
+        <TMSWebObfuscation>1</TMSWebObfuscation>
         <TMSWebPWAResIconLowFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-64x64.png</TMSWebPWAResIconLowFile>
         <TMSWebPWAResIconMidFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\favicon-256x256.png</TMSWebPWAResIconMidFile>
-        <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
-        <TMSWebObfuscation>1</TMSWebObfuscation>
-        <TMSWebSingleJS>2</TMSWebSingleJS>
         <TMSWebDebugInfo>2</TMSWebDebugInfo>
-        <TMSApplicationDescription>Connections</TMSApplicationDescription>
-        <TMSPWAApplicationName>Actorious</TMSPWAApplicationName>
-        <TMSWebPWAResIconHighFile>C:\Users\Andrew Simard\Documents\Embarcadero\Studio\Projects\ActoriousClient\iconx\android-chrome-maskable-512x512.png</TMSWebPWAResIconHighFile>
-        <TMSWebEcmaScript>2</TMSWebEcmaScript>
+        <TMSWebSingleJS>2</TMSWebSingleJS>
+        <TMSVersion>1.0.3646</TMSVersion>
+        <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
-        <TMSVersion>1.0.3632</TMSVersion>
+        <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -169,7 +169,6 @@
         </DCCReference>
         <None Include="ActoriousClient.html"/>
         <None Include="Manifest.json"/>
-        <None Include="ServiceWorker.js"/>
         <None Include="ActoriousClient.css"/>
         <RcItem Include="img\actorious.png">
             <ResourceType>RCDATA</ResourceType>
@@ -566,6 +565,7 @@
             <ResourceId>PngImage_97</ResourceId>
         </RcItem>
         <None Include="robots.txt"/>
+        <None Include="serviceworker.js"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -988,12 +988,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ServiceWorker.js" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="iconx\favicon-16x16.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1042,12 +1036,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="iconx\apple-touch-icon-120x120.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1055,6 +1043,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1343,6 +1337,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="splashscreens\9.7__iPad_Pro__7.9__iPad_mini__9.7__iPad_Air__9.7__iPad_portrait.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="serviceworker.js" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
