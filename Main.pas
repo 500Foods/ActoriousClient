@@ -482,7 +482,7 @@ begin
   MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'ReqError');
 
   if MainForm.QuickSearch
-  then Endpoint := 'IActorInfoService.SearchPeople'
+  then Endpoint := 'IActorInfoService.SearchLocal'
   else EndPoint := 'IActorInfoService.SearchPeopleExtended';
 
   // Make the Request
