@@ -563,6 +563,10 @@ begin
     pas.Main.MainForm.ActorTabulator.setData(actorData)
       .then(function(){
 
+        table1.clearSort();
+        table1.deslectRow();
+        table1.setSort("Count","desc");
+
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
         if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
@@ -580,6 +584,8 @@ begin
         else {
           table2.clearData();
         }
+
+       This.HideToolTips();
 
       });
   } end; {$ENDIF}
@@ -3329,7 +3335,7 @@ begin
             headerMenu: headerMenu
         },
 
-        { title: "Relevance", field: "Count", visible: false, width: 80,
+        { title: "Relevance", field: "Count", visible: false, width: 105,
             headerMenu: headerMenu
         },
 
@@ -5067,6 +5073,7 @@ begin
     table.selectRow(1);
     window.Actor_Selected(null, table.getRow(1));
     table.clearSort();
+    table.setSort("Count","desc");
     This.HideToolTips();
 
     linkFrequent.style.removeProperty('background');
