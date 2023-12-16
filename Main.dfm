@@ -124,7 +124,7 @@ object MainForm: TMainForm
         ElementID = 'divInfoPages'
         ChildOrder = 4
         ElementFont = efCSS
-        TabIndex = 5
+        TabIndex = 0
         ShowTabs = False
         TabOrder = 0
         object pageBio: TWebTabSheet
@@ -431,7 +431,7 @@ object MainForm: TMainForm
                   'ings3" checked>'
                 
                   '  <label class="form-check-label" for="siwtchSettings2" id="swit' +
-                  'chSettingsLabel3">Limit Quick Search to 20 Results</label>'
+                  'chSettingsLabel3">Limit Quick Search to 50 Results</label>'
                 '</div>')
               Role = ''
             end

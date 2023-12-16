@@ -780,7 +780,7 @@ begin
   begin
     QuickSearch := True;
     {$IFNDEF WIN32} asm {
-      switchSettingsLabel3.innerHTML = 'Limit Quick search to 20 Results';
+      switchSettingsLabel3.innerHTML = 'Limit Quick search to 50 Results';
       btnSearch.innerHTML = window.icon_magnifying_glass;
     } end; {$ENDIF}
   end
@@ -3329,7 +3329,7 @@ begin
             headerMenu: headerMenu
         },
 
-        { title: "Count", field: "Count", visible: false, width: 80,
+        { title: "Relevance", field: "Count", visible: false, width: 80,
             headerMenu: headerMenu
         },
 
