@@ -564,7 +564,7 @@ begin
       .then(function(){
 
         table1.clearSort();
-        table1.deslectRow();
+        table1.deselectRow();
         table1.setSort("Count","desc");
 
         // update the first column header to show a count
@@ -574,11 +574,8 @@ begin
 
         if (rowCount > 0) {
 
-          // highlight the first row, based on whatever sorting is currently in place
-          table1.selectRow(table1.getRowFromPosition(1, true));
-
-          // Do what we would do if we had directly clicked on that row
-          window.Actor_Selected(null, table1.getRowFromPosition(1,true));
+          table1.selectRow(1);
+          window.Actor_Selected(null, table1.getRow(1));
 
         }
         else {
