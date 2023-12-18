@@ -169,6 +169,7 @@ type
     WebHTMLDiv1: TWebHTMLDiv;
     WebHTMLDiv2: TWebHTMLDiv;
     divSettingsSwitch1: TWebHTMLDiv;
+    tmrTooltips: TWebTimer;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -228,6 +229,7 @@ type
     procedure linkRelativesClick(Sender: TObject);
     procedure HideToolTips;
     [async] procedure linkFrequentClick(Sender: TObject);
+    procedure tmrTooltipsTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -2784,7 +2786,8 @@ begin
                   '</div>';
       }
       else {
-        return '<img alt="Missing Poster Placeholder" atitle="" src="img/dark_space.png" width=45 height=68>';
+//        return '<img alt="Missing Poster Placeholder" atitle="" src="img/dark_space.png" width=45 height=68>';
+        return '';
       }
     }
     window.addPoster = addPoster;
@@ -3324,24 +3327,35 @@ begin
             formatter:  formatter_actor_SOC
         },
 
-        { title: "<i class='fa-solid fa-image-polaroid-user'></i>", field: "IMC", sorter: "number", width: 75, minWidth: 75, maxWidth: 75, hozAlign: "center", visible: false,
+        { title: window.icon_image_polaroid_user, field: "IMC", width: 95, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
             headerMenu: headerMenu
         },
 
-        { title: "Rank", field: "ID", visible: false,
-            headerMenu: headerMenu
+        { title: "Rank", field: "ID", width: 95, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
+            headerMenu: headerMenu,
+            formatter:  "money",
+            formatterParams:{
+              decimal: ".",
+              thousand:",",
+              symbol:"",
+              symbolAfter:"",
+              precision: 0
+            }
         },
 
-        { title: "Relevance", field: "Count", visible: false, width: 105,
-            headerMenu: headerMenu
+        { title: "Relevance", field: "Count", width: 115, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
+            headerMenu: headerMenu,
+            formatter:  "money",
+            formatterParams:{
+              decimal: ".",
+              thousand:",",
+              symbol:"",
+              symbolAfter:"",
+              precision: 0
+            }
         },
 
-        { title: "Points", field: "PTS", visible: false, sorter:"number",
-            headerMenu: headerMenu
-        },
-
-        // Actor Table: Original Popularity Value - now hidden
-        { title: "Pop", field: "POP",width:95, sorter:"number", hozAlign: "right",vertAlign:"middle",  visible: false, headerFilter: true,
+        { title: "Points", field: "PTS", width: 95, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
             headerMenu: headerMenu,
             formatter:  "money",
             formatterParams:{
@@ -3353,7 +3367,21 @@ begin
             }
         },
 
-        { title: window.icon_star_sharp, field:"PopInt", width:75,
+        // Actor Table: TMDb Popularity Value
+        { title: "Pop", field: "POP", width: 85, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
+            headerMenu: headerMenu,
+            formatter:  "money",
+            formatterParams:{
+              decimal: ".",
+              thousand:",",
+              symbol:"",
+              symbolAfter:"",
+              precision: 3
+            }
+        },
+
+        // Stars: TMDb Popularity value
+        { title: window.icon_star_sharp, field: "PopInt", width: 75, hozAlign:"left", vertAlign:"top",
             headerMenu: headerMenu,
             formatter:  "star", formatterParams: {stars: 5},
             mutator:    PopularityInt
@@ -4018,7 +4046,7 @@ begin
 
     // We might have extra steps at the beginning, so here we're just explicitly stating a number
     // which we can then use in the progress indicator
-    var TourSteps = 16;
+    var TourSteps = 18;
     var TourIcon = '<img style="position:absolute; top:5px; left:5px; height:38px; width:38px;" src="img/actorious-logo-100x100.svg" alt="Actorious Icon">';
 
     // This is the main tour object
@@ -4056,7 +4084,7 @@ begin
       tour.addStep({
         id: 'step-welcome-0',
         title: TourIcon+'<div style="padding-left:35px;">Welcome to Actorious!</div>',
-        text: 'It looks like this might be your first visit. Would you be interested in a quick tour?',
+        text: 'It looks like this might be your first visit. Would you be interested in a website tour?',
         buttons: [
           { text: 'No, thanks', action: () => { tour.show('step-tour-0', true); }},
           { text: 'Yes, please', action: () => { tour.show('step-tour-1', true); }}
@@ -4077,7 +4105,7 @@ begin
       tour.addStep({
         id: 'step-welcome-0',
         title: TourIcon+'<div style="padding-left:35px;">Actorious Updated</div>',
-        text: 'It looks like there has been an update since your last visit. Would you be interested in a quick tour?',
+        text: 'It looks like there has been an update since your last visit. Would you be interested in a website tour?',
         buttons: [
           { text: 'No, thanks', action: tour.complete },
           { text: 'Yes, please', action: () => { tour.show('step-tour-1', true); }}
@@ -4099,7 +4127,7 @@ begin
     tour.addStep({
       id: 'step-tour-2',
       title: 'Search for People, Movies, or TV Shows',
-      text: 'Enter search terms here. The search results will appear below. You can search for People (by actor name or role), Movies (by title), or TV Shows (by title).',
+      text: 'Enter search terms here. The search results will appear below. You can search for People (by name or role), Movies (by title), or TV Shows (by title). <br><br>Eg: "Leonard Nimoy" or "Spock"',
       attachTo: { element: '#divSearchNav', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4115,7 +4143,7 @@ begin
     tour.addStep({
       id: 'step-tour-4',
       title: 'Current Selection',
-      text: 'The currently selected Person (photo), Movie (poster), or TV Show (poster) appears here. Initially, this will show the most popular Person with a birthday today.',
+      text: 'The currently selected Person (photo), Movie (poster), or TV Show (poster) appears here. Initially, this will show the most popular Person with a birthday today, as rated by The Movie Database.',
       attachTo: { element: '#divPhoto', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4131,7 +4159,7 @@ begin
     tour.addStep({
       id: 'step-tour-6',
       title: 'Awards and Lists',
-      text: 'These buttons provide access Awards and other lists, and changes to reflect the selected Person, Movie, or TV Show, show.',
+      text: 'These buttons provide access Awards and other lists. These will change to reflect the selected Person, Movie, or TV Show.',
       attachTo: { element: '#divLinkSet3', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
@@ -4139,13 +4167,29 @@ begin
     tour.addStep({
       id: 'step-tour-7',
       title: 'Sytstem Buttons',
-      text: 'These buttons provide access to general Actorious features link Permalinks, Tours, E-Mail Subscriptions, and more.',
+      text: 'These buttons provide access to general Actorious features that are available to everyone. Some features are specific to the currently selected person.',
       attachTo: { element: '#divLinkSet2', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
       id: 'step-tour-8',
+      title: 'Friends and Family',
+      text: 'After selecting a person, clicking this button will do a search for other people that are connected to this person. This may include direct family memmbers (parents, children and so on) or people they are currently involved with or have been involved with previously.<br><br>For example, after selecting "Josh Brolin", clicking this button will find all of his friends and relatives, including "Barbra Streisand" - his stepmother.',
+      attachTo: { element: '#linkRelatives', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-9',
+      title: 'Frequent Figures',
+      text: 'After selecting a person, clicking this button will do a search for all the people that have worked with the selected person, and will return a list sorted by the most frequently featured people.<br><br> For example, after selecting "Simon Pegg", clicking this button will find all the people he has worked with, ranked by those he has worked with the most. Naturally, "Nick Frost" appears at the top of the list.',
+      attachTo: { element: '#linkFrequent', on: 'right' },
+      buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
+    });
+
+    tour.addStep({
+      id: 'step-tour-10',
       title: 'Resource Links',
       text: 'Links to other resources about the selected Person, Movie, or TV Show from TMDb, Wikidata, Wikipedia, Google, IMDB, Rotten Tomatoes, and more.',
       attachTo: { element: '#divLinkSet4', on: 'right' },
@@ -4153,7 +4197,7 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-9',
+      id: 'step-tour-11',
       title: 'Social Media Links',
       text: 'Links to the social medial accounts of the selected Person, Movie, or TV Show.',
       attachTo: { element: '#divLinkSet5', on: 'right' },
@@ -4161,23 +4205,23 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-10',
+      id: 'step-tour-12',
       title: 'Additional Information',
-      text: 'These buttons lead to other content, depending on the Person, Movie, or TVS Show selected. This may include biographies, summaries, photos, video clips, and so on. The available pages change when a Person is selected vs. when a Movie or TV Show is selected.',
+      text: 'These buttons lead to other content, depending on the Person, Movie, or TV Show selected. This may include biographies, summaries, photos, video clips, and so on. The available pages change when a Person is selected vs. when a Movie or TV Show is selected.',
       attachTo: { element: '#divButtonHolder', on: 'bottom' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
-      id: 'step-tour-11',
+      id: 'step-tour-13',
       title: 'People - Table',
-      text: 'This is a list of People, selected using either the criteria from the top-left section, the bottom-right table, or the Connections found in the top-right sections.',
+      text: 'This is a list of People, selected using either the criteria from the top-left section, by clicking on a person or link in the bottom-right table, or by using one of the other Actorious search features, like "Friends and Faimily" or "Frequent Figures".',
       attachTo: { element: '#divActorTabulatorHolder', on: 'top' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
 
     tour.addStep({
-      id: 'step-tour-12',
+      id: 'step-tour-14',
       title: 'People - Columns',
       text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header. Many other columns are available.',
       attachTo: { element: '#divActorTabulator .tabulator-header', on: 'bottom' },
@@ -4185,7 +4229,7 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-13',
+      id: 'step-tour-15',
       title: 'Movies and TV Shows - Table',
       text: 'When a Person is selected from the People Table, all their Movies and TV Shows are listed in this table. This may also be populated based on criteria from the top-left section.',
       attachTo: { element: '#divRoleTabulatorHolder', on: 'top' },
@@ -4193,7 +4237,7 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-14',
+      id: 'step-tour-16',
       title: 'Movies and TV Shows - Columns',
       text: 'The columns for this table can be sorted, filtered, or even changed using the buttons appearing in each column header. Many other columns are available.',
       attachTo: { element: '#divRoleTabulator .tabulator-header', on: 'bottom' },
@@ -4201,7 +4245,7 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-15',
+      id: 'step-tour-17',
       title: 'Select All People',
       text: 'Clicking a Movie or TV icon in this column will update the table on the left with all of the People that appeared in the selected Movie or TV Show.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .MovieTVColumn', on: 'bottom' },
@@ -4209,7 +4253,7 @@ begin
     });
 
     tour.addStep({
-      id: 'step-tour-16',
+      id: 'step-tour-18',
       title: 'Select One Person',
       text: 'Clicking on a photo of a Person in this column will select that Person and then retrieve all the Movies and TV Shows that they have appeared in.',
       attachTo: { element: '#divRoleTabulator .tabulator-header .Top10Column', on: 'bottom' },
@@ -6377,6 +6421,11 @@ begin
     TWebLocalStorage.SetValue('Actorious Tour Version', Version);
 
   end;
+end;
+
+procedure TMainForm.tmrTooltipsTimer(Sender: TObject);
+begin
+  HideToolTips;
 end;
 
 procedure TMainForm.StopLinkerRemoval(P: Pointer);                          begin end;

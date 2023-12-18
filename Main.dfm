@@ -2305,4 +2305,10 @@ object MainForm: TMainForm
     Left = 523
     Top = 310
   end
+  object tmrTooltips: TWebTimer
+    Interval = 60000
+    OnTimer = tmrTooltipsTimer
+    Left = 280
+    Top = 256
+  end
 end
