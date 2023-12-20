@@ -1917,7 +1917,7 @@ begin
     // to cobble together from both TMDb and WikiData.  Got to do some basic checking as well
     // as sometimes there are links without data.  Something similar is done with the Links
     // field in ActorTabulator.
-    function SetLNK(row,key,prefix,button,icon,alt){
+    function SetLNK(row,key,prefix,suffix,button,icon,alt){
       if (row.getCell(key) !== false) {
         var LNK = row.getCell(key).getValue();
         if ((LNK == null) || (LNK == "")) {
@@ -1926,7 +1926,7 @@ begin
         }
         else {
           button.style.opacity = 1.0;
-          button.innerHTML = '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+prefix+LNK+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
+          button.innerHTML = '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+prefix+LNK+suffix+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
         }
       }
       else {
@@ -2025,19 +2025,18 @@ begin
 
 
         // Populate some buttons
-        window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', linkTMDb,     'img/tmdb_icon.svg',           'TMDb Link');
-        window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', linkJustWatch,'img/justwatch_icon.png',      'TMDb/JustWatch Link');
-        window.SetLNK(row,'WID','',                                   linkWikiData,                            'img/wikidata_icon.png',       'WikiData Link');
-        window.SetLNK(row,'IID','https://www.imdb.com/name/',         linkIMDb,                                'img/imdb_icon.png',           'IMDb Link');
-        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    linkRottenTomatoes,                      'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
-        window.SetLNK(row,'MET','https://www.metacritic.com/',        linkMetaCritic,                          'img/metacritic_icon.png',     'MetaCritic Link');
-        window.SetLNK(row,'WWW','',                                   linkWeb,                                 'img/web_icon.png',            'Website Link');
-
-        window.SetLNK(row,'WIK','',                                   linkWikipedia,                           'img/wikipedia_icon.png',      'Wikipedia Link');
-        window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,                            'img/facebook_icon.png',       'Facebook Link');
-        window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,                           'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://x.com/',                     linkTwitter,                             'img/twitter_icon.png',        '𝕏 Link');
-        window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,                              'img/models_icon.png',         'Models.com Link');
+        window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', '',       linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', '/watch', linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
+        window.SetLNK(row,'WID','',                                                              '',       linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
+        window.SetLNK(row,'IID','https://www.imdb.com/name/',                                    '',       linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
+        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',                               '',       linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
+        window.SetLNK(row,'MET','https://www.metacritic.com/',                                   '',       linkMetaCritic,     'img/metacritic_icon.png',     'MetaCritic Link');
+        window.SetLNK(row,'WWW','',                                                              '',       linkWeb,            'img/web_icon.png',            'Website Link');
+        window.SetLNK(row,'WIK','',                                                              '',       linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
+        window.SetLNK(row,'FID','https://www.facebook.com/',                                     '',       linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
+        window.SetLNK(row,'INS','https://www.instagram.com/',                                    '',       linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
+        window.SetLNK(row,'TWT','https://x.com/',                                                '',       linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
+        window.SetLNK(row,'MID','https://www.models.com/people/',                                '',       linkModels,         'img/models_icon.png',         'Models.com Link');
 
         // Populate the Pop button
         // This fills in the Pop figure, in amongst the other buttons above
@@ -2276,19 +2275,18 @@ begin
 
 
         // Set Links
-        window.SetLNK(row,'TID','https://www.themoviedb.org/person/', linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
-        window.SetLNK(row,'TID','',                                   linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
-        window.SetLNK(row,'WID','',                                   linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
-        window.SetLNK(row,'IID','https://www.imdb.com/name/',         linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
-        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
-        window.SetLNK(row,'MET','https://www.metacritic.com/',        linkMetaCritic,     'img/metacritic_icon.png',     'MetaCritic Link');
-        window.SetLNK(row,'WWW','',                                   linkWeb,            'img/web_icon.png',            'Website Link');
-
-        window.SetLNK(row,'WIK','',                                   linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
-        window.SetLNK(row,'FID','https://www.facebook.com/',          linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
-        window.SetLNK(row,'INS','https://www.instagram.com/',         linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://x.com/',                     linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
-        window.SetLNK(row,'MID','https://www.models.com/people/',     linkModels,         'img/models_icon.png',         'Models.com Link');
+        window.SetLNK(row,'TID','https://www.themoviedb.org/person/', '', linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'TID','',                                   '', linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
+        window.SetLNK(row,'WID','',                                   '', linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
+        window.SetLNK(row,'IID','https://www.imdb.com/name/',         '', linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
+        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    '', linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
+        window.SetLNK(row,'MET','https://www.metacritic.com/',        '', linkMetaCritic,     'img/metacritic_icon.png',     'MetaCritic Link');
+        window.SetLNK(row,'WWW','',                                   '', linkWeb,            'img/web_icon.png',            'Website Link');
+        window.SetLNK(row,'WIK','',                                   '', linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
+        window.SetLNK(row,'FID','https://www.facebook.com/',          '', linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
+        window.SetLNK(row,'INS','https://www.instagram.com/',         '', linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
+        window.SetLNK(row,'TWT','https://x.com/',                     '', linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
+        window.SetLNK(row,'MID','https://www.models.com/people/',     '', linkModels,         'img/models_icon.png',         'Models.com Link');
 
         // This fills in linkLINK
         linkLink.style.opacity = 1.0;
