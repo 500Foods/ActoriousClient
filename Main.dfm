@@ -1345,7 +1345,7 @@ object MainForm: TMainForm
         ElementPosition = epRelative
         ElementFont = efCSS
         Role = ''
-        object linkList3: TWebHTMLDiv
+        object linkFrequent: TWebHTMLDiv
           Left = 0
           Top = 70
           Width = 32
@@ -1353,24 +1353,7 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-3 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
-          ElementID = 'linkList3'
-          ChildOrder = 2
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          Role = ''
-        end
-        object linkFrequent: TWebHTMLDiv
-          Left = 0
-          Top = 35
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkFrequent'
           ChildOrder = 1
           ElementPosition = epRelative
@@ -1411,13 +1394,13 @@ object MainForm: TMainForm
         end
         object linkRelatives: TWebHTMLDiv
           Left = 0
-          Top = 0
+          Top = 35
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkRelatives'
           ChildOrder = 5
           ElementPosition = epRelative
@@ -1480,6 +1463,21 @@ object MainForm: TMainForm
             '</a>')
           Role = ''
         end
+        object linkScore: TWebHTMLDiv
+          Left = 1
+          Top = 0
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkScore'
+          ChildOrder = 2
+          ElementPosition = epRelative
+          ElementFont = efCSS
+          Role = ''
+        end
       end
       object divLinkSet4: TWebHTMLDiv
         Left = 108
@@ -1509,21 +1507,6 @@ object MainForm: TMainForm
             
               '<img style="padding:2px;" alt="WikiData Logo" src="img/wikidata_' +
               'icon.png" height=100% width=100%>')
-          Role = ''
-        end
-        object linkScore: TWebHTMLDiv
-          Left = 0
-          Top = 35
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkScore'
-          ChildOrder = 2
-          ElementPosition = epRelative
-          ElementFont = efCSS
           Role = ''
         end
         object linkTMDb: TWebHTMLDiv
@@ -1638,6 +1621,25 @@ object MainForm: TMainForm
             
               '<img style="padding:3px;width:100%;height:100%;" alt="Google Log' +
               'o" src="img/google_icon.png">')
+          Role = ''
+        end
+        object linkJustWatch: TWebHTMLDiv
+          Left = -1
+          Top = 35
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkJustWatch'
+          ChildOrder = 5
+          ElementPosition = epRelative
+          ElementFont = efCSS
+          HTML.Strings = (
+            
+              '<img style="padding:2px;" alt="JustWatch Logo" src="img/justwatc' +
+              'h_icon.png" height=100% width=100%>')
           Role = ''
         end
       end

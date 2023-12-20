@@ -126,7 +126,6 @@ type
     WebHTMLDiv13: TWebHTMLDiv;
     divLinkSet2: TWebHTMLDiv;
     linkList4: TWebHTMLDiv;
-    linkList3: TWebHTMLDiv;
     linkFrequent: TWebHTMLDiv;
     linkTour: TWebHTMLDiv;
     linkLink: TWebHTMLDiv;
@@ -135,7 +134,6 @@ type
     linkRating: TWebHTMLDiv;
     divLinkSet4: TWebHTMLDiv;
     linkWikiData: TWebHTMLDiv;
-    linkScore: TWebHTMLDiv;
     linkTMDb: TWebHTMLDiv;
     linkRottenTomatoes: TWebHTMLDiv;
     linkMetaCritic: TWebHTMLDiv;
@@ -170,6 +168,8 @@ type
     WebHTMLDiv2: TWebHTMLDiv;
     divSettingsSwitch1: TWebHTMLDiv;
     tmrTooltips: TWebTimer;
+    linkScore: TWebHTMLDiv;
+    linkJustWatch: TWebHTMLDiv;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -1040,8 +1040,16 @@ begin
   SetBootstrapTooltipDiv(linkLogin, 'Login to TMDb Account', 'left');
   SetBootstrapTooltipDiv(linkFavourite, 'Mark as Favorite', 'left');
 
-  SetBootstrapTooltipDiv(linkTMDb, 'The Movie Database', 'left');
   SetBootstrapTooltipDiv(linkScore, 'Actorious Points', 'left');
+  SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
+  SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
+  SetBootstrapTooltipDiv(linkRating, 'Rating', 'Right');
+  SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
+  SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
+  SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
+
+  SetBootstrapTooltipDiv(linkTMDb, 'The Movie Database', 'left');
+  SetBootstrapTooltipDiv(linkJustWatch, 'JustWatch', 'left');
   SetBootstrapTooltipDiv(linkWikiData, 'WikiData', 'left');
   SetBootstrapTooltipDiv(linkGoogleImageSearch, 'Google Image Search', 'left');
   SetBootstrapTooltipDiv(linkIMDb, 'IMDb', 'left');
@@ -1058,21 +1066,17 @@ begin
   SetBootstrapTooltipDiv(linkModels, 'Models.com', 'right');
   SetBootstrapTooltipDiv(linkShare, 'Share', 'right');
 
-
-  SetBootstrapTooltipDiv(linkRating, 'Rating', 'Right');
-//  SetBootstrapTooltipDiv(linkLink, 'Link to Content', 'right');
-  SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
-  SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
-  SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
-  SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
-  SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
-
   // Shade all the link buttons to start with
   linkLogin.ElementHandle.style.setProperty('opacity','0.25');
   linkFavourite.ElementHandle.style.setProperty('opacity','0.25');
 
-  linkTMDb.ElementHandle.style.setProperty('opacity','0.25');
   linkScore.ElementHandle.style.setProperty('opacity','0.25');
+  linkLink.ElementHandle.style.setProperty('opacity','0.25');
+  linkEMail.ElementHandle.style.setProperty('opacity','.25');
+  linkTour.ElementHandle.style.setProperty('opacity','1.0'); // Always available
+
+  linkTMDb.ElementHandle.style.setProperty('opacity','0.25');
+  linkJustWatch.ElementHandle.style.setProperty('opacity','0.25');
   linkWikiData.ElementHandle.style.setProperty('opacity','0.25');
   linkRating.ElementHandle.style.setProperty('opacity','0.25');
   linkIMDb.ElementHandle.style.setProperty('opacity','0.25');
@@ -1090,9 +1094,6 @@ begin
   linkShare.ElementHandle.style.setProperty('opacity','0.25');
 
   linkGoogleImageSearch.ElementHandle.style.setProperty('opacity','0.25');
-  linkLink.ElementHandle.style.setProperty('opacity','0.25');
-  linkEMail.ElementHandle.style.setProperty('opacity','.25');
-  linkTour.ElementHandle.style.setProperty('opacity','1.0'); // Always available
 
   // Setup the main UI
   {$IFNDEF WIN32} asm {
@@ -2025,6 +2026,7 @@ begin
 
         // Populate some buttons
         window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', linkTMDb,     'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', linkJustWatch,'img/justwatch_icon.png',      'TMDb/JustWatch Link');
         window.SetLNK(row,'WID','',                                   linkWikiData,                            'img/wikidata_icon.png',       'WikiData Link');
         window.SetLNK(row,'IID','https://www.imdb.com/name/',         linkIMDb,                                'img/imdb_icon.png',           'IMDb Link');
         window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    linkRottenTomatoes,                      'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
@@ -2042,7 +2044,10 @@ begin
         var pop = row.getCell('POP').getValue();
         var LNK = row.getCell('TID').getValue();
         linkScore.style.opacity = 1.0;
-        linkScore.innerHTML = '<div style="margin-top:1px; width:100%; height:100%; text-align:center; vertical-align:middle;"><a aria-label="Link Score on TMDb" style="text-decoration:none; font-size:12px; color:#01b4e4;" rel="noopener noreferrer" target="_blank" href=https://www.themoviedb.org/person/'+LNK+'><strong>'+pop.toFixed(0)+'</strong></a></div>';
+        linkScore.innerHTML = '<div style="margin-top:1px; width:100%; height:100%; text-align:center; vertical-align:middle;"><a aria-label="Link Score on TMDb" style="text-decoration:none; font-size:12px; color:white;" rel="noopener noreferrer" target="_blank" href=https://www.themoviedb.org/person/'+LNK+'><strong>'+pop.toFixed(0)+'</strong></a></div>';
+
+        // JustWatch is enabled for Movies/TV Shows but not for people
+        linkJustWatch.style.opacity = 1.0;
 
         // Populate the linkLINK button
         linkLink.style.opacity = 1.0;
@@ -2272,6 +2277,7 @@ begin
 
         // Set Links
         window.SetLNK(row,'TID','https://www.themoviedb.org/person/', linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'TID','',                                   linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
         window.SetLNK(row,'WID','',                                   linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
         window.SetLNK(row,'IID','https://www.imdb.com/name/',         linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
         window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
@@ -2289,6 +2295,9 @@ begin
         pas.Main.MainForm.SetBootstrapTooltipDiv(pas.Main.MainForm.linkLink, 'PermaLink to '+row.getCell('NAM').getValue(), 'right');
         linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" rel="noopener noreferrer" target="_blank" style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R=P'+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
 
+        // JustWatch is enabled for Movies/TV Shows but not for people
+        linkJustWatch.style.opacity = 0.25;
+
         // This fills in linkGoogleImageSearch
         linkGoogleImageSearch.style.opacity = 1.0;
         linkGoogleImageSearch.innerHTML = '<a aria-label="Google Image Search" rel="noopener noreferrer" target="_blank" style="text-decoration:none;" href="https://www.google.com/search?q='+row.getCell('NAM').getValue().replaceAll(' ','+')+'&tbm=isch"><img style="padding:3px; width:100%; height:100%;" alt="Google Images Logo" src="img/google_icon.png"></a></div>';
@@ -2297,8 +2306,8 @@ begin
         // This fills in the Actorious Points figure, in amongst the other buttons above
         var pts = row.getCell('PTS').getValue();
         if (pts !== undefined) {
-          if (pts < 100) { linkScore.innerHTML = '<div style="cursor:help; margin-top:6px; width:100%; height:100%; text-align:center; vertical-align:middle; font-size:12px;color:#01b4e4;">'+pts.toFixed(1)+'</strong></div>'; }
-          else           { linkScore.innerHTML = '<div style="cursor:help; margin-top:6px; width:100%; height:100%; text-align:center; vertical-align:middle; font-size:12px;color:#01b4e4;">'+pts.toFixed(0)+'</strong></div>'; }
+          if (pts < 100) { linkScore.innerHTML = '<div style="cursor:help; margin-top:6px; width:100%; height:100%; text-align:center; vertical-align:middle; font-size:12px;color:white;">'+pts.toFixed(1)+'</strong></div>'; }
+          else           { linkScore.innerHTML = '<div style="cursor:help; margin-top:6px; width:100%; height:100%; text-align:center; vertical-align:middle; font-size:12px;color:white;">'+pts.toFixed(0)+'</strong></div>'; }
           linkScore.style.opacity = 1.0;
           var ptb = row.getCell('PTB').getValue();
           if (ptb !== undefined) {
