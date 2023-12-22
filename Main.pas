@@ -5911,6 +5911,7 @@ begin
     Response := await(MainForm.Client.RawInvokeAsync(Endpoint, [
       window.atob('TGVlbG9vRGFsbGFzTXVsdGlQYXNz'),   // Secret
       MainForm.btnRelatives.Tag,
+      MainForm.btnRelatives.Hint,
       Progress                                       // Progress Reference
     ]));
     Blob := Response.Result;
@@ -6026,6 +6027,7 @@ var
 begin
   aName := Name;
   MainForm.btnRelatives.Tag := relative;
+  MainForm.btnRelatives.Hint := aName;
   if MainForm.btnRelatives.Tag > 0 then
   begin
     MainForm.btnRelatives.Enabled := True;
