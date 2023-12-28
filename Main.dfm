@@ -1189,8 +1189,8 @@ object MainForm: TMainForm
       ElementFont = efCSS
       Role = ''
       object divLinkSet1: TWebHTMLDiv
-        Left = 0
-        Top = 0
+        Left = -1
+        Top = -2
         Width = 32
         Height = 277
         ElementClassName = 'order-0 d-flex flex-column gap-1'
@@ -1209,12 +1209,12 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-4 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 1
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
-        object WebHTMLDiv5: TWebHTMLDiv
+        object linkFavourite: TWebHTMLDiv
           Left = 0
           Top = 70
           Width = 32
@@ -1222,23 +1222,7 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-3 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
-          ChildOrder = 2
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          Role = ''
-        end
-        object linkFavourite: TWebHTMLDiv
-          Left = 0
-          Top = 35
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkFavourite'
           ChildOrder = 3
           ElementPosition = epRelative
@@ -1274,25 +1258,25 @@ object MainForm: TMainForm
           Margins.Top = 0
           Margins.Right = 0
           ElementClassName = 
-            'order-7 opacity-25 bg-dark border  border-secondary rounded over' +
+            'order-8 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
           ElementID = 'linkLoading'
-          ChildOrder = 5
+          ChildOrder = 8
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object linkLogin: TWebHTMLDiv
-          Left = 3
-          Top = 0
+          Left = 0
+          Top = 35
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkLogin'
-          ChildOrder = 3
+          ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1312,7 +1296,7 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-7 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 5
+          ChildOrder = 7
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1328,9 +1312,28 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-6 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 5
+          ChildOrder = 6
           ElementPosition = epRelative
           ElementFont = efCSS
+          Role = ''
+        end
+        object linkTMDb: TWebHTMLDiv
+          Left = 0
+          Top = 8
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkTMDb'
+          ChildOrder = 1
+          ElementPosition = epRelative
+          ElementFont = efCSS
+          HTML.Strings = (
+            
+              '<img style="padding:2px;" alt="TMDb Logo" src="img/tmdb_icon.svg' +
+              '" height=100% width=100%>')
           Role = ''
         end
       end
@@ -1347,15 +1350,15 @@ object MainForm: TMainForm
         Role = ''
         object linkFrequent: TWebHTMLDiv
           Left = 0
-          Top = 70
+          Top = 106
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkFrequent'
-          ChildOrder = 1
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1371,7 +1374,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-6 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkTour'
-          ChildOrder = 4
+          ChildOrder = 6
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1387,22 +1390,22 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-7 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkLink'
-          ChildOrder = 6
+          ChildOrder = 7
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object linkRelatives: TWebHTMLDiv
-          Left = 0
-          Top = 35
+          Left = 1
+          Top = 71
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkRelatives'
-          ChildOrder = 5
+          ChildOrder = 3
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1418,22 +1421,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-8 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkEMail'
-          ChildOrder = 7
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          Role = ''
-        end
-        object linkRating: TWebHTMLDiv
-          Left = 0
-          Top = 105
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkRating'
-          ChildOrder = 5
+          ChildOrder = 8
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1473,6 +1461,21 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkScore'
+          ChildOrder = 1
+          ElementPosition = epRelative
+          ElementFont = efCSS
+          Role = ''
+        end
+        object linkHeight: TWebHTMLDiv
+          Left = 0
+          Top = 35
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkHeight'
           ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
@@ -1500,32 +1503,13 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkWikiData'
-          ChildOrder = 1
+          ChildOrder = 3
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
             
               '<img style="padding:2px;" alt="WikiData Logo" src="img/wikidata_' +
               'icon.png" height=100% width=100%>')
-          Role = ''
-        end
-        object linkTMDb: TWebHTMLDiv
-          Left = 0
-          Top = 0
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkTMDb'
-          ChildOrder = 4
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          HTML.Strings = (
-            
-              '<img style="padding:2px;" alt="TMDb Logo" src="img/tmdb_icon.svg' +
-              '" height=100% width=100%>')
           Role = ''
         end
         object linkRottenTomatoes: TWebHTMLDiv
@@ -1538,7 +1522,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-6 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkRottenTomatoes'
-          ChildOrder = 5
+          ChildOrder = 6
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1557,7 +1541,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-7 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkMetaCritic'
-          ChildOrder = 5
+          ChildOrder = 7
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1567,7 +1551,7 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkIMDb: TWebHTMLDiv
-          Left = 0
+          Left = 1
           Top = 140
           Width = 32
           Height = 32
@@ -1595,7 +1579,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-8 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkWeb'
-          ChildOrder = 5
+          ChildOrder = 8
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1614,7 +1598,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkGoogleImageSearch'
-          ChildOrder = 5
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1633,13 +1617,29 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkJustWatch'
-          ChildOrder = 5
+          ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
             
               '<img style="padding:2px;" alt="JustWatch Logo" src="img/justwatc' +
               'h_icon.png" height=100% width=100%>')
+          Role = ''
+        end
+        object WebHTMLDiv5: TWebHTMLDiv
+          Left = 0
+          Top = 0
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 
+            'order-1 opacity-25 bg-dark border  border-secondary rounded over' +
+            'flow-hidden'
+          ChildOrder = 1
+          ElementPosition = epRelative
+          ElementFont = efCSS
           Role = ''
         end
       end
@@ -1664,7 +1664,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-6 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkTwitter'
-          ChildOrder = 1
+          ChildOrder = 6
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1683,7 +1683,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-5 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkInstagram'
-          ChildOrder = 2
+          ChildOrder = 5
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1702,7 +1702,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkFacebook'
-          ChildOrder = 3
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1721,7 +1721,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-7 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkModels'
-          ChildOrder = 5
+          ChildOrder = 7
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
@@ -1749,21 +1749,6 @@ object MainForm: TMainForm
               'a_icon.png" height=100% width=100%>')
           Role = ''
         end
-        object linkHeight: TWebHTMLDiv
-          Left = 0
-          Top = 35
-          Width = 32
-          Height = 32
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkHeight'
-          ChildOrder = 5
-          ElementPosition = epRelative
-          ElementFont = efCSS
-          Role = ''
-        end
         object linkCitizenship: TWebHTMLDiv
           Left = 0
           Top = 0
@@ -1774,7 +1759,7 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkCitizenship'
-          ChildOrder = 5
+          ChildOrder = 1
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1790,13 +1775,29 @@ object MainForm: TMainForm
           Margins.Right = 0
           ElementClassName = 'order-8 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkShare'
-          ChildOrder = 5
+          ChildOrder = 8
           ElementPosition = epRelative
           ElementFont = efCSS
           HTML.Strings = (
             
               '<div style="padding:2px 3px;color:var(--bs-gray-200);"><i class=' +
               '"fa-duotone fa-share-all fa-lg"></i></div>')
+          Role = ''
+        end
+        object WebHTMLDiv15: TWebHTMLDiv
+          Left = 0
+          Top = 35
+          Width = 32
+          Height = 32
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          ElementClassName = 
+            'order-2 opacity-25 bg-dark border  border-secondary rounded over' +
+            'flow-hidden'
+          ChildOrder = 2
+          ElementPosition = epRelative
+          ElementFont = efCSS
           Role = ''
         end
       end

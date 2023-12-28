@@ -117,7 +117,6 @@ type
     divTopButtons: TWebHTMLDiv;
     divLinkSet1: TWebHTMLDiv;
     WebHTMLDiv4: TWebHTMLDiv;
-    WebHTMLDiv5: TWebHTMLDiv;
     linkFavourite: TWebHTMLDiv;
     WebHTMLDiv7: TWebHTMLDiv;
     linkLoading: TWebHTMLDiv;
@@ -131,10 +130,8 @@ type
     linkLink: TWebHTMLDiv;
     linkRelatives: TWebHTMLDiv;
     linkEMail: TWebHTMLDiv;
-    linkRating: TWebHTMLDiv;
     divLinkSet4: TWebHTMLDiv;
     linkWikiData: TWebHTMLDiv;
-    linkTMDb: TWebHTMLDiv;
     linkRottenTomatoes: TWebHTMLDiv;
     linkMetaCritic: TWebHTMLDiv;
     linkIMDb: TWebHTMLDiv;
@@ -146,7 +143,6 @@ type
     linkFacebook: TWebHTMLDiv;
     linkModels: TWebHTMLDiv;
     linkWikipedia: TWebHTMLDiv;
-    linkHeight: TWebHTMLDiv;
     linkCitizenship: TWebHTMLDiv;
     linkShare: TWebHTMLDiv;
     divPhotoHolder: TWebHTMLDiv;
@@ -170,6 +166,10 @@ type
     tmrTooltips: TWebTimer;
     linkScore: TWebHTMLDiv;
     linkJustWatch: TWebHTMLDiv;
+    linkTMDb: TWebHTMLDiv;
+    WebHTMLDiv5: TWebHTMLDiv;
+    linkHeight: TWebHTMLDiv;
+    WebHTMLDiv15: TWebHTMLDiv;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -1043,7 +1043,7 @@ begin
   SetBootstrapTooltipDiv(linkScore, 'Actorious Points', 'left');
   SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
   SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
-  SetBootstrapTooltipDiv(linkRating, 'Rating', 'Right');
+//  SetBootstrapTooltipDiv(linkRating, 'Rating', 'Right');
   SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
   SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
   SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
@@ -1078,7 +1078,7 @@ begin
   linkTMDb.ElementHandle.style.setProperty('opacity','0.25');
   linkJustWatch.ElementHandle.style.setProperty('opacity','0.25');
   linkWikiData.ElementHandle.style.setProperty('opacity','0.25');
-  linkRating.ElementHandle.style.setProperty('opacity','0.25');
+//  linkRating.ElementHandle.style.setProperty('opacity','0.25');
   linkIMDb.ElementHandle.style.setProperty('opacity','0.25');
   linkRottenTomatoes.ElementHandle.style.setProperty('opacity','0.25');
   linkMetaCritic.ElementHandle.style.setProperty('opacity','0.25');
