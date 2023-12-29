@@ -1189,8 +1189,8 @@ object MainForm: TMainForm
       ElementFont = efCSS
       Role = ''
       object divLinkSet1: TWebHTMLDiv
-        Left = -1
-        Top = -2
+        Left = 4
+        Top = 0
         Width = 32
         Height = 277
         ElementClassName = 'order-0 d-flex flex-column gap-1'
@@ -1199,8 +1199,8 @@ object MainForm: TMainForm
         ElementFont = efCSS
         Role = ''
         object WebHTMLDiv4: TWebHTMLDiv
-          Left = 3
-          Top = 105
+          Left = 0
+          Top = 104
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1235,7 +1235,7 @@ object MainForm: TMainForm
         end
         object WebHTMLDiv7: TWebHTMLDiv
           Left = 0
-          Top = 140
+          Top = 138
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1251,7 +1251,7 @@ object MainForm: TMainForm
         end
         object linkLoading: TWebHTMLDiv
           Left = 0
-          Top = 243
+          Top = 240
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1268,7 +1268,7 @@ object MainForm: TMainForm
         end
         object linkLogin: TWebHTMLDiv
           Left = 0
-          Top = 35
+          Top = 36
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1287,7 +1287,7 @@ object MainForm: TMainForm
         end
         object WebHTMLDiv12: TWebHTMLDiv
           Left = 0
-          Top = 210
+          Top = 206
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1303,7 +1303,7 @@ object MainForm: TMainForm
         end
         object WebHTMLDiv13: TWebHTMLDiv
           Left = 0
-          Top = 175
+          Top = 172
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1319,7 +1319,7 @@ object MainForm: TMainForm
         end
         object linkTMDb: TWebHTMLDiv
           Left = 0
-          Top = 8
+          Top = 2
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1338,7 +1338,7 @@ object MainForm: TMainForm
         end
       end
       object divLinkSet2: TWebHTMLDiv
-        Left = 72
+        Left = 76
         Top = 0
         Width = 32
         Height = 277
@@ -1350,15 +1350,15 @@ object MainForm: TMainForm
         Role = ''
         object linkFrequent: TWebHTMLDiv
           Left = 0
-          Top = 106
+          Top = 70
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkFrequent'
-          ChildOrder = 4
+          ChildOrder = 3
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1366,7 +1366,7 @@ object MainForm: TMainForm
         end
         object linkTour: TWebHTMLDiv
           Left = 0
-          Top = 175
+          Top = 172
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1382,7 +1382,7 @@ object MainForm: TMainForm
         end
         object linkLink: TWebHTMLDiv
           Left = 0
-          Top = 210
+          Top = 206
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1396,16 +1396,16 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkRelatives: TWebHTMLDiv
-          Left = 1
-          Top = 71
+          Left = 0
+          Top = 36
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-3 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
           ElementID = 'linkRelatives'
-          ChildOrder = 3
+          ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1413,7 +1413,7 @@ object MainForm: TMainForm
         end
         object linkEMail: TWebHTMLDiv
           Left = 0
-          Top = 245
+          Top = 240
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1428,7 +1428,7 @@ object MainForm: TMainForm
         end
         object linkPizza: TWebHTMLDiv
           Left = 0
-          Top = 141
+          Top = 138
           Width = 32
           Height = 32
           Cursor = crHandPoint
@@ -1452,8 +1452,8 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkScore: TWebHTMLDiv
-          Left = 1
-          Top = 0
+          Left = 0
+          Top = 2
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1466,24 +1466,25 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
         end
-        object linkHeight: TWebHTMLDiv
+        object WebHTMLDiv15: TWebHTMLDiv
           Left = 0
-          Top = 35
+          Top = 104
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
-          ElementID = 'linkHeight'
-          ChildOrder = 2
+          ElementClassName = 
+            'order-4  opacity-25 bg-dark border  border-secondary rounded ove' +
+            'rflow-hidden'
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
       end
       object divLinkSet4: TWebHTMLDiv
-        Left = 108
+        Left = 112
         Top = 0
         Width = 32
         Height = 277
@@ -1514,7 +1515,7 @@ object MainForm: TMainForm
         end
         object linkRottenTomatoes: TWebHTMLDiv
           Left = 0
-          Top = 175
+          Top = 172
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1533,7 +1534,7 @@ object MainForm: TMainForm
         end
         object linkMetaCritic: TWebHTMLDiv
           Left = 0
-          Top = 210
+          Top = 206
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1551,8 +1552,8 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkIMDb: TWebHTMLDiv
-          Left = 1
-          Top = 140
+          Left = 0
+          Top = 138
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1571,7 +1572,7 @@ object MainForm: TMainForm
         end
         object linkWeb: TWebHTMLDiv
           Left = 0
-          Top = 245
+          Top = 240
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1589,8 +1590,8 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkGoogleImageSearch: TWebHTMLDiv
-          Left = 1
-          Top = 105
+          Left = 0
+          Top = 104
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1608,8 +1609,8 @@ object MainForm: TMainForm
           Role = ''
         end
         object linkJustWatch: TWebHTMLDiv
-          Left = -1
-          Top = 35
+          Left = 0
+          Top = 36
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1628,7 +1629,7 @@ object MainForm: TMainForm
         end
         object WebHTMLDiv5: TWebHTMLDiv
           Left = 0
-          Top = 0
+          Top = 2
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1644,7 +1645,7 @@ object MainForm: TMainForm
         end
       end
       object divLinkSet5: TWebHTMLDiv
-        Left = 144
+        Left = 148
         Top = 0
         Width = 32
         Height = 277
@@ -1656,7 +1657,7 @@ object MainForm: TMainForm
         Role = ''
         object linkTwitter: TWebHTMLDiv
           Left = 0
-          Top = 175
+          Top = 172
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1675,7 +1676,7 @@ object MainForm: TMainForm
         end
         object linkInstagram: TWebHTMLDiv
           Left = 0
-          Top = 140
+          Top = 138
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1694,7 +1695,7 @@ object MainForm: TMainForm
         end
         object linkFacebook: TWebHTMLDiv
           Left = 0
-          Top = 105
+          Top = 104
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1713,7 +1714,7 @@ object MainForm: TMainForm
         end
         object linkModels: TWebHTMLDiv
           Left = 0
-          Top = 210
+          Top = 206
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1751,7 +1752,7 @@ object MainForm: TMainForm
         end
         object linkCitizenship: TWebHTMLDiv
           Left = 0
-          Top = 0
+          Top = 2
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1766,7 +1767,7 @@ object MainForm: TMainForm
         end
         object linkShare: TWebHTMLDiv
           Left = 0
-          Top = 245
+          Top = 240
           Width = 32
           Height = 32
           Cursor = crHandPoint
@@ -1784,7 +1785,7 @@ object MainForm: TMainForm
               '"fa-duotone fa-share-all fa-lg"></i></div>')
           Role = ''
         end
-        object WebHTMLDiv15: TWebHTMLDiv
+        object linkHeight: TWebHTMLDiv
           Left = 0
           Top = 35
           Width = 32
@@ -1792,9 +1793,8 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-2 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
+          ElementClassName = 'order-2 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkHeight'
           ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
@@ -1802,8 +1802,8 @@ object MainForm: TMainForm
         end
       end
       object divLinkSet3: TWebHTMLDiv
-        Left = 36
-        Top = 1
+        Left = 40
+        Top = 0
         Width = 32
         Height = 277
         Margins.Left = 2
@@ -1818,7 +1818,7 @@ object MainForm: TMainForm
         Role = ''
         object WebHTMLDiv3: TWebHTMLDiv
           Left = 0
-          Top = 175
+          Top = 172
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1827,14 +1827,14 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-6 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 1
+          ChildOrder = 6
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object WebHTMLDiv6: TWebHTMLDiv
           Left = 0
-          Top = 140
+          Top = 138
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1843,14 +1843,14 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-5 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 2
+          ChildOrder = 5
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object WebHTMLDiv8: TWebHTMLDiv
-          Left = -2
-          Top = 105
+          Left = 0
+          Top = 104
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1859,14 +1859,14 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-4  opacity-25 bg-dark border  border-secondary rounded ove' +
             'rflow-hidden'
-          ChildOrder = 3
+          ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object WebHTMLDiv9: TWebHTMLDiv
           Left = 0
-          Top = 210
+          Top = 206
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1875,7 +1875,7 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-7 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 5
+          ChildOrder = 7
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
@@ -1898,7 +1898,7 @@ object MainForm: TMainForm
         end
         object WebHTMLDiv11: TWebHTMLDiv
           Left = 0
-          Top = 35
+          Top = 36
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1907,14 +1907,14 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-2 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 5
+          ChildOrder = 2
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object WebHTMLDiv14: TWebHTMLDiv
           Left = 0
-          Top = 0
+          Top = 2
           Width = 32
           Height = 32
           Margins.Left = 0
@@ -1923,24 +1923,24 @@ object MainForm: TMainForm
           ElementClassName = 
             'order-1 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
-          ChildOrder = 5
+          ChildOrder = 1
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
         end
         object linkList4: TWebHTMLDiv
           Left = 0
-          Top = 245
+          Top = 240
           Width = 32
           Height = 32
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           ElementClassName = 
-            'order-5 opacity-25 bg-dark border  border-secondary rounded over' +
+            'order-8 opacity-25 bg-dark border  border-secondary rounded over' +
             'flow-hidden'
           ElementID = 'linkList4'
-          ChildOrder = 3
+          ChildOrder = 8
           ElementPosition = epRelative
           ElementFont = efCSS
           Role = ''
