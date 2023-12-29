@@ -152,7 +152,7 @@
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
-        <TMSVersion>1.0.3693</TMSVersion>
+        <TMSVersion>1.0.3712</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -570,6 +570,10 @@
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>PngImage_98</ResourceId>
         </RcItem>
+        <RcItem Include="img\letterboxd_icon.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>PngImage_100</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -951,6 +955,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\justwatch_icon.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="img\letterboxd_icon.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

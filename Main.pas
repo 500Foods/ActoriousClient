@@ -167,9 +167,9 @@ type
     linkScore: TWebHTMLDiv;
     linkJustWatch: TWebHTMLDiv;
     linkTMDb: TWebHTMLDiv;
-    WebHTMLDiv5: TWebHTMLDiv;
+    linkLetterboxd: TWebHTMLDiv;
     linkHeight: TWebHTMLDiv;
-    WebHTMLDiv15: TWebHTMLDiv;
+    linkConnections: TWebHTMLDiv;
     procedure tmrImageCheckEnable;
     procedure WebFormCreate(Sender: TObject);
     [async] procedure CheckVersion;
@@ -1043,12 +1043,13 @@ begin
   SetBootstrapTooltipDiv(linkScore, 'Actorious Points', 'left');
   SetBootstrapTooltipDiv(linkRelatives, 'Friends and Family', 'right');
   SetBootstrapTooltipDiv(linkFrequent, 'Frequent Figures', 'right');
-//  SetBootstrapTooltipDiv(linkRating, 'Rating', 'Right');
+  SetBootstrapTooltipDiv(linkConnections, 'Connections', 'right');
   SetBootstrapTooltipDiv(linkTour, 'Take a Tour of Actorious and Explore its Features', 'right');
   SetBootstrapTooltipDiv(linkPIzza, 'Donate to the Actorious Project via Buy Me a Pizza', 'right');
   SetBootstrapTooltipDiv(linkEMail, 'Subscribe to Daily E-Mail', 'right');
 
   SetBootstrapTooltipDiv(linkTMDb, 'The Movie Database', 'left');
+  SetBootstrapTooltipDiv(linkLetterboxd, 'Letterboxd Search', 'left');
   SetBootstrapTooltipDiv(linkJustWatch, 'JustWatch', 'left');
   SetBootstrapTooltipDiv(linkWikiData, 'WikiData', 'left');
   SetBootstrapTooltipDiv(linkGoogleImageSearch, 'Google Image Search', 'left');
@@ -1076,6 +1077,7 @@ begin
   linkTour.ElementHandle.style.setProperty('opacity','1.0'); // Always available
 
   linkTMDb.ElementHandle.style.setProperty('opacity','0.25');
+  linkLetterboxd.ElementHandle.style.setProperty('opacity','0.25');
   linkJustWatch.ElementHandle.style.setProperty('opacity','0.25');
   linkWikiData.ElementHandle.style.setProperty('opacity','0.25');
 //  linkRating.ElementHandle.style.setProperty('opacity','0.25');
@@ -1164,7 +1166,8 @@ begin
     linkEMail.innerHTML = window.icon_envelope_open_text;
     linkTour.innerHTML = window.icon_signs_post;
     linkRelatives.innerHTML = window.icon_relatives;
-    linkFrequent.innerHTML = window.icon_people_arrows2;
+    linkFrequent.innerHTML = window.icon_people_carry_box;
+    linkConnections.innerHTML = window.icon_people_arrows2;
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1926,7 +1929,7 @@ begin
         }
         else {
           button.style.opacity = 1.0;
-          button.innerHTML = '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+prefix+LNK+suffix+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
+          button.innerHTML = '<a aria-label="'+alt+'" rel="noopener noreferrer" target="_blank" href='+encodeURI(prefix+LNK+suffix)+'><img style="padding:2px;" src='+icon+' height=100% width=100% alt="'+alt+'">';
         }
       }
       else {
@@ -2026,6 +2029,7 @@ begin
 
         // Populate some buttons
         window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', '',       linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'NAM','https://www.letterboxd.com/search/',                            '/',      linkLetterboxd,     'img/letterboxd_icon.png',     'Letterboxd Search');
         window.SetLNK(row,'TID','https://www.themoviedb.org/'+row.getCell('TYP').getValue()+'/', '/watch', linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
         window.SetLNK(row,'WID','',                                                              '',       linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
         window.SetLNK(row,'IID','https://www.imdb.com/name/',                                    '',       linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
@@ -2044,6 +2048,14 @@ begin
         var LNK = row.getCell('TID').getValue();
         linkScore.style.opacity = 1.0;
         linkScore.innerHTML = '<div style="margin-top:1px; width:100%; height:100%; text-align:center; vertical-align:middle;"><a aria-label="Link Score on TMDb" style="text-decoration:none; font-size:12px; color:white;" rel="noopener noreferrer" target="_blank" href=https://www.themoviedb.org/person/'+LNK+'><strong>'+pop.toFixed(0)+'</strong></a></div>';
+
+        // Letterboxd is enabled for Movies and people but not TV Shows
+        if (row.getCell('TYP').getValue() !== 'tv') {
+          linkLetterboxd.style.opacity = 1.0;
+        }
+        else {
+          linkLetterboxd.style.opacity = 0.25;
+        }
 
         // JustWatch is enabled for Movies/TV Shows but not for people
         linkJustWatch.style.opacity = 1.0;
@@ -2275,23 +2287,27 @@ begin
 
 
         // Set Links
-        window.SetLNK(row,'TID','https://www.themoviedb.org/person/', '', linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
-        window.SetLNK(row,'TID','',                                   '', linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
-        window.SetLNK(row,'WID','',                                   '', linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
-        window.SetLNK(row,'IID','https://www.imdb.com/name/',         '', linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
-        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    '', linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
-        window.SetLNK(row,'MET','https://www.metacritic.com/',        '', linkMetaCritic,     'img/metacritic_icon.png',     'MetaCritic Link');
-        window.SetLNK(row,'WWW','',                                   '', linkWeb,            'img/web_icon.png',            'Website Link');
-        window.SetLNK(row,'WIK','',                                   '', linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
-        window.SetLNK(row,'FID','https://www.facebook.com/',          '', linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
-        window.SetLNK(row,'INS','https://www.instagram.com/',         '', linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
-        window.SetLNK(row,'TWT','https://x.com/',                     '', linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
-        window.SetLNK(row,'MID','https://www.models.com/people/',     '', linkModels,         'img/models_icon.png',         'Models.com Link');
+        window.SetLNK(row,'TID','https://www.themoviedb.org/person/', '',  linkTMDb,           'img/tmdb_icon.svg',           'TMDb Link');
+        window.SetLNK(row,'NAM','https://www.letterboxd.com/search/', '/', linkLetterboxd,     'img/letterboxd_icon.png',     'Letterboxd Search Link');
+        window.SetLNK(row,'TID','',                                   '',  linkJustWatch,      'img/justwatch_icon.png',      'TMDb/JustWatch Link');
+        window.SetLNK(row,'WID','',                                   '',  linkWikiData,       'img/wikidata_icon.png',       'WikiData Link');
+        window.SetLNK(row,'IID','https://www.imdb.com/name/',         '',  linkIMDb,           'img/imdb_icon.png',           'IMDb Link');
+        window.SetLNK(row,'RID','https://www.rottentomatoes.com/',    '',  linkRottenTomatoes, 'img/rottentomatoes_icon.png', 'Rotten Tomatoes Link');
+        window.SetLNK(row,'MET','https://www.metacritic.com/',        '',  linkMetaCritic,     'img/metacritic_icon.png',     'MetaCritic Link');
+        window.SetLNK(row,'WWW','',                                   '',  linkWeb,            'img/web_icon.png',            'Website Link');
+        window.SetLNK(row,'WIK','',                                   '',  linkWikipedia,      'img/wikipedia_icon.png',      'Wikipedia Link');
+        window.SetLNK(row,'FID','https://www.facebook.com/',          '',  linkFacebook,       'img/facebook_icon.png',       'Facebook Link');
+        window.SetLNK(row,'INS','https://www.instagram.com/',         '',  linkInstagram,      'img/instagram_icon.png',      'Instagram Link');
+        window.SetLNK(row,'TWT','https://x.com/',                     '',  linkTwitter,        'img/twitter_icon.png',        '𝕏 Link');
+        window.SetLNK(row,'MID','https://www.models.com/people/',     '',  linkModels,         'img/models_icon.png',         'Models.com Link');
 
         // This fills in linkLINK
         linkLink.style.opacity = 1.0;
         pas.Main.MainForm.SetBootstrapTooltipDiv(pas.Main.MainForm.linkLink, 'PermaLink to '+row.getCell('NAM').getValue(), 'right');
         linkLink.innerHTML = '<div style="padding:2px 2px;"><a aria-label="PermaLink" rel="noopener noreferrer" target="_blank" style="fill:var(--bs-gray-200); text-decoration:none;" href="'+window.location.href.split('?')[0]+'?R=P'+window.to29(row.getCell('TID').getValue())+'-'+row.getCell('NAM').getValue().replaceAll(' ','-')+'">'+window.icon_link+'</a></div>';
+
+        // Letterboxd is enabled for Movies/People but not TV Shows
+        linkLetterboxd.style.opacity = 1.0;
 
         // JustWatch is enabled for Movies/TV Shows but not for people
         linkJustWatch.style.opacity = 0.25;
@@ -6001,7 +6017,7 @@ begin
           pas.Main.MainForm.RoleTabulator.clearData();
         }
 
-        pas.Main.MainForm.HideToolTips();
+        setTimeout(function() { pas.Main.MainForm.HideToolTips()}, 1000);
         linkRelatives.style.removeProperty('background');
       });
   } end; {$ENDIF}

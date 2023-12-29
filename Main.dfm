@@ -88,7 +88,7 @@ object MainForm: TMainForm
     Margins.Right = 4
     Margins.Bottom = 2
     ElementClassName = 
-      'justify-content-center order-0 p-1 gap-1 d-flex flex-row flex-wr' +
+      'justify-content-evenly order-0 p-1 gap-1 d-flex flex-row flex-wr' +
       'ap '
     ElementID = 'divTop'
     HeightStyle = ssAuto
@@ -1026,13 +1026,13 @@ object MainForm: TMainForm
           ElementFont = efCSS
           object btnTop1000: TWebButton
             AlignWithMargins = True
-            Left = 0
+            Left = 1
             Top = 0
-            Width = 205
+            Width = 203
             Height = 32
-            Margins.Left = 0
+            Margins.Left = 1
             Margins.Top = 0
-            Margins.Right = 0
+            Margins.Right = 1
             Margins.Bottom = 0
             Align = alClient
             ElementClassName = 'btn btn-sm btn-secondary'
@@ -1042,17 +1042,19 @@ object MainForm: TMainForm
             TabStop = False
             WidthPercent = 100.000000000000000000
             OnClick = btnTop1000Click
+            ExplicitLeft = 0
+            ExplicitWidth = 205
           end
         end
         object divPeopleNav: TWebPanel
           AlignWithMargins = True
-          Left = 4
+          Left = 5
           Top = 34
-          Width = 205
+          Width = 203
           Height = 32
-          Margins.Left = 4
+          Margins.Left = 5
           Margins.Top = 0
-          Margins.Right = 4
+          Margins.Right = 5
           Margins.Bottom = 2
           ElementClassName = 'bg-none rounded'
           ElementID = 'divPeopleNav'
@@ -1060,6 +1062,8 @@ object MainForm: TMainForm
           ChildOrder = 1
           ElementBodyClassName = 'btn-group btn-group-sm d-flex align-items-stretch '
           ElementFont = efCSS
+          ExplicitLeft = 4
+          ExplicitWidth = 205
           object btnActors: TWebButton
             Left = 114
             Top = 0
@@ -1132,25 +1136,24 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
           object edtSearch: TWebEdit
-            Left = 0
+            Left = 2
             Top = 0
-            Width = 204
-            Height = 32
+            Width = 199
+            Height = 30
             Margins.Left = 0
             Margins.Top = 0
             Margins.Right = 0
             Margins.Bottom = 0
             TabStop = False
-            Align = alClient
             AutoFocus = True
             ChildOrder = 7
-            ElementClassName = 'border-0 rounded bg-light ps-2 pb-1'
+            ElementClassName = 'border-0 rounded bg-light ps-2'
             ElementID = 'edtSearch'
             ElementFont = efCSS
             HeightPercent = 100.000000000000000000
             MaxLength = 25
             SpellCheck = False
-            TextHint = 'Search...'
+            TextHint = 'Search People / Roles'
             WidthPercent = 100.000000000000000000
             OnChange = edtSearchChange
             OnEnter = edtSearchEnter
@@ -1446,8 +1449,8 @@ object MainForm: TMainForm
               'xt-decoration:none;" target="_blank" aria-label="Buy Me a Pizza"' +
               '>'
             
-              '  <img style="filter:grayscale(1); padding:2px;" alt="Pizza" src' +
-              '="img/pizza_promo_icon.png" height=100% width=100%>'
+              '  <img style="filter:grayscale(1); padding:1px 2px 3px 3px;" alt' +
+              '="Pizza" src="img/pizza_promo_icon.png" height=100% width=100%>'
             '</a>')
           Role = ''
         end
@@ -1466,7 +1469,7 @@ object MainForm: TMainForm
           ElementFont = efCSS
           Role = ''
         end
-        object WebHTMLDiv15: TWebHTMLDiv
+        object linkConnections: TWebHTMLDiv
           Left = 0
           Top = 104
           Width = 32
@@ -1474,9 +1477,8 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-4  opacity-25 bg-dark border  border-secondary rounded ove' +
-            'rflow-hidden'
+          ElementClassName = 'order-4 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkConnections'
           ChildOrder = 4
           ElementPosition = epRelative
           ElementFont = efCSS
@@ -1627,7 +1629,7 @@ object MainForm: TMainForm
               'h_icon.png" height=100% width=100%>')
           Role = ''
         end
-        object WebHTMLDiv5: TWebHTMLDiv
+        object linkLetterboxd: TWebHTMLDiv
           Left = 0
           Top = 2
           Width = 32
@@ -1635,12 +1637,15 @@ object MainForm: TMainForm
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
-          ElementClassName = 
-            'order-1 opacity-25 bg-dark border  border-secondary rounded over' +
-            'flow-hidden'
+          ElementClassName = 'order-1 bg-dark border  border-secondary rounded overflow-hidden'
+          ElementID = 'linkLetterboxd'
           ChildOrder = 1
           ElementPosition = epRelative
           ElementFont = efCSS
+          HTML.Strings = (
+            
+              '<img style="padding:2px;" alt="JustWatch Logo" src="img/letterbo' +
+              'xd_icon.png" height=100% width=100%>')
           Role = ''
         end
       end
