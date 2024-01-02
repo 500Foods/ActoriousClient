@@ -1626,15 +1626,22 @@ begin
           if      (column.getDefinition().field == 'DOB')    { grpAllow = true; }
           else if (column.getDefinition().field == 'DOD')    { grpAllow = true; }
           else if (column.getDefinition().field == 'NUM')    { grpAllow = true; }
-          else if (column.getDefinition().field == 'PopInt') { grpAllow = true; }
-          else if (column.getDefinition().field == 'TYP')    { grpAllow = true; }
+          else if (column.getDefinition().field == 'IMC')    { grpAllow = true; }
           else if (column.getDefinition().field == 'CTZ')    { grpAllow = true; }
+          else if (column.getDefinition().field == 'TYP')    { grpAllow = true; }
+          else if (column.getDefinition().field == 'PopInt') { grpAllow = true; }
 
           var groupicon = document.createElement("div");
           var group = document.createElement("div");
           if (grpAllow) {
             groupicon.classList.add("flex-grow-0", "GroupVis", "fa-duotone", "fa-layer-group", "ps-3", "user-select-none");
-            group.classList.add("GroupVis", "flex-grow-0","ps-1", "fa-solid", "fa-circle");
+            if ((groups.length !== 0) && (groups[0].getField() == column.getDefinition().field)) {
+              group.classList.add("GroupVis", "flex-grow-0","ps-1", "fa-solid", "fa-circle-check");
+            }
+            else {
+              group.classList.add("GroupVis", "flex-grow-0","ps-1", "fa-solid", "fa-circle");
+            }
+
           }
           else {
             groupicon.classList.add("flex-grow-0", "px-3","user-select-none");
@@ -1669,7 +1676,16 @@ begin
 
               // toggle current column grouping
               if (grpchg) {
-                column.getTable().setGroupBy(column.getField());
+                var table = column.getTable();
+                if (groups.length == 0) {
+                  table.setSort(column.getField(), "desc");
+                  table.setGroupBy(column.getField());
+                  table.redraw(true);
+                }
+                else {
+                  table.setGroupBy(false);
+                  table.redraw(true);
+                }
               }
 
             }
@@ -1679,7 +1695,7 @@ begin
           if (   (column.getDefinition().field == 'HT1')
               || (column.getDefinition().field == 'OVR')
               || (column.getDefinition().field == 'PopInt')
-              || (column.getDefinition().title == 'Top TV Shows')) {
+              || (column.getDefinition().title == 'Top 5 TV Shows')) {
             var sep = document.createElement("div");
             sep.innerHTML = '<hr class="w-100 p-0 m-0 border-1 border-top border-secondary pe-none">';
             menu.push({
@@ -1687,9 +1703,9 @@ begin
             });
           }
 
-          if ((column.getDefinition().field == 'OVR')  || (column.getDefinition().title == 'Top TV Shows')) {
+          if ((column.getDefinition().field == 'OVR')  || (column.getDefinition().title == 'Top 5 TV Shows')) {
             let clrgroup = document.createElement("div");
-            clrgroup.innerHTML = '<div style="display:flex;">'+window.icon_xmark_left+'<div>Clear All Groups</div></div>';
+            clrgroup.innerHTML = '<div style="display:flex;">'+window.icon_xmark_left+'<div>Clear Group</div></div>';
             menu.push({
               label: clrgroup,
               action: function(e){
@@ -1899,12 +1915,18 @@ begin
     function PopularityInt(value, data, type, params, component) {
       // This isn't actually a field, so we pull in data from an actual field
       var starcount = parseInt(data.POP);
+//      if      ( starcount <=  2) { return 0;                 }
+//      else if ( starcount <=  5) { return 1+(data.POP/5);    }
+//      else if ( starcount <= 10) { return 2+(data.POP/10);   }
+//      else if ( starcount <= 20) { return 3+(data.POP/20);   }
+//      else if ( starcount <= 40) { return 4+(data.POP/40);   }
+//      else                       { return 5+(data.POP/1000); }
       if      ( starcount <=  2) { return 0;                 }
-      else if ( starcount <=  5) { return 1+(data.POP/5);    }
-      else if ( starcount <= 10) { return 2+(data.POP/10);   }
-      else if ( starcount <= 20) { return 3+(data.POP/20);   }
-      else if ( starcount <= 40) { return 4+(data.POP/40);   }
-      else                       { return 5+(data.POP/1000); }
+      else if ( starcount <=  5) { return Math.min(5,parseInt(1+(data.POP/5)));    }
+      else if ( starcount <= 10) { return Math.min(5,parseInt(2+(data.POP/10)));   }
+      else if ( starcount <= 20) { return Math.min(5,parseInt(3+(data.POP/20)));   }
+      else if ( starcount <= 40) { return Math.min(5,parseInt(4+(data.POP/40)));   }
+      else                       { return Math.min(5,parseInt(5+(data.POP/1000))); }
     }
     window.PopularityInt = PopularityInt;
   } end; {$ENDIF}

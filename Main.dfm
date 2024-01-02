@@ -1042,8 +1042,6 @@ object MainForm: TMainForm
             TabStop = False
             WidthPercent = 100.000000000000000000
             OnClick = btnTop1000Click
-            ExplicitLeft = 0
-            ExplicitWidth = 205
           end
         end
         object divPeopleNav: TWebPanel
@@ -1062,8 +1060,6 @@ object MainForm: TMainForm
           ChildOrder = 1
           ElementBodyClassName = 'btn-group btn-group-sm d-flex align-items-stretch '
           ElementFont = efCSS
-          ExplicitLeft = 4
-          ExplicitWidth = 205
           object btnActors: TWebButton
             Left = 114
             Top = 0
