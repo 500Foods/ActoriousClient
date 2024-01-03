@@ -1677,7 +1677,7 @@ begin
               // toggle current column grouping
               if (grpchg) {
                 var table = column.getTable();
-                if (groups.length == 0) {
+                if ((groups.length == 0) || (groups[0].getField() !== column.getField())) {
                   table.setSort(column.getField(), "desc");
                   table.setGroupBy(column.getField());
                   table.redraw(true);
@@ -1834,7 +1834,7 @@ begin
     Tabulator.defaultOptions.layout = "fitColumns";
     Tabulator.defaultOptions.movableColumns = true;
     Tabulator.defaultOptions.selectable = 1;
-    Tabulator.defaultOptions.columnHeaderSortMulti = true,
+    Tabulator.defaultOptions.columnHeaderSortMulti = true;
     Tabulator.defaultOptions.clipboard = "copy";
     Tabulator.defaultOptions.placeholder = '<div style="justify-content: center; align-items: center;">No Records Found.</small></div>'+
                                            '<div style="justify-content: center; align-items: center;">'+window.icon_star_sharp_special+'<div>Searching.... Please Wait.</div></div>'+
@@ -1842,6 +1842,7 @@ begin
                                            '<div style="justify-content: center; align-items: center;">'+window.icon_star_sharp_special+'<div>Loading.... Please Wait.</div></div>'+
                                            '<div style="justify-content: center; align-items: center;"><i class="fa-duotone fa-cloud-exclamation fa-xl me-3"></i>Error.... Please retry later.</div></div>';
     Tabulator.defaultOptions.headerSortElement = window.icon_sort+window.icon_sort_up+window.icon_sort_down;
+    Tabulator.defaultOptions.groupToggleElement = "header";
     Tabulator.defaultOptions.columnDefaults = {
       headerHozAlign: "left",
       hozAlign: "left",

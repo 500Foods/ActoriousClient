@@ -422,6 +422,12 @@ div.swiper3 > div > .swiper-slide > img {
   background-color: #9abcde;  /* I dunno about this...? */
 }
 
+/* Group rows just need to have enough space for one line of text */
+.tabulator-row.tabulator-group {
+    min-height: 34px;
+    max-height: 34px;
+}
+
 /* Tamp down the padding around the header menu icons and change the color so
 ** all the elements are the same except for the title.  The spacing needs to
 ** be big enough that someone could reasonably tap on it but not so big that
