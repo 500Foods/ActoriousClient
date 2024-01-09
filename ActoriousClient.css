@@ -745,6 +745,8 @@ div.flatpickr-months > div > div > select {
   height: 100% !important;
   top: unset !important;
   left: unset !important;
+  /* Make this text selectable */
+  user-select: text;
 }
 #divBackgroundSlider,
 #divVideoSlider,
@@ -800,6 +802,15 @@ div.flatpickr-months > div > div > select {
   background: var(--bs-dark);
 }
 
+/* Maybe someone wants to copy this text, like to report a typo or something */
+.shepherd-title,
+.shepherd-text {
+  user-select: text;
+}
+.shepherd-title > img {
+  user-select: none;
+}
+
 /* Adjust the footer and in particular the button arrangement */
 .shepherd-footer {
   padding: 5px;
@@ -823,6 +834,7 @@ div.flatpickr-months > div > div > select {
   position: absolute;
   top: 3px;
   right: 5px;
+  user-select: none;
 }
 
 /*******************************************************************************

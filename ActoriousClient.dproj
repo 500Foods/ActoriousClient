@@ -152,7 +152,7 @@
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
-        <TMSVersion>1.0.3731</TMSVersion>
+        <TMSVersion>1.0.3737</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -1050,6 +1050,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="iconx\favicon-64x64.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1069,12 +1075,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="img\twitter_icon.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="iconx\android-48x48.png" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
