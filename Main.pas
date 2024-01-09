@@ -6309,9 +6309,15 @@ begin
       var element = divViewer.firstElementChild;
       pas.Main.MainForm.pz = Panzoom(element, {
         maxScale: 100,
-        minScale: 0.75
+        minScale: 0.75,
+        panOnlyWhenZoomed: true
       });
-      element.parentElement.addEventListener('wheel',pas.Main.MainForm.pz.zoomWithWheel)
+      element.parentElement.addEventListener('wheel',pas.Main.MainForm.pz.zoomWithWheel);
+      // this is an attempt to get a right-click on the image to not immediate initiate a pan
+      element.parentElement.addEventListener('contextmenu', event => {
+        event.stopPropagation();
+      });
+
     } end; {$ENDIF}
   end;
 
