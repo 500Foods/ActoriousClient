@@ -154,7 +154,7 @@ object MainForm: TMainForm
             Margins.Top = 4
             Margins.Right = 4
             Margins.Bottom = 4
-            ElementClassName = 'text-white CustomScroll'
+            ElementClassName = 'text-white CustomScroll user-select-auto'
             ElementID = 'divBiography'
             ChildOrder = 4
             ElementFont = efCSS
