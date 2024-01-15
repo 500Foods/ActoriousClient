@@ -4821,12 +4821,11 @@ end;
 procedure TMainForm.GetTop1000;
 var
   Response: TXDataClientResponse; // The response coming back
-  Data :String;                   // The response coming back, as text
+  Data: String;                   // The response coming back, as text
   Blob: JSValue;
   Progress: String;               // Used to lookup progress on the request later
   Endpoint: String;               // The service endpoint for this request
   CacheData: String;
-  Segment: String;
 begin
 
   // If we've already got the data in the past six hours, let's use it
@@ -4947,7 +4946,6 @@ begin
   if DataLimitedTop
   then Endpoint := 'IActorInfoService.TopOneThousand'
   else Endpoint := 'IActorInfoService.TopFiveThousand';
-  Segment := 'A';
 
   // Progress: Loading Actors
   MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
@@ -4960,7 +4958,6 @@ begin
   try
     Response := await(MainForm.Client.RawInvokeAsync(Endpoint, [
       window.atob('TGVlbG9vRGFsbGFzTXVsdGlQYXNz'),   // Secret
-      Segment,                                       // Segment
       Progress                                       // Progress Reference
     ]));
 
@@ -4968,7 +4965,7 @@ begin
     Data := '[]';
     {$IFNDEF WIN32} asm {
       Data = await Blob.text();
-      Data = JSON.parse(Data);
+//      Data = JSON.parse(Data);
     } end; {$ENDIF}
 
   except on E: Exception do
@@ -4999,6 +4996,79 @@ begin
       exit;
     end;
   end;
+
+  // 2024: Alright, instead of returning a complete table, what we're getting back here is the list
+  // of people that are in the Top1000. We have to separately go and retrieve these. This is done for
+  // a few reasons, but one of the benefits is that it gives us an opportunity to do something about
+  // a proper progress indicator.
+
+  {$IFNDEF WIN32} asm {
+
+    // We're expecting 1,000 items, so let's split it up into chunks of 50 and make 20 requests.
+    // We'll make them as async requests and just make a note of them as they come back.
+
+    var nextreq = [];
+    var toplist = JSON.parse(Data);
+    var received = 0;
+    var datareqnum = 20;
+    var datareqsize = 50;
+
+    // This is the new set of data we'll be working with
+    Data = [];
+    divProgress.style.setProperty('height','0px');
+    divProgress.style.setProperty('top','277px');
+
+
+    // Here we send off all the requests at one time.
+    for (var i = 0; i < datareqnum; i++) {
+
+      let lookuplist = [];
+      nextreq = toplist.slice(i*50, (i+1) * datareqsize );
+
+      // Build the data request
+      for (var j = 0; j < datareqsize; j++) {
+        lookuplist.push({"ID":nextreq[j]});
+      }
+
+      // This is the call to the Actorious XData server using JavaScript fetch()
+      let URL = 'http://localhost:10999/actorious/ActorInfoService/Lookup';
+      URL = URL + '?Secret=LeelooDallasMultiPass';
+      URL = URL + '&Lookup='+encodeURIComponent('{"PPL":'+JSON.stringify(lookuplist)+'}');
+      URL = URL + '&Progress='+Progress+'.'+String(i).padStart(2,'0');
+
+      fetch(URL).then(
+
+        // Once we get the data, we add it to our data cache
+        async function(response) {
+          var segment = parseInt(response.url.slice(-2));
+          var newdata = await response.json();
+
+          // Here we're updating the data with the position of this packet in the overall request
+          for (var k = 0; k < newdata.PPL.length; k++) {
+            newdata.PPL[k].ID = (segment * 50) + k;
+            Data.push(newdata.PPL[k]);
+          }
+
+          // Mark this data request as fulfilled
+          received++
+
+        }
+      )
+      // Let's not submit them ALL at once, a brief delay. So 20 requests means this will take 5sec
+      // just to issue the requests, and then hopefully not long for them all to return
+      await sleep(250);
+    }
+
+    // This waits for the packets to come back
+    while (received < 20) {
+      divProgress.style.setProperty('height',parseInt(277 * received / 20)+'px');
+      divProgress.style.setProperty('top',277-parseInt(277 * received / 20)+'px');
+      await sleep(1000);
+    }
+    divProgress.style.setProperty('height','0px');
+    divProgress.style.setProperty('top','277px');
+
+  } end; {$ENDIF}
 
   MainForm.Top1000CacheDate := Now;
   MainForm.Top1000CacheData := Data;
@@ -5045,6 +5115,8 @@ begin
         else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
+
+          table1.setSort("ID","asc");
 
           // highlight the first row, based on whatever sorting is currently in place
           table1.selectRow(table1.getRowFromPosition(1, true));

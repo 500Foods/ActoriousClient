@@ -2007,16 +2007,13 @@ object MainForm: TMainForm
         Role = ''
       end
       object divProgress: TWebHTMLDiv
-        Left = -3
+        Left = 0
         Top = 103
         Width = 185
         Height = 63
         ElementClassName = 'bg-danger rounded  opacity-50'
         ElementID = 'divProgress'
-        HeightStyle = ssAuto
-        WidthStyle = ssAuto
         ChildOrder = 6
-        ElementPosition = epIgnore
         ElementFont = efCSS
         Role = ''
       end
