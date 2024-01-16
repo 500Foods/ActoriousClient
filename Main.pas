@@ -5004,14 +5004,14 @@ begin
 
   {$IFNDEF WIN32} asm {
 
-    // We're expecting 1,000 items, so let's split it up into chunks of 50 and make 20 requests.
+    // We're expecting 1,000 items, so let's split it up into chunks.
     // We'll make them as async requests and just make a note of them as they come back.
 
-    var nextreq = [];
-    var toplist = JSON.parse(Data);
-    var received = 0;
-    var datareqnum = 20;
-    var datareqsize = 50;
+    let nextreq = [];
+    let toplist = JSON.parse(Data);
+    let received = 0;
+    let datareqnum = 10;
+    let datareqsize = 100;
 
     // This is the new set of data we'll be working with
     Data = [];
@@ -5020,32 +5020,33 @@ begin
 
 
     // Here we send off all the requests at one time.
-    for (var i = 0; i < datareqnum; i++) {
+    for (let i = 0; i < datareqnum; i++) {
 
       let lookuplist = [];
-      nextreq = toplist.slice(i*50, (i+1) * datareqsize );
+      nextreq = toplist.slice(i * datareqsize, (i + 1) * datareqsize );
 
       // Build the data request
-      for (var j = 0; j < datareqsize; j++) {
+      for (let j = 0; j < datareqsize; j++) {
         lookuplist.push({"ID":nextreq[j]});
       }
 
       // This is the call to the Actorious XData server using JavaScript fetch()
-      let URL = 'http://localhost:10999/actorious/ActorInfoService/Lookup';
+      let URL = this.Server+'/ActorInfoService/Lookup';
       URL = URL + '?Secret=LeelooDallasMultiPass';
       URL = URL + '&Lookup='+encodeURIComponent('{"PPL":'+JSON.stringify(lookuplist)+'}');
-      URL = URL + '&Progress='+Progress+'.'+String(i).padStart(2,'0');
+      URL = URL + '&Progress='+Progress+'.'+String(i).padStart(3,'0');
 
       fetch(URL).then(
 
         // Once we get the data, we add it to our data cache
         async function(response) {
-          var segment = parseInt(response.url.slice(-2));
-          var newdata = await response.json();
+          let segment = parseInt(response.url.slice(-3));
+          let newdata = await response.json();
 
           // Here we're updating the data with the position of this packet in the overall request
-          for (var k = 0; k < newdata.PPL.length; k++) {
-            newdata.PPL[k].ID = (segment * 50) + k;
+          for (let k = 0; k < newdata.PPL.length; k++) {
+            newdata.PPL[k].Count = (segment * datareqsize) + k;
+            newdata.PPL[k].ID = (segment * datareqsize) + k;
             Data.push(newdata.PPL[k]);
           }
 
@@ -5056,14 +5057,14 @@ begin
       )
       // Let's not submit them ALL at once, a brief delay. So 20 requests means this will take 5sec
       // just to issue the requests, and then hopefully not long for them all to return
-      await sleep(250);
+//      await sleep(250);
     }
 
     // This waits for the packets to come back
-    while (received < 20) {
-      divProgress.style.setProperty('height',parseInt(277 * received / 20)+'px');
-      divProgress.style.setProperty('top',277-parseInt(277 * received / 20)+'px');
-      await sleep(1000);
+    while (received < datareqnum) {
+      divProgress.style.setProperty('height',parseInt(277 * received / datareqnum)+'px');
+      divProgress.style.setProperty('top',277-parseInt(277 * received / datareqnum)+'px');
+      await sleep(500);
     }
     divProgress.style.setProperty('height','0px');
     divProgress.style.setProperty('top','277px');
@@ -5109,14 +5110,18 @@ begin
     pas.Main.MainForm.ActorTabulator.setData(actorData)
       .then(function(){
 
+        var table1 = pas.Main.MainForm.ActorTabulator;
+        table1.clearSort();
+        table1.deselectRow();
+        table1.setSort("ID","asc");
+        table1.redraw(true);
+
         // update the first column header to show a count
         var rowCount = table1.getDataCount("active");
         if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
         else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
 
         if (rowCount > 0) {
-
-          table1.setSort("ID","asc");
 
           // highlight the first row, based on whatever sorting is currently in place
           table1.selectRow(table1.getRowFromPosition(1, true));
