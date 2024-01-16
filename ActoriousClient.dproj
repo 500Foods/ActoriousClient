@@ -152,7 +152,7 @@
         <TMSPWABackgroundColor>#212529</TMSPWABackgroundColor>
         <TMSWebPWAThemeColor>#212529</TMSWebPWAThemeColor>
         <TMSPWAApplicationShortName>Actorious</TMSPWAApplicationShortName>
-        <TMSVersion>1.0.3786</TMSVersion>
+        <TMSVersion>1.0.3787</TMSVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
