@@ -5064,7 +5064,7 @@ begin
     while (received < datareqnum) {
       divProgress.style.setProperty('height',parseInt(277 * received / datareqnum)+'px');
       divProgress.style.setProperty('top',277-parseInt(277 * received / datareqnum)+'px');
-      await sleep(500);
+      await sleep(100);
     }
     divProgress.style.setProperty('height','0px');
     divProgress.style.setProperty('top','277px');
@@ -5072,7 +5072,7 @@ begin
   } end; {$ENDIF}
 
   MainForm.Top1000CacheDate := Now;
-  MainForm.Top1000CacheData := Data;
+  MainForm.Top1000CacheData := '';
 
   MainForm.divProgressSpinner.HTML.Text := '';
 
@@ -5086,28 +5086,30 @@ begin
   {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
-    var actorData = Data;
+    table1.clearData();
+    table2.clearData();
 
     // Filter out Adult content
     var adult = pas.Main.MainForm.AdultContent;
     var acount = 0;
     if (!adult) {
-      for (var i = actorData.length - 1; i >= 0; i--) {
-        if (actorData[i]['XXX'] == true) {
-          actorData.splice(i,1);
+      for (var i = Data.length - 1; i >= 0; i--) {
+        if (Data[i]['XXX'] == true) {
+          Data.splice(i,1);
           acount++;
         }
       }
     } else {
-      for (var i = actorData.length - 1; i >= 0; i--) {
-        if ((actorData[i]['XXX'] == false) || (actorData[i]['XXX'] == undefined)) {
-          actorData.splice(i,1);
+      for (var i = Data.length - 1; i >= 0; i--) {
+        if ((Data[i]['XXX'] == false) || (Data[i]['XXX'] == undefined)) {
+          Data.splice(i,1);
           acount++;
         }
       }
     }
+    pas.Main.MainForm.Top1000CacheData = Data;
 
-    pas.Main.MainForm.ActorTabulator.setData(actorData)
+    pas.Main.MainForm.ActorTabulator.setData(Data)
       .then(function(){
 
         var table1 = pas.Main.MainForm.ActorTabulator;
