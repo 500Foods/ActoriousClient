@@ -5012,6 +5012,10 @@ begin
     let received = 0;
     let datareqnum = 10;
     let datareqsize = 100;
+    if (pas.Main.MainForm.DataLimitedTop == false) {
+     datareqnum = 25;
+     datareqsize = 200;
+    }
 
     // This is the new set of data we'll be working with
     Data = [];
