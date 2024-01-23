@@ -1002,6 +1002,7 @@ begin
     });
   } end; {$ENDIF}
 
+
   // Backtrack if we're running the top5000 initially
   if (StartupMode = 'top5000') then
   begin
@@ -1012,6 +1013,7 @@ begin
     } end; {$ENDIF}
     btnTop1000.Caption := 'TMDb Top 5,000 Actors';
   end;
+
 
   // We use this to know when it is time to request data,
   // basically once the Tabulator tables announce that
@@ -3915,8 +3917,6 @@ begin
     window.from29 = from29;
   } end; {$ENDIF}
 
-
-
   tmrStart.Enabled := true;
 
   StopLinkerRemoval(@PreventCompilerHint);
@@ -5062,7 +5062,12 @@ begin
 
       // Build the data request
       for (let j = 0; j < datareqsize; j++) {
-        lookuplist.push({"ID":nextreq[j]});
+        if (nextreq[j] !== undefined) {
+          lookuplist.push({"ID":nextreq[j]});
+        }
+        else {
+          lookuplist.push({"ID":0});
+        }
       }
 
       // This is the call to the Actorious XData server using JavaScript fetch()
