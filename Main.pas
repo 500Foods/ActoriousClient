@@ -884,12 +884,15 @@ begin
 
 
   // Check for Parameters
+
+  // By default, we want to show results for today
   StartupMode := 'today';
   if GetQueryParam('R') <> '' then
   begin
     StartupMode := 'reference';
   end;
 
+  // There is an adult mode that can be specified
   AdultContent := False;
   if GetQueryParam('X') <> '' then
   begin
@@ -900,6 +903,23 @@ begin
     end;
   end;
 
+  // This is used to run the top-1000 query which is used as a bit
+  // of a hack to get the top 1000 values cached in the server.
+  // This is normally only run by the server after the top 1000
+  // data has been retrieved from TMDB
+  if (GetQueryParam('top-one-thousand') <> '') then
+  begin
+    StartupMode := 'top1000';
+  end;
+
+  // This is used to run the top-5000 query which is used as a bit
+  // of a hack to get the top 5000 values cached in the server.
+  // This is normally only run by the server after the top 5000
+  // data has been retrieved from TMDB
+  if (GetQueryParam('top-five-thousand') <> '') then
+  begin
+    StartupMode := 'top5000';
+  end;
 
   // Global Sleep function :)
   {$IFNDEF WIN32} asm {
@@ -981,6 +1001,17 @@ begin
       pas.Main.MainForm.switchLimitSearch(this.checked);
     });
   } end; {$ENDIF}
+
+  // Backtrack if we're running the top5000 initially
+  if (StartupMode = 'top5000') then
+  begin
+    DataLimitedTop := False;
+    {$IFNDEF WIN32} asm {
+      switchSettings2.setAttribute('disabled','');
+      switchSettings2.removeAttribute('checked');
+    } end; {$ENDIF}
+    btnTop1000.Caption := 'TMDb Top 5,000 Actors';
+  end;
 
   // We use this to know when it is time to request data,
   // basically once the Tabulator tables announce that
@@ -6530,6 +6561,7 @@ begin
   begin
     tmrStart.Enabled := False;
 
+    // Figure out what kind of startup we want to handle
     if StartupMode = 'today' then
     begin
       GetBirthdays(MonthOfTheYear(Now), DayOfTheMonth(Now));
@@ -6543,19 +6575,33 @@ begin
     begin
       Startup := False;
       GetBirthdays(MonthOfTheYear(Now), DayOfTheMonth(Now));
+    end
+    else if StartupMode = 'top1000' then
+    begin
+      Startup := False;
+      GetTop1000;
+    end
+    else if StartupMode = 'top5000' then
+    begin
+      Startup := False;
+      GetTop1000;
     end;
 
+    // If the stars align, launch the tour
     TourVersion := TWebLocalStorage.GetValue('Actorious Tour Version');
     TourActive := False;
-    if TourVersion = '' then
+    if Startup then
     begin
-      LaunchTour('New');
-    end
-    else if TourVersion <> Version then
-    begin
-      LaunchTour('Update');
+      if TourVersion = '' then
+      begin
+        LaunchTour('New');
+      end
+      else if TourVersion <> Version then
+      begin
+        LaunchTour('Update');
+      end;
+      TWebLocalStorage.SetValue('Actorious Tour Version', Version);
     end;
-    TWebLocalStorage.SetValue('Actorious Tour Version', Version);
 
   end;
 end;
