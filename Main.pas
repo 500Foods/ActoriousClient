@@ -1307,7 +1307,7 @@ begin
       else if (pas.Main.MainForm.MenuType == 2) {
         // Drawing the top menu for the selected TV Show
 
-        if (window.innerWidth > 1500) {
+        if (window.innerWidth > 1000) {
           btnSettings.innerHTML   = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_sliders+'Settings</div>';
           btnDiscord.innerHTML    = '<div style="display:flex; justify-content:center; align-items:center; margin-right:6px;">'+window.icon_bell_concierge+'Support</div>';
           btnAbout.innerHTML      = '<div class="d-flex align-items-center justify-content-center"><div style="margin-top:-2px;""><img style="height:24px; width:24px; margin-right:6px;" src="img/actorious-logo-100x100.svg" alt="Actorious Icon" aria-label="About Actorious"></div>About Actorious</div>';
@@ -4989,7 +4989,7 @@ begin
   try
     Response := await(MainForm.Client.RawInvokeAsync(Endpoint, [
       window.atob('TGVlbG9vRGFsbGFzTXVsdGlQYXNz'),   // Secret
-      Progress                                       // Progress Reference
+      Progress+'-NOREGEN'                            // Progress Reference
     ]));
 
     Blob := Response.Result;
