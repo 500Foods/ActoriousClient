@@ -541,7 +541,10 @@ begin
   {$IFNDEF WIN32} asm {
     var table1 = pas.Main.MainForm.ActorTabulator;
     var table2 = pas.Main.MainForm.RoleTabulator;
-    var actorData = Data;
+    var actorData = Data.Actors;
+    var movieData = Data.Movies;
+//    console.log('Actors found: '+actorData.length);
+//    console.log('Movies found: '+movieData.length);
 
     // Filter out Adult content
     var adult = pas.Main.MainForm.AdultContent;
@@ -576,17 +579,44 @@ begin
 
         if (rowCount > 0) {
 
-          table1.selectRow(1);
-          window.Actor_Selected(null, table1.getRow(1));
+//          table1.selectRow(1);
+//          window.Actor_Selected(null, table1.getRow(1));
 
         }
         else {
-          table2.clearData();
+//          table2.clearData();
         }
 
-       This.HideToolTips();
+       pas.Main.MainForm.HideToolTips();
 
       });
+
+   pas.Main.MainForm.RoleTabulator.setData(movieData)
+      .then(function(){
+
+        table2.clearSort();
+        table2.deselectRow();
+        table2.setSort("Count","desc");
+
+        // update the first column header to show a count
+        var rowCount = table2.getDataCount("active");
+        if (table2.getDataCount() !== rowCount) { window.rolecount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.rolecount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
+
+        if (rowCount > 0) {
+
+//          table2.selectRow(1);
+//          window.Actor_Selected(null, table1.getRow(1));
+
+        }
+        else {
+//          table2.clearData();
+        }
+
+//      pas.Main.MainForm.HideToolTips();
+
+      });
+
   } end; {$ENDIF}
 
   // Progress: Ready Actors
@@ -3651,6 +3681,18 @@ begin
             }
         },
 
+        { title: "Relevance", field: "Count", width: 115, sorter: "number", hozAlign: "right", vertAlign: "top", visible: false,
+            headerMenu: headerMenu,
+            formatter:  "money",
+            formatterParams:{
+              decimal: ".",
+              thousand:",",
+              symbol:"",
+              symbolAfter:"",
+              precision: 0
+            }
+        },
+
         { title: "Genres", field: "GEN", width: 145, visible: false,
             headerMenu: headerMenu,
             formatter: "textarea"
@@ -4203,8 +4245,8 @@ begin
 
     tour.addStep({
       id: 'step-tour-2',
-      title: 'Search for People, Movies, or TV Shows',
-      text: 'Enter search terms here. The search results will appear below. You can search for People (by name or role), Movies (by title), or TV Shows (by title). <br><br>Eg: "Leonard Nimoy" or "Spock"',
+      title: 'Search for People, Roles, or Movies',
+      text: 'Enter search terms here. The search results will appear below. You can search for People (by name or role), Movies (by title or tagline). <br><br>Eg: "Wrath of Kahn", "Leonard Nimoy", "Spock", or "beginning of vengeance"',
       attachTo: { element: '#divSearchNav', on: 'right' },
       buttons: [{ text: 'Back', action: tour.back }, { text: 'Next', action: tour.next }]
     });
