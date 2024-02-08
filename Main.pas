@@ -175,6 +175,7 @@ type
     [async] procedure CheckVersion;
     [async] procedure GetBirthDays(aMonth: Integer; aDay: Integer);
     [async] procedure GetDeathDays(aMonth: Integer; aDay: Integer);
+    [async] procedure GetReleaseDays(aMonth: Integer; aDay: Integer);
     [async] procedure GetTop1000;
     [async] procedure GetLookupList(LookupList: String);
     [async] procedure GetReference(Reference: String);
@@ -1624,6 +1625,7 @@ begin
           // Only using one at a time, so picking one clears the others
           document.querySelector("#divFlatPickr")._flatpickr.clear();
           document.querySelector("#divFlatPickr2")._flatpickr.clear();
+          GetReleaseDays(parseInt(dateStr.substr(5,2)), parseInt(dateStr.substr(8,2)));
           pas.Main.MainForm.CurrentReleaseDate = dateStr;
         }
       }
@@ -5745,6 +5747,257 @@ begin
 
   // Suppress Delphi Hint "Local variable is assigned but never used"
   MainForm.PreventCompilerHint(Data);
+  MainForm.PreventCompilerHint(Blob);
+
+end;
+
+procedure TMainForm.GetReleaseDays(aMonth, aDay: Integer);
+var
+  Response: TXDataClientResponse; // The response coming back
+  Data :String;                   // The response coming back, as text
+  Blob: JSValue;
+  Progress: String;               // Used to lookup progress on the request later
+  Endpoint: String;               // The service endpoint for this request
+  DayNum: Integer;
+  CacheData: String;
+begin
+
+  DayNum := DayOfTheYear(EncodeDate(2020, aMonth, aDay));
+
+  // If we've already got the data in the past six hours, let's use it
+//  if (MainForm.ReleaseDayCacheDate[DayNum] > (Now - 0.25)) then
+//  begin
+//    CacheData := MainForm.ReleaseDayCacheData[DayNum];
+//    MainForm.CurrentPerson := -1;
+//    MainForm.CurrentRole := -1;
+//    {$IFNDEF WIN32} asm {
+//      var table1 = pas.Main.MainForm.ActorTabulator;
+//      var table2 = pas.Main.MainForm.RoleTabulator;
+//      var actorData = CacheData;
+//
+//      // Filter out Adult content
+//      var adult = pas.Main.MainForm.AdultContent;
+//      var acount = 0;
+//      if (!adult) {
+//        for (var i = actorData.length - 1; i >= 0; i--) {
+//          if (actorData[i]['XXX'] == true) {
+//            actorData.splice(i,1);
+//            acount++;
+//          }
+//        }
+//      } else {
+//        for (var i = actorData.length - 1; i >= 0; i--) {
+//          if ((actorData[i]['XXX'] == false) || (actorData[i]['XXX'] == undefined)) {
+//            actorData.splice(i,1);
+//            acount++;
+//          }
+//        }
+//      }
+//
+//      pas.Main.MainForm.ActorTabulator.setData(actorData)
+//      .then(function(){
+//
+//        // update the first column header to show a count
+//        var rowCount = table1.getDataCount("active");
+//        if (table1.getDataCount() !== rowCount) { window.actorcount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+//        else { window.actorcount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
+//
+//        if (rowCount > 0) {
+//
+//          // highlight the first row, based on whatever sorting is currently in place
+//          table1.selectRow(table1.getRowFromPosition(1, true));
+//
+//          // Do what we would do if we had directly clicked on that row
+//          window.Actor_Selected(null, table1.getRowFromPosition(1,true));
+//
+//        }
+//        else {
+//          table2.clearData();
+//        }
+//
+//      });
+//    } end; {$ENDIF}
+//    exit;
+//  end;
+
+
+  MainForm.divProgressSpinner.HTML.Text := '<div style="width:100%; height:100%; font-size:11em; color:var(--bs-danger); opacity:0.75; text-align: center;"><i class="fa-regular fa-loader fa-spin"></i></div>';
+
+  Progress := TGUID.NewGUID;
+  MainForm.Pending.Add(Progress);
+  MainForm.CurrentPerson := -1;
+  MainForm.CurrentRole := -1;
+
+  // Progress: Error Actors
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'ReqError');
+  // Progress: Error Roles
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Loading');
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'ReqError');
+
+  // Establish connection to XData Server
+  if (MainForm.Carnival = nil) then
+  begin
+    // Setup connection to XData Server
+    try
+      MainForm.Carnival := TXDataWebConnection.Create(nil);
+      MainForm.Carnival.URL := Server;
+      await(MainForm.Carnival.OpenAsync);
+      MainForm.Client := TXDataWebClient.Create(nil);
+      MainForm.Client.Connection := MainForm.Carnival;
+    except on E: Exception do
+      begin
+        if (MainForm.Client <> nil) then MainForm.Client.Free;
+        if (MainForm.Carnival <> nil) then MainForm.Carnival.Free;
+
+        MainForm.divProgressSpinner.HTML.Text := '';
+
+        console.log('Server Communication Exception Encountered.');
+        console.log(' -- '+E.ClassName);
+        console.log(' -- '+E.Message);
+        console.log(' -- Automatic retry attempt in 30s');
+
+        // Progress: Photo
+        MainForm.divPhoto.HTML.Text := '<div style="width:100%; height:100%;text-align:center; margin-top:110px;"><i class="fa-duotone fa-cloud-exclamation fa-2x text-white"></i></div>';
+        // Progress: Error Actors
+        MainForm.divActorTabulatorHolder.ElementHandle.classList.add('ReqError');
+        MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading');
+        // Progress: Error Roles
+        MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('ReqError');
+        MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading');
+
+        // Set timer to reset in case internet/server/something  is down and comes back at some point
+        MainForm.tmrStart.interval := 30000;
+        MainForm.tmrStart.Enabled := True;
+
+        exit;
+      end;
+    end;
+  end;
+
+  if MainForm.VersionCheck then MainForm.CheckVersion;
+
+  EndPOint := 'IActorInfoService.ReleaseDay';
+
+  // Progress: Loading Actors
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Loading');
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'ReqError');
+  // Progress: Loading Roles
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Loading');
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'ReqError');
+
+  // Make the Request
+  try
+    Response := await(MainForm.Client.RawInvokeAsync(Endpoint, [
+      window.atob('TGVlbG9vRGFsbGFzTXVsdGlQYXNz'),   // Secret
+      amonth,                                        // Releaseday Month
+      aDay,                                          // Releaseday Day
+      Progress                                       // Progress Reference
+    ]));
+    Blob := Response.Result;
+    Data := '[]';
+    {$IFNDEF WIN32} asm {
+      Data = await Blob.text();
+      Data = JSON.parse(Data);
+    } end; {$ENDIF}
+  except on E: Exception do
+    begin
+      if (MainForm.Client <> nil) then MainForm.Client.Free;
+      if (MainForm.Carnival <> nil) then MainForm.Carnival.Free;
+
+      MainForm.divProgressSpinner.HTML.Text := '';
+
+      console.log('Server Communication Exception Encountered.');
+      console.log(' -- '+E.ClassName);
+      console.log(' -- '+E.Message);
+      console.log(' -- Automatic retry attempt in 30s');
+
+      // Progress: Photo
+      MainForm.divPhoto.HTML.Text := '<div style="width:100%; height:100%;text-align:center; margin-top:110px;"><i class="fa-duotone fa-cloud-exclamation fa-2x text-white"></i></div>';
+      // Progress: Error Actors
+      MainForm.divActorTabulatorHolder.ElementHandle.classList.add('ReqError');
+      MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading');
+      // Progress: Error Roles
+      MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('ReqError');
+      MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading');
+
+      // Set timer to reset in case internet/server/something  is down and comes back at some point
+      MainForm.tmrStart.interval := 30000;
+      MainForm.tmrStart.Enabled := True;
+
+      exit;
+    end;
+  end;
+
+  MainForm.ReleaseDayCacheDate[DayNum] := Now;
+  MainForm.ReleaseDayCacheData[DayNum] := Data;
+
+  MainForm.divProgressSpinner.HTML.Text := '';
+
+  // Progress: Preparing Actors
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.add('Preparing');
+  // Progress: Preparing Roles
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Loading', 'ReqError');
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.add('Preparing');
+
+  {$IFNDEF WIN32} asm {
+    var table1 = pas.Main.MainForm.ActorTabulator;
+    var table2 = pas.Main.MainForm.RoleTabulator;
+    var movieData = Data;
+
+    // Filter out Adult content
+    var adult = pas.Main.MainForm.AdultContent;
+    var mcount = 0;
+    if (!adult) {
+      for (var i = movieData.length - 1; i >= 0; i--) {
+        if (movieData[i]['XXX'] == true) {
+          movieData.splice(i,1);
+          mcount++;
+        }
+      }
+    } else {
+      for (var i = movieData.length - 1; i >= 0; i--) {
+        if ((movieData[i]['XXX'] == false) || (movieData[i]['XXX'] == undefined)) {
+          movieData.splice(i,1);
+          mcount++;
+        }
+      }
+    }
+
+    pas.Main.MainForm.RoleTabulator.setData(movieData)
+      .then(function(){
+
+        // update the first column header to show a count
+        var rowCount = table2.getDataCount("active");
+        if (table2.getDataCount() !== rowCount) { window.rolecount.innerHTML = '<span style="cursor:pointer; color: var(--bs-warning);">'+rowCount+'</span>'; }
+        else { window.rolecount.innerHTML = '<span style="cursor:pointer;">'+rowCount+'</span>'; }
+
+        if (rowCount > 0) {
+
+          // highlight the first row, based on whatever sorting is currently in place
+          table2.selectRow(table1.getRowFromPosition(1, true));
+
+          // Do what we would do if we had directly clicked on that row
+          window.Role_Selected(null, table1.getRowFromPosition(1,true));
+
+        }
+        else {
+          table1.clearData();
+        }
+
+      });
+  } end; {$ENDIF}
+
+  // Progress: Ready Actors
+  MainForm.divActorTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
+  // Progress: Ready Roles
+  MainForm.divRoleTabulatorHolder.ElementHandle.classList.remove('Searching', 'Preparing', 'Loading', 'ReqError');
+
+  MainForm.tmrImageCheck.Enabled := True;
+
+  // Suppress Delphi Hint "Local variable is assigned but never used"
+  MainForm.PreventCompilerHint(CacheData);
   MainForm.PreventCompilerHint(Blob);
 
 end;
