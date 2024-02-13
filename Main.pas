@@ -3404,7 +3404,7 @@ begin
             cellClick:     cellClick_actor_PIC,
         },
 
-        { title: "Person", field: "NAM", minWidth: 230, cssClass: "Name",
+        { title: "Person", field: "NAM", minWidth: 230, cssClass: "Name user-select-text",
             headerMenu:       headerMenu,
             headerPopup:      headerNameFilter,
             headerPopupIcon:  window.icon_filter,
@@ -3654,7 +3654,7 @@ begin
             cellClick:  cellClick_role_PIC
         },
 
-        { title: "Title", field: "NAM", minWidth: 150,
+        { title: "Title", field: "NAM", minWidth: 150, cssClass: "Title user-select-text",
             headerMenu: headerMenu,
             tooltip:    tooltip_role_NAM,
             formatter:  formatter_role_NAM

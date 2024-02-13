@@ -52,7 +52,9 @@ body {
         -ms-user-select: none;
             user-select: none;
 }
-
+.user-select-text {
+  user-select: text !important;
+}
 
 
 /* In the Biography section, there are sometimes blocks of text shown. We'd like
